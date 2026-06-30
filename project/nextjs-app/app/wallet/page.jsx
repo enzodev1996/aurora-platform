@@ -1,14 +1,14 @@
 import Card from '@/components/ui/Card'
-import Callout from '@/components/ui/Callout'
 import QrBlock from '@/components/aurora/QrBlock'
 import WalletActions from '@/components/aurora/WalletActions'
+import UsdtCard from '@/components/aurora/UsdtCard'
 
 const ADDR = '0x9C4d8f2a3B1e7D5c0A6f4E2b8C1d9F0e7A3b2D7a'
 
 export default function WalletPage() {
   return (
     <>
-      {/* Balances */}
+      {/* Wallet balance hero */}
       <Card>
         <div className="card-head">
           <span className="card-title">Wallet</span>
@@ -25,34 +25,16 @@ export default function WalletPage() {
         <WalletActions />
       </Card>
 
+      {/* USDT asset card */}
+      <UsdtCard balance="12,480.50" />
+
       {/* Deposit address */}
       <Card style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-        <div className="card-title">Deposit USDT</div>
-        <QrBlock address={ADDR} network="Binance Smart Chain (BEP-20)" />
-        <Callout variant="warn">
-          Send only USDT on the selected network. Wrong-network transfers may not be recoverable.
-        </Callout>
-      </Card>
-
-      {/* USDT asset detail */}
-      <Card>
-        <div className="tile" style={{ border: 'none', padding: 0, background: 'transparent' }}>
-          <span
-            className="row-icon"
-            style={{ background: 'rgba(38,161,123,0.16)', color: '#26A17B', font: '700 14px var(--font-body)', flexShrink: 0 }}
-          >
-            T
-          </span>
-          <div className="row-main">
-            <div className="row-title">Tether USD</div>
-            <div className="row-sub">USDT · Stablecoin</div>
-          </div>
+        <div>
+          <div className="card-title">Deposit address</div>
+          <div className="muted" style={{ font: '400 12px/1.3 var(--font-body)', marginTop: 5 }}>Network · Binance Network (BEP-20)</div>
         </div>
-        <div className="eyebrow" style={{ marginTop: 18, color: 'var(--c-muted)' }}>Balance</div>
-        <div className="balance" style={{ fontSize: 34, marginTop: 6, color: 'var(--c-text)' }}>
-          12,480.50{' '}
-          <span className="muted" style={{ font: '500 18px var(--font-body)' }}>USDT</span>
-        </div>
+        <QrBlock address={ADDR} />
       </Card>
     </>
   )

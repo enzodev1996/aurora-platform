@@ -77,7 +77,7 @@ export default function DashboardPage() {
       <Card title="Featured projects">
         <div className="grid-cards" style={{ marginTop: 4 }}>
           {PROJECTS.map((p, i) => (
-            <ProjectCard key={i} {...p} cta={{ type: 'link', href: '/invest', label: 'View project' }} />
+            <ProjectCard key={i} {...p} />
           ))}
         </div>
       </Card>
