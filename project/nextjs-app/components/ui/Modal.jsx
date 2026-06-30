@@ -4,9 +4,9 @@ import { Icon } from '@/lib/icons'
 
 /**
  * Multi-step modal shell.
- * @param {{ open: boolean, onClose: Function, title: string, step: number, totalSteps: number, children: React.ReactNode }} props
+ * @param {{ open: boolean, onClose: Function, title: string, step: number, totalSteps: number, children: React.ReactNode, footer?: React.ReactNode }} props
  */
-export default function Modal({ open, onClose, title, step = 1, totalSteps = 1, children }) {
+export default function Modal({ open, onClose, title, step = 1, totalSteps = 1, children, footer }) {
   const dialogRef = useRef(null)
 
   useEffect(() => {
@@ -50,6 +50,7 @@ export default function Modal({ open, onClose, title, step = 1, totalSteps = 1, 
         </div>
         {totalSteps > 1 && <div className="step-bars">{bars}</div>}
         <div className="modal-body">{children}</div>
+        {footer && <div className="modal-foot">{footer}</div>}
       </div>
     </div>
   )

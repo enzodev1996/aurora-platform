@@ -18,7 +18,8 @@
   --font-body:    "Inter", system-ui, sans-serif;
 }
 
-/* ── Light theme ── */
+/* ── Light theme (default) ── */
+:root,
 [data-theme="light"] {
   --c-canvas:#F4F5FA; --c-surface:#FFFFFF; --c-card:#FFFFFF; --c-elevated:#EEF0F7;
   --c-hover:#E7EAF3; --c-border:#DDE0EC; --c-border-strong:#C7CBDC; --c-divider:#E7EAF3;
@@ -31,9 +32,8 @@
   --qr-dark:#090916;
 }
 
-/* ── Dark theme (default) ── */
-[data-theme="dark"],
-:root {
+/* ── Dark theme ── */
+[data-theme="dark"] {
   --c-canvas:#090916; --c-surface:#0E0E1F; --c-card:#13132A; --c-elevated:#1A1A38;
   --c-hover:#15152B; --c-border:#25254A; --c-border-strong:#35356A; --c-divider:#1E1E3A;
   --c-text:#F8F8F8; --c-muted:#C0C2CB; --c-header:rgba(9,9,22,0.82);
@@ -275,6 +275,7 @@ a { color: inherit; text-decoration: none; }
 .modal-head { display: flex; align-items: center; gap: 12px; padding: 20px 22px 16px; }
 .modal-title { flex: 1; font: 700 17px/1.1 var(--font-display); letter-spacing: -0.01em; }
 .modal-body { padding: 0 22px 22px; display: flex; flex-direction: column; gap: 14px; }
+.modal-foot { display: flex; gap: 10px; padding: 0 22px 22px; }
 .amount-display { text-align: center; padding: 8px 0; }
 .amount-num { font: 700 44px/1 var(--font-display); letter-spacing: -0.02em; }
 .step-bars { display: flex; gap: 4px; padding: 0 22px 16px; }

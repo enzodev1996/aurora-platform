@@ -1,7 +1,7 @@
 import Card from '@/components/ui/Card'
-import Button from '@/components/ui/Button'
 import Callout from '@/components/ui/Callout'
 import QrBlock from '@/components/aurora/QrBlock'
+import WalletActions from '@/components/aurora/WalletActions'
 
 const ADDR = '0x9C4d8f2a3B1e7D5c0A6f4E2b8C1d9F0e7A3b2D7a'
 
@@ -22,10 +22,7 @@ export default function WalletPage() {
             <span className="muted">AUR</span>
           </span>
         </div>
-        <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
-          <Button variant="accent" icon="in" style={{ flex: 1 }}>Deposit</Button>
-          <Button variant="secondary" icon="out" style={{ flex: 1 }}>Redeem</Button>
-        </div>
+        <WalletActions />
       </Card>
 
       {/* Deposit address */}

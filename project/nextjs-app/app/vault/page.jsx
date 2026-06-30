@@ -1,4 +1,4 @@
-import BalanceHero from '@/components/aurora/BalanceHero'
+import VaultHero from '@/components/aurora/VaultHero'
 import KpiTile from '@/components/aurora/KpiTile'
 import TransactionRow from '@/components/aurora/TransactionRow'
 import Card from '@/components/ui/Card'
@@ -14,16 +14,10 @@ const REQUESTS = [
 export default function VaultPage() {
   return (
     <>
-      <BalanceHero
-        eyebrow="Aura Vault balance"
+      <VaultHero
         balance="84,250"
         currency="AP"
         subtitle="1 USDT = 100 Aurora Points"
-        variant="violet"
-        actions={[
-          { label: 'Top up vault', icon: 'in',    variant: 'accent'    },
-          { label: 'Lend Aura XP', icon: 'arrow', variant: 'secondary' },
-        ]}
       />
 
       <div className="grid-auto">

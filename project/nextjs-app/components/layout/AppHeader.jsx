@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { Icon } from '@/lib/icons'
 import Button from '@/components/ui/Button'
+import TransactionModal from '@/components/aurora/TransactionModal'
 
 const TITLES = {
   '/':             'Dashboard',
@@ -14,12 +15,13 @@ const TITLES = {
   '/admin/audit':  'Audit Trail',
 }
 
-export default function AppHeader({ onTopUp }) {
+export default function AppHeader() {
   const pathname = usePathname()
-  const [theme, setTheme] = useState('dark')
+  const [theme, setTheme] = useState('light')
+  const [topUpOpen, setTopUpOpen] = useState(false)
 
   useEffect(() => {
-    const stored = localStorage.getItem('aurora-theme') ?? 'dark'
+    const stored = localStorage.getItem('aurora-theme') ?? 'light'
     setTheme(stored)
     document.documentElement.setAttribute('data-theme', stored)
   }, [])
@@ -49,9 +51,10 @@ export default function AppHeader({ onTopUp }) {
       <button className="icon-btn" aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`} onClick={toggleTheme}>
         <Icon name={theme === 'dark' ? 'sun' : 'moon'} />
       </button>
-      <Button variant="accent" icon="in" style={{ height: 40 }} onClick={onTopUp}>
+      <Button variant="accent" icon="in" style={{ height: 40 }} onClick={() => setTopUpOpen(true)}>
         Top up
       </Button>
+      <TransactionModal flow="topup" open={topUpOpen} onClose={() => setTopUpOpen(false)} />
     </header>
   )
 }

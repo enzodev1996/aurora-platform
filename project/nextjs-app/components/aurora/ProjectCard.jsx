@@ -1,13 +1,15 @@
+import Link from 'next/link'
 import Badge from '@/components/ui/Badge'
 import FundingProgress from './FundingProgress'
+import InvestButton from './InvestButton'
 
 const RISK_VARIANT = { low: 'success', medium: 'warn', high: 'error' }
 const STATUS_VARIANT = { funding: 'info', funded: 'success', completed: 'neutral', closed: 'neutral' }
 
 /**
- * @param {{ title: string, location?: string, category?: string, raisedPct?: number, raised?: string, goal?: string, investors?: number, risk?: 'low'|'medium'|'high', status?: string, daysLeft?: number, gradient?: string, notice?: string }} props
+ * @param {{ title: string, location?: string, category?: string, raisedPct?: number, raised?: string, goal?: string, investors?: number, risk?: 'low'|'medium'|'high', status?: string, daysLeft?: number, gradient?: string, notice?: string, cta?: { type: 'link', href: string, label: string } | { type: 'invest' } }} props
  */
-export default function ProjectCard({ title, location, category, raisedPct = 0, raised, goal, investors, risk, status, daysLeft, gradient, notice }) {
+export default function ProjectCard({ title, location, category, raisedPct = 0, raised, goal, investors, risk, status, daysLeft, gradient, notice, cta }) {
   return (
     <article className="project">
       <div
@@ -50,6 +52,12 @@ export default function ProjectCard({ title, location, category, raisedPct = 0, 
             </Badge>
           )}
         </div>
+        {cta?.type === 'link' && (
+          <Link href={cta.href} className="btn btn-accent full" style={{ marginTop: 6 }}>
+            {cta.label}
+          </Link>
+        )}
+        {cta?.type === 'invest' && <InvestButton project={title} />}
       </div>
     </article>
   )

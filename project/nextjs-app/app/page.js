@@ -1,4 +1,4 @@
-import BalanceHero from '@/components/aurora/BalanceHero'
+import DashboardHero from '@/components/aurora/DashboardHero'
 import KpiTile from '@/components/aurora/KpiTile'
 import TransactionRow from '@/components/aurora/TransactionRow'
 import ProjectCard from '@/components/aurora/ProjectCard'
@@ -20,15 +20,10 @@ const PROJECTS = [
 export default function DashboardPage() {
   return (
     <>
-      <BalanceHero
-        eyebrow="Total balance"
+      <DashboardHero
         balance="₱84,250.00"
         subtitle="Borealis Finance · Aurora Vault"
         delta="12.4%"
-        actions={[
-          { label: 'Top up',  icon: 'in',  variant: 'accent'     },
-          { label: 'Withdraw', icon: 'out', variant: 'secondary'  },
-        ]}
       />
 
       {/* KPIs */}
@@ -82,7 +77,7 @@ export default function DashboardPage() {
       <Card title="Featured projects">
         <div className="grid-cards" style={{ marginTop: 4 }}>
           {PROJECTS.map((p, i) => (
-            <ProjectCard key={i} {...p} />
+            <ProjectCard key={i} {...p} cta={{ type: 'link', href: '/invest', label: 'View project' }} />
           ))}
         </div>
       </Card>

@@ -71,7 +71,7 @@ export default function InvestPage() {
 
       <div className="grid-cards">
         {PROJECTS.map((p, i) => (
-          <ProjectCard key={i} {...p} />
+          <ProjectCard key={i} {...p} cta={{ type: 'invest' }} />
         ))}
       </div>
     </>
