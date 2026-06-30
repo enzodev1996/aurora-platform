@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aurora Wallet — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sulphur+Point:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="app-root" data-page="dashboard">
+  <main class="app-main">
+    <div class="app-content">
+
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero-bloom"></div>
+        <div class="hero-inner" style="display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:flex-end">
+          <div style="min-width:240px">
+            <div class="eyebrow">Total balance</div>
+            <div style="display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:nowrap">
+              <span class="balance">$12,480.50</span>
+              <span class="delta">▲ 2.4%</span>
+            </div>
+            <div style="font:400 14px/1.4 var(--font-body);color:#C0C2CB;margin-top:10px">≈ 12,480.50 USDT · +$291.40 today</div>
+            <div style="display:flex;gap:10px;margin-top:24px">
+              <button class="btn btn-accent" data-modal="topup"><i data-icon="in"></i> Top up</button>
+              <button class="btn btn-secondary" data-modal="withdraw"><i data-icon="out"></i> Withdraw</button>
+            </div>
+          </div>
+          <div style="flex:1;min-width:220px;align-self:stretch;display:flex;align-items:flex-end">
+            <svg class="hero-spark" viewBox="0 0 600 150" preserveAspectRatio="none" style="width:100%;height:130px">
+              <defs>
+                <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#7828E8" stop-opacity="0.34"/>
+                  <stop offset="100%" stop-color="#7828E8" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,118 L40,120 L80,108 L120,112 L160,96 L200,104 L240,82 L280,90 L320,70 L360,78 L400,56 L440,62 L480,42 L520,50 L560,30 L600,36 L600,150 L0,150 Z" fill="url(#sparkFill)"/>
+              <path d="M0,118 L40,120 L80,108 L120,112 L160,96 L200,104 L240,82 L280,90 L320,70 L360,78 L400,56 L440,62 L480,42 L520,50 L560,30 L600,36" fill="none" stroke="#7828E8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- Assets + Activity -->
+      <div class="grid cols-auto">
+        <section class="card">
+          <div class="card-head"><span class="card-title">Your assets</span><span class="muted" style="font:400 12px var(--font-body)">1 asset</span></div>
+          <div class="tile">
+            <span class="row-icon" style="background:rgba(38,161,123,0.16);color:#26A17B;font:700 13px var(--font-body)">T</span>
+            <div class="row-main">
+              <div class="row-title">Tether USD</div>
+              <div class="row-sub">USDT · Stablecoin</div>
+            </div>
+            <div class="row-right"><div class="row-title tabular">12,480.50</div><div class="row-sub">USDT</div></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-head"><span class="card-title">Recent activity</span><a class="muted" href="transactions.html" style="font:500 12px var(--font-body);color:var(--c-accent)">View all</a></div>
+          <div>
+            <div class="list-row s-approved">
+              <span class="row-icon" style="background:var(--c-pos-bg);color:var(--c-pos-ink)"><i data-icon="in"></i></span>
+              <div class="row-main"><div class="row-title">Deposit</div><div class="row-sub">BEP-20 · Jun 20, 2026</div></div>
+              <div class="row-right"><div class="amt tabular">+500.00 USDT</div><div class="status-label"><span class="status-dot"></span>Completed</div></div>
+            </div>
+            <div class="list-row s-pending">
+              <span class="row-icon" style="background:var(--c-hover);color:var(--c-muted)"><i data-icon="out"></i></span>
+              <div class="row-main"><div class="row-title">Withdrawal</div><div class="row-sub">BEP-20 · Jun 18, 2026</div></div>
+              <div class="row-right"><div class="row-title tabular">−250.00 USDT</div><div class="status-label"><span class="status-dot"></span>Pending</div></div>
+            </div>
+            <div class="list-row s-approved">
+              <span class="row-icon" style="background:var(--c-pos-bg);color:var(--c-pos-ink)"><i data-icon="in"></i></span>
+              <div class="row-main"><div class="row-title">Deposit</div><div class="row-sub">BEP-20 · Jun 14, 2026</div></div>
+              <div class="row-right"><div class="amt tabular">+1,200.00 USDT</div><div class="status-label"><span class="status-dot"></span>Completed</div></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Featured projects -->
+      <section>
+        <div class="row-between" style="margin-bottom:16px">
+          <span class="card-title">Featured projects</span>
+          <a class="muted" href="invest.html" style="font:500 12px var(--font-body);color:var(--c-accent)">Browse all</a>
+        </div>
+        <div class="grid cols-cards">
+          <article class="project">
+            <div class="project-top"></div>
+            <div class="project-body">
+              <div class="project-title">Mindanao Agri Cooperative</div>
+              <div class="muted" style="font:400 13px/1.5 var(--font-body)">Tokenized farmland yield · escrow-held · 12.4% APY</div>
+              <div class="progress"><i style="width:68%"></i></div>
+              <div class="row-between"><span class="muted" style="font:400 12px var(--font-body)">68% funded</span><span style="font:600 13px var(--font-body);color:var(--c-accent)">12.4% APY</span></div>
+              <a class="btn btn-accent full" href="invest.html" style="margin-top:6px">View project</a>
+            </div>
+          </article>
+          <article class="project">
+            <div class="project-top" style="background:linear-gradient(135deg,#0c2218,#2AD9B7 70%,#5FF0CC)"></div>
+            <div class="project-body">
+              <div class="project-title">Cebu Solar Microgrid</div>
+              <div class="muted" style="font:400 13px/1.5 var(--font-body)">Renewable infrastructure note · 9.8% APY</div>
+              <div class="progress"><i style="width:41%"></i></div>
+              <div class="row-between"><span class="muted" style="font:400 12px var(--font-body)">41% funded</span><span style="font:600 13px var(--font-body);color:var(--c-accent)">9.8% APY</span></div>
+              <a class="btn btn-accent full" href="invest.html" style="margin-top:6px">View project</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>

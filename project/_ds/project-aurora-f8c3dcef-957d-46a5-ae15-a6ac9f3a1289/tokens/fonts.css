@@ -1,0 +1,20 @@
+/* Typefaces.
+   - Inter: body, labels, UI text.
+   - Sulphur Point: headlines (display → sm). Shipped as TTF in tokens/.
+     Bold (700) for display/lg headlines; Regular (400) for md/sm. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+@font-face {
+  font-family: "Sulphur Point";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("SulphurPoint-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Sulphur Point";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("SulphurPoint-Bold.ttf") format("truetype");
+}

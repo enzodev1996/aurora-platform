@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="stylesheet" href="_ds/project-aurora-f8c3dcef-957d-46a5-ae15-a6ac9f3a1289/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/project-aurora-f8c3dcef-957d-46a5-ae15-a6ac9f3a1289/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/project-aurora-f8c3dcef-957d-46a5-ae15-a6ac9f3a1289/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/project-aurora-f8c3dcef-957d-46a5-ae15-a6ac9f3a1289/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/project-aurora-f8c3dcef-957d-46a5-ae15-a6ac9f3a1289/styles.css">
+  <script src="_ds/project-aurora-f8c3dcef-957d-46a5-ae15-a6ac9f3a1289/_ds_bundle.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { background: #0A0A0B; font-family: "Inter", system-ui, sans-serif; }
+    @keyframes auroraSpin { to { transform: rotate(360deg); } }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #2A2F3A; border-radius: 9999px; border: 3px solid #0A0A0B; }
+    @media (max-width: 900px) {
+      .admin-sidebar { width: 68px !important; }
+      .admin-sidebar .sidebar-label { display: none !important; }
+      .admin-content { padding: 20px 16px !important; }
+    }
+    @media (max-width: 600px) {
+      .drawer-panel { width: 100% !important; max-width: 100% !important; }
+    }
+  </style>
+</helmet>
+
+<div style="display:flex; height:100vh; overflow:hidden; color:#F4F4F5;">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" style="width:230px; flex:none; background:#0F1115; border-right:1px solid #2A2F3A; display:flex; flex-direction:column; padding:20px 14px;">
+    <div style="display:flex; align-items:center; gap:10px; padding:0 6px 20px;">
+      <span style="width:30px; height:30px; border-radius:8px; background:linear-gradient(135deg,#B45CFF,#7F3FBF); display:flex; align-items:center; justify-content:center; color:#fff; font:700 14px/1 'Sulphur Point';">A</span>
+      <span class="sidebar-label" style="font:700 18px/1 'Sulphur Point'; letter-spacing:-0.01em; color:#F4F4F5;">Admin</span>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:4px;">
+      <sc-if value="{{ isQueue }}" hint-placeholder-val="{{ true }}">
+        <div onClick="{{ goQueue }}" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; cursor:pointer; font:500 13px/1.2 Inter; color:#F4F4F5; background:#1C2028;"><span style="display:flex; flex:none;">{{ iconInbox }}</span><span class="sidebar-label">Verification queue</span></div>
+      </sc-if>
+      <sc-if value="{{ notQueue }}" hint-placeholder-val="{{ false }}">
+        <div onClick="{{ goQueue }}" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; cursor:pointer; font:500 13px/1.2 Inter; color:#A1A1AA; background:transparent; transition:background-color .15s ease, color .15s ease;" style-hover="background:#15171c; color:#F4F4F5;"><span style="display:flex; flex:none;">{{ iconInbox }}</span><span class="sidebar-label">Verification queue</span></div>
+      </sc-if>
+
+      <sc-if value="{{ isAudit }}" hint-placeholder-val="{{ false }}">
+        <div onClick="{{ goAudit }}" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; cursor:pointer; font:500 13px/1.2 Inter; color:#F4F4F5; background:#1C2028;"><span style="display:flex; flex:none;">{{ iconAudit }}</span><span class="sidebar-label">Audit trail</span></div>
+      </sc-if>
+      <sc-if value="{{ notAudit }}" hint-placeholder-val="{{ true }}">
+        <div onClick="{{ goAudit }}" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; cursor:pointer; font:500 13px/1.2 Inter; color:#A1A1AA; background:transparent; transition:background-color .15s ease, color .15s ease;" style-hover="background:#15171c; color:#F4F4F5;"><span style="display:flex; flex:none;">{{ iconAudit }}</span><span class="sidebar-label">Audit trail</span></div>
+      </sc-if>
+    </div>
+
+    <div style="flex:1;"></div>
+    <div style="display:flex; align-items:center; gap:10px; padding:10px 6px; border-top:1px solid #2A2F3A; margin-top:12px;">
+      <div style="width:32px; height:32px; flex:none; border-radius:9999px; background:#1C2028; color:#A1A1AA; display:flex; align-items:center; justify-content:center; font:600 13px/1 Inter;">S</div>
+      <div class="sidebar-label" style="flex:1; min-width:0;">
+        <div style="font:500 13px/1.2 Inter; color:#F4F4F5;">{{ adminName }}</div>
+        <div style="font:400 11px/1.3 Inter; color:#A1A1AA;">Finance · Admin</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main style="flex:1; min-width:0; overflow-y:auto; display:flex; flex-direction:column;">
+    <header class="admin-header" style="position:sticky; top:0; z-index:5; display:flex; align-items:center; gap:16px; padding:16px 32px; background:rgba(10,10,11,0.82); backdrop-filter:blur(12px); border-bottom:1px solid #2A2F3A;">
+      <h1 style="font:700 20px/1.1 'Sulphur Point'; letter-spacing:-0.01em; color:#F4F4F5; margin:0;">{{ pageTitle }}</h1>
+      <div style="flex:1;"></div>
+      <div class="admin-search" style="width:240px; flex:none;">
+        <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Input" placeholder="Search by user, hash, wallet…" leading-icon="{{ iconSearch }}" hint-size="240px,40px" style="width:240px;" value="{{ searchQuery }}" onChange="{{ onSearch }}"></x-import>
+      </div>
+    </header>
+
+    <div class="admin-content" style="padding:28px 32px; max-width:1280px; margin:0 auto; width:100%;">
+
+      <!-- QUEUE VIEW -->
+      <sc-if value="{{ isQueue }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; flex-direction:column; gap:24px;">
+
+          <!-- SUMMARY CARDS -->
+          <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px;">
+            <div style="background:#18181B; border:1px solid #2A2F3A; border-radius:12px; padding:18px;">
+              <div style="font:400 11px/1 Inter; color:#A1A1AA; letter-spacing:0.03em; text-transform:uppercase;">Pending requests</div>
+              <div style="font:700 32px/1 'Sulphur Point'; color:#FDE68A; margin-top:12px; font-variant-numeric:tabular-nums;">{{ pendingCount }}</div>
+            </div>
+            <div style="background:#18181B; border:1px solid #2A2F3A; border-radius:12px; padding:18px;">
+              <div style="font:400 11px/1 Inter; color:#A1A1AA; letter-spacing:0.03em; text-transform:uppercase;">Approved today</div>
+              <div style="font:700 32px/1 'Sulphur Point'; color:#BBF7D0; margin-top:12px; font-variant-numeric:tabular-nums;">{{ approvedToday }}</div>
+            </div>
+            <div style="background:#18181B; border:1px solid #2A2F3A; border-radius:12px; padding:18px;">
+              <div style="font:400 11px/1 Inter; color:#A1A1AA; letter-spacing:0.03em; text-transform:uppercase;">Rejected today</div>
+              <div style="font:700 32px/1 'Sulphur Point'; color:#FCA5A5; margin-top:12px; font-variant-numeric:tabular-nums;">{{ rejectedToday }}</div>
+            </div>
+            <div style="background:#18181B; border:1px solid #2A2F3A; border-radius:12px; padding:18px;">
+              <div style="font:400 11px/1 Inter; color:#A1A1AA; letter-spacing:0.03em; text-transform:uppercase;">USDT under review</div>
+              <div style="font:700 32px/1 'Sulphur Point'; color:#F4F4F5; margin-top:12px; font-variant-numeric:tabular-nums;">{{ underReviewUsdt }}</div>
+            </div>
+            <div style="background:#18181B; border:1px solid #2A2F3A; border-radius:12px; padding:18px;">
+              <div style="font:400 11px/1 Inter; color:#A1A1AA; letter-spacing:0.03em; text-transform:uppercase;">Total processed</div>
+              <div style="font:700 32px/1 'Sulphur Point'; color:#F4F4F5; margin-top:12px; font-variant-numeric:tabular-nums;">{{ totalProcessed }}</div>
+            </div>
+          </div>
+
+          <!-- FILTERS -->
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <sc-for list="{{ statusFilters }}" as="f" hint-placeholder-count="5">
+                <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Chip" selected="{{ f.active }}" onClick="{{ f.onClick }}" hint-size="auto,32px">{{ f.label }} {{ f.count }}</x-import>
+              </sc-for>
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <sc-for list="{{ networkFilters }}" as="nf" hint-placeholder-count="6">
+                <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Chip" selected="{{ nf.active }}" onClick="{{ nf.onClick }}" hint-size="auto,32px">{{ nf.label }}</x-import>
+              </sc-for>
+            </div>
+          </div>
+
+          <!-- QUEUE TABLE -->
+          <sc-if value="{{ hasRows }}" hint-placeholder-val="{{ true }}">
+            <div style="background:#18181B; border:1px solid #2A2F3A; border-radius:12px; overflow:hidden;">
+              <div style="overflow-x:auto;">
+                <div style="min-width:1020px;">
+                  <div style="display:grid; grid-template-columns:160px 120px 100px 90px 150px 90px 140px 100px; gap:10px; padding:14px 20px; border-bottom:1px solid #2A2F3A; font:500 11px/1 Inter; color:#A1A1AA; letter-spacing:0.03em; text-transform:uppercase;">
+                    <div>User</div><div>Submitted</div><div>Amount</div><div>Network</div><div>TX hash</div><div>Proof</div><div>Status</div><div>Actions</div>
+                  </div>
+                  <sc-for list="{{ rows }}" as="r" hint-placeholder-count="5">
+                    <div style="display:grid; grid-template-columns:160px 120px 100px 90px 150px 90px 140px 100px; gap:10px; align-items:center; padding:14px 20px; border-bottom:1px solid #1f242c; transition:background-color .1s ease;" style-hover="background:#15171c;">
+                      <div>
+                        <div style="font:500 13px/1.2 Inter; color:#F4F4F5;">{{ r.userName }}</div>
+                        <div style="font:400 11px/1.3 Inter; color:#676182; margin-top:3px;">{{ r.userId }}</div>
+                      </div>
+                      <div style="font:400 12px/1.3 Inter; color:#A1A1AA;">{{ r.date }}</div>
+                      <div style="font:500 14px/1 Inter; color:#F4F4F5; font-variant-numeric:tabular-nums;">{{ r.amountText }}</div>
+                      <div><span style="display:inline-flex; padding:4px 8px; border-radius:9999px; background:#1C2028; border:1px solid #2A2F3A; font:400 11px/1 Inter; color:#A1A1AA;">{{ r.network }}</span></div>
+                      <div style="display:flex; align-items:center; gap:6px;">
+                        <span style="font:400 12px/1 Inter; color:#D4D4D8; font-variant-numeric:tabular-nums; font-family:monospace;">{{ r.txHashShort }}</span>
+                        <button onClick="{{ r.copyHash }}" style="width:24px; height:24px; flex:none; display:flex; align-items:center; justify-content:center; background:transparent; border:none; color:#676182; cursor:pointer; border-radius:4px;" style-hover="color:#F4F4F5;">{{ iconCopySm }}</button>
+                      </div>
+                      <div>
+                        <sc-if value="{{ r.hasProof }}" hint-placeholder-val="{{ true }}">
+                          <button onClick="{{ r.viewProof }}" style="display:inline-flex; align-items:center; gap:5px; padding:5px 10px; background:transparent; border:1px solid #2A2F3A; border-radius:8px; color:#A9C7FF; font:400 11px/1 Inter; cursor:pointer; transition:border-color .15s ease;" style-hover="border-color:#0B84FF;">{{ iconImage }} View</button>
+                        </sc-if>
+                        <sc-if value="{{ r.noProof }}" hint-placeholder-val="{{ false }}">
+                          <span style="font:400 11px/1 Inter; color:#676182;">None</span>
+                        </sc-if>
+                      </div>
+                      <div><span style="display:inline-flex; align-items:center; gap:6px; padding:5px 10px; border-radius:9999px; background:{{ r.statusBg }}; color:{{ r.statusColor }}; font:500 11px/1 Inter;"><span style="width:6px; height:6px; border-radius:50%; background:{{ r.statusDot }};"></span>{{ r.statusLabel }}</span></div>
+                      <div>
+                        <button onClick="{{ r.openReview }}" style="height:32px; padding:0 14px; background:transparent; border:1px solid #3A404B; border-radius:9999px; color:#F4F4F5; font:500 12px/1 Inter; cursor:pointer; transition:background-color .15s ease, border-color .15s ease;" style-hover="background:#1A1A1F; border-color:#0B84FF;">Review</button>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ noRows }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px; padding:48px 24px; background:#18181B; border:1px solid #2A2F3A; border-radius:12px;">
+              <span style="width:48px; height:48px; border-radius:9999px; background:#1C2028; color:#676182; display:flex; align-items:center; justify-content:center;">{{ iconInbox }}</span>
+              <div style="font:500 15px/1.3 Inter; color:#F4F4F5;">No matching requests</div>
+              <div style="font:400 13px/1.5 Inter; color:#A1A1AA; max-width:300px;">Try adjusting your filters or search query.</div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <!-- AUDIT VIEW -->
+      <sc-if value="{{ isAudit }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div style="font:400 13px/1.5 Inter; color:#A1A1AA;">Complete immutable log of all admin actions on top-up requests.</div>
+          <div style="background:#18181B; border:1px solid #2A2F3A; border-radius:12px; padding:6px 0;">
+            <sc-for list="{{ auditLogs }}" as="log" hint-placeholder-count="6">
+              <div style="display:flex; gap:14px; padding:16px 20px; border-bottom:1px solid #1f242c;">
+                <div style="width:38px; height:38px; flex:none; border-radius:9999px; background:{{ log.iconBg }}; color:{{ log.iconColor }}; display:flex; align-items:center; justify-content:center;">{{ log.icon }}</div>
+                <div style="flex:1; min-width:0;">
+                  <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                    <span style="font:500 13px/1.2 Inter; color:#F4F4F5;">{{ log.admin }}</span>
+                    <span style="font:400 12px/1 Inter; color:#676182;">{{ log.action }}</span>
+                    <span style="display:inline-flex; align-items:center; gap:5px; padding:3px 8px; border-radius:9999px; background:{{ log.badgeBg }}; color:{{ log.badgeColor }}; font:500 11px/1 Inter;"><span style="width:5px; height:5px; border-radius:50%; background:{{ log.badgeDot }};"></span>{{ log.badgeLabel }}</span>
+                  </div>
+                  <div style="font:400 12px/1.4 Inter; color:#A1A1AA; margin-top:5px;">{{ log.detail }}</div>
+                  <div style="font:400 11px/1 Inter; color:#676182; margin-top:6px;">{{ log.timestamp }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+    </div>
+  </main>
+</div>
+
+<!-- REVIEW DRAWER -->
+<sc-if value="{{ drawerOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed; inset:0; z-index:50; display:flex; justify-content:flex-end;">
+    <div onClick="{{ closeDrawer }}" style="flex:1; background:rgba(5,3,12,0.55); backdrop-filter:blur(4px);"></div>
+    <div class="drawer-panel" style="width:520px; max-width:90vw; height:100%; background:#121016; border-left:1px solid #2A2F3A; box-shadow:-20px 0 50px rgba(0,0,0,0.4); overflow-y:auto; display:flex; flex-direction:column;">
+
+      <!-- Drawer header -->
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:20px 24px 14px; border-bottom:1px solid #2A2F3A;">
+        <div>
+          <div style="font:700 18px/1.1 'Sulphur Point'; color:#F4F4F5;">Request {{ selected.id }}</div>
+          <span style="display:inline-flex; align-items:center; gap:6px; margin-top:6px; padding:4px 10px; border-radius:9999px; background:{{ selStatusBg }}; color:{{ selStatusColor }}; font:500 11px/1 Inter;"><span style="width:6px; height:6px; border-radius:50%; background:{{ selStatusDot }};"></span>{{ selStatusLabel }}</span>
+        </div>
+        <button onClick="{{ closeDrawer }}" style="width:32px; height:32px; display:flex; align-items:center; justify-content:center; background:transparent; border:none; color:#A1A1AA; cursor:pointer; border-radius:9999px;" style-hover="background:#1A1A1F; color:#F4F4F5;">{{ iconClose }}</button>
+      </div>
+
+      <div style="padding:20px 24px; display:flex; flex-direction:column; gap:20px; flex:1;">
+
+        <!-- User info -->
+        <div>
+          <div style="font:500 12px/1 Inter; color:#676182; letter-spacing:0.03em; text-transform:uppercase; margin-bottom:10px;">User information</div>
+          <div style="display:flex; flex-direction:column; gap:10px; padding:14px; border-radius:10px; background:#1C2028; border:1px solid #2A2F3A;">
+            <div style="display:flex; justify-content:space-between; font:400 13px/1 Inter;"><span style="color:#A1A1AA;">Name</span><span style="color:#F4F4F5;">{{ selected.userName }}</span></div>
+            <div style="display:flex; justify-content:space-between; font:400 13px/1 Inter;"><span style="color:#A1A1AA;">User ID</span><span style="color:#F4F4F5;">{{ selected.userId }}</span></div>
+            <div style="display:flex; justify-content:space-between; gap:12px; font:400 13px/1 Inter;"><span style="color:#A1A1AA; flex:none;">Wallet</span><span style="color:#F4F4F5; font-variant-numeric:tabular-nums; word-break:break-all; text-align:right; font-family:monospace; font-size:12px;">{{ selected.wallet }}</span></div>
+            <div style="display:flex; justify-content:space-between; font:400 13px/1 Inter;"><span style="color:#A1A1AA;">Registered</span><span style="color:#F4F4F5;">{{ selected.registered }}</span></div>
+          </div>
+        </div>
+
+        <!-- Transaction info -->
+        <div>
+          <div style="font:500 12px/1 Inter; color:#676182; letter-spacing:0.03em; text-transform:uppercase; margin-bottom:10px;">Transaction information</div>
+          <div style="display:flex; flex-direction:column; gap:10px; padding:14px; border-radius:10px; background:#1C2028; border:1px solid #2A2F3A;">
+            <div style="display:flex; justify-content:space-between; font:400 13px/1 Inter;"><span style="color:#A1A1AA;">Amount</span><span style="color:#F4F4F5; font-variant-numeric:tabular-nums;">{{ selected.amountText }}</span></div>
+            <div style="display:flex; justify-content:space-between; font:400 13px/1 Inter;"><span style="color:#A1A1AA;">Network</span><span style="color:#F4F4F5;">{{ selected.network }}</span></div>
+            <div style="display:flex; justify-content:space-between; gap:12px; font:400 13px/1 Inter;"><span style="color:#A1A1AA; flex:none;">TX hash</span><span style="color:#F4F4F5; font-variant-numeric:tabular-nums; word-break:break-all; text-align:right; font-family:monospace; font-size:12px;">{{ selected.txHash }}</span></div>
+            <div style="display:flex; justify-content:space-between; font:400 13px/1 Inter;"><span style="color:#A1A1AA;">Submitted</span><span style="color:#F4F4F5;">{{ selected.date }}</span></div>
+          </div>
+        </div>
+
+        <!-- Proof -->
+        <div>
+          <div style="font:500 12px/1 Inter; color:#676182; letter-spacing:0.03em; text-transform:uppercase; margin-bottom:10px;">Proof of transfer</div>
+          <sc-if value="{{ selected.hasProof }}" hint-placeholder-val="{{ true }}">
+            <div style="border-radius:10px; overflow:hidden; border:1px solid #2A2F3A; background:#0F1115;">
+              <div style="height:220px; display:flex; align-items:center; justify-content:center; background:repeating-conic-gradient(#1C2028 0% 25%, #18181B 0% 50%) 50% / 20px 20px; color:#676182; font:400 13px/1 Inter;">{{ iconImageLg }} Screenshot preview</div>
+              <div style="display:flex; gap:8px; padding:10px 12px; border-top:1px solid #2A2F3A;">
+                <button style="flex:1; height:32px; display:flex; align-items:center; justify-content:center; gap:6px; background:transparent; border:1px solid #2A2F3A; border-radius:8px; color:#A1A1AA; font:400 12px/1 Inter; cursor:pointer;" style-hover="border-color:#3A404B; color:#F4F4F5;">{{ iconExpand }} Fullscreen</button>
+                <button style="flex:1; height:32px; display:flex; align-items:center; justify-content:center; gap:6px; background:transparent; border:1px solid #2A2F3A; border-radius:8px; color:#A1A1AA; font:400 12px/1 Inter; cursor:pointer;" style-hover="border-color:#3A404B; color:#F4F4F5;">{{ iconDownload }} Download</button>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ selected.noProof }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:28px; text-align:center; border-radius:10px; border:1px dashed #2A2F3A; color:#676182; font:400 13px/1.5 Inter;">No proof uploaded for this request.</div>
+          </sc-if>
+        </div>
+
+        <!-- Verification checklist -->
+        <div>
+          <div style="font:500 12px/1 Inter; color:#676182; letter-spacing:0.03em; text-transform:uppercase; margin-bottom:10px;">Verification checklist</div>
+          <div style="display:flex; flex-direction:column; gap:2px; border-radius:10px; overflow:hidden;">
+            <sc-for list="{{ checklist }}" as="c" hint-placeholder-count="6">
+              <div onClick="{{ c.toggle }}" style="display:flex; align-items:center; gap:12px; padding:12px 14px; background:#1C2028; cursor:pointer; transition:background-color .1s ease;" style-hover="background:#222630;">
+                <span style="width:20px; height:20px; flex:none; border-radius:5px; border:1.5px solid {{ c.borderColor }}; background:{{ c.checkBg }}; color:{{ c.checkColor }}; display:flex; align-items:center; justify-content:center; transition:all .15s ease; font-size:12px;">{{ c.checkIcon }}</span>
+                <span style="font:400 13px/1.3 Inter; color:{{ c.textColor }};">{{ c.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; margin-top:10px; font:400 12px/1.3 Inter; color:#A1A1AA;">{{ checkProgress }}</div>
+        </div>
+
+        <!-- Actions -->
+        <sc-if value="{{ canAction }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:auto; padding-top:12px; border-top:1px solid #2A2F3A;">
+            <sc-if value="{{ showRejectForm }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <div style="font:500 12px/1 Inter; color:#FCA5A5;">Rejection reason <span style="color:#676182; font-weight:400;">(required)</span></div>
+                <select onChange="{{ onRejectReason }}" style="width:100%; height:42px; background:#0F1115; border:1px solid #2A2F3A; border-radius:9999px; padding:0 14px; color:#F4F4F5; font:400 13px/1 Inter; outline:none; cursor:pointer;">
+                  <sc-for list="{{ rejectReasons }}" as="rr" hint-placeholder-count="7">
+                    <option value="{{ rr.value }}">{{ rr.label }}</option>
+                  </sc-for>
+                </select>
+                <textarea onChange="{{ onRejectNote }}" placeholder="Optional notes…" rows="2" style="width:100%; background:#0F1115; border:1px solid #2A2F3A; border-radius:10px; padding:10px 14px; color:#F4F4F5; font:400 13px/1.5 Inter; outline:none; resize:vertical;"></textarea>
+                <div style="display:flex; gap:10px;">
+                  <button onClick="{{ cancelReject }}" style="flex:1; height:42px; background:transparent; border:1px solid #3A404B; border-radius:9999px; color:#F4F4F5; font:500 13px/1 Inter; cursor:pointer;" style-hover="background:#1A1A1F;">Cancel</button>
+                  <sc-if value="{{ rejectValid }}" hint-placeholder-val="{{ true }}">
+                    <button onClick="{{ confirmReject }}" style="flex:1; height:42px; background:#F87171; color:#1a0505; border:none; border-radius:9999px; font:600 13px/1 Inter; cursor:pointer; transition:background-color .15s ease;" style-hover="background:#f99090;">Reject request</button>
+                  </sc-if>
+                  <sc-if value="{{ rejectInvalid }}" hint-placeholder-val="{{ false }}">
+                    <button disabled="true" style="flex:1; height:42px; background:#F87171; color:#1a0505; border:none; border-radius:9999px; font:600 13px/1 Inter; opacity:0.35; cursor:not-allowed;">Reject request</button>
+                  </sc-if>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ showApproveConfirm }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; flex-direction:column; gap:12px; padding:16px; border-radius:12px; background:rgba(63,185,132,0.06); border:1px solid rgba(63,185,132,0.22);">
+                <div style="font:500 14px/1.2 Inter; color:#BBF7D0;">Confirm approval</div>
+                <div style="font:400 13px/1.5 Inter; color:#A7E0C8;">This will credit <span style="color:#F4F4F5; font-weight:500;">{{ selected.amountText }}</span> as Aura Points to the user's vault. This action is logged and cannot be undone.</div>
+                <div style="display:flex; gap:10px;">
+                  <button onClick="{{ cancelApprove }}" style="flex:1; height:42px; background:transparent; border:1px solid #3A404B; border-radius:9999px; color:#F4F4F5; font:500 13px/1 Inter; cursor:pointer;" style-hover="background:#1A1A1F;">Cancel</button>
+                  <button onClick="{{ confirmApprove }}" style="flex:1; height:42px; background:#3FB984; color:#06231a; border:none; border-radius:9999px; font:600 13px/1 Inter; cursor:pointer; transition:background-color .15s ease;" style-hover="background:#4fd197;">Approve &amp; credit</button>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ showFlagConfirm }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; flex-direction:column; gap:10px; padding:14px; border-radius:12px; background:rgba(253,230,138,0.06); border:1px solid rgba(253,230,138,0.18);">
+                <div style="font:500 13px/1.2 Inter; color:#FDE68A;">Flag this request for further investigation?</div>
+                <div style="display:flex; gap:10px;">
+                  <button onClick="{{ cancelFlag }}" style="flex:1; height:38px; background:transparent; border:1px solid #3A404B; border-radius:9999px; color:#F4F4F5; font:500 12px/1 Inter; cursor:pointer;">Cancel</button>
+                  <button onClick="{{ confirmFlag }}" style="flex:1; height:38px; background:#E0A93B; color:#1a1400; border:none; border-radius:9999px; font:600 12px/1 Inter; cursor:pointer;">Confirm flag</button>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ showActionButtons }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex; gap:10px;">
+                <button onClick="{{ startApprove }}" style="flex:1; height:46px; background:#3FB984; color:#06231a; border:none; border-radius:9999px; font:600 14px/1 Inter; cursor:pointer; transition:background-color .15s ease, box-shadow .15s ease;" style-hover="background:#4fd197; box-shadow:0 0 30px rgba(63,185,132,0.3);">{{ iconCheck }} Approve</button>
+                <button onClick="{{ startReject }}" style="flex:1; height:46px; background:transparent; color:#FCA5A5; border:1.5px solid rgba(248,113,113,0.35); border-radius:9999px; font:500 14px/1 Inter; cursor:pointer; transition:background-color .15s ease, border-color .15s ease;" style-hover="background:rgba(248,113,113,0.06); border-color:#F87171;">Reject</button>
+                <button onClick="{{ startFlag }}" style="width:46px; height:46px; flex:none; display:flex; align-items:center; justify-content:center; background:transparent; border:1.5px solid rgba(253,230,138,0.25); border-radius:9999px; color:#FDE68A; cursor:pointer; transition:background-color .15s ease;" style-hover="background:rgba(253,230,138,0.06);">{{ iconFlag }}</button>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ selIsProcessed }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:auto; padding-top:12px; border-top:1px solid #2A2F3A;">
+            <sc-if value="{{ selIsApproved }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; gap:10px; padding:14px; border-radius:10px; background:rgba(63,185,132,0.06); border:1px solid rgba(63,185,132,0.2);">
+                <span style="flex:none; color:#3FB984; display:flex;">{{ iconCheckCircle }}</span>
+                <div style="font:400 13px/1.5 Inter; color:#A7E0C8;">Approved by <span style="color:#F4F4F5; font-weight:500;">{{ selected.processedBy }}</span>. {{ selected.amountText }} credited as Aura Points.</div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ selIsRejected }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; flex-direction:column; gap:8px; padding:14px; border-radius:10px; background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.2);">
+                <div style="display:flex; gap:10px;">
+                  <span style="flex:none; color:#F87171; display:flex;">{{ iconXCircle }}</span>
+                  <div style="font:400 13px/1.5 Inter; color:#E9A8A8;">Rejected by <span style="color:#F4F4F5; font-weight:500;">{{ selected.processedBy }}</span></div>
+                </div>
+                <div style="font:400 12px/1.4 Inter; color:#FCA5A5; padding-left:30px;">{{ selected.rejectReason }}</div>
+              </div>
+            </sc-if>
+            <button onClick="{{ closeDrawer }}" style="width:100%; height:44px; background:transparent; border:1px solid #3A404B; border-radius:9999px; color:#F4F4F5; font:500 14px/1 Inter; cursor:pointer;" style-hover="background:#1A1A1F;">Close</button>
+          </div>
+        </sc-if>
+
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<!-- TOAST -->
+<sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed; bottom:24px; left:50%; transform:translateX(-50%); z-index:60; background:#1C2028; border:1px solid #3A404B; border-radius:9999px; padding:12px 20px; color:#F4F4F5; font:500 13px/1 Inter; box-shadow:0 12px 40px rgba(0,0,0,0.5);">{{ toast }}</div>
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100%&quot;},&quot;adminName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Sarah&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+
+class Component extends DCLogic {
+  state = {
+    view: "queue",
+    searchQuery: "",
+    statusFilter: "all",
+    networkFilter: "all",
+    drawerOpen: false,
+    selectedId: null,
+    actionMode: null,
+    rejectReason: "",
+    rejectNote: "",
+    checks: {},
+    toast: "",
+    toastShow: false,
+    requests: [
+      { id: "TU-4091", userName: "Alex Mercer", userId: "USR-10482", wallet: "0x9C4d2E7a1B5f8C3d6A0e9B2c7D4f1A8e5C3b0D7a", registered: "Jan 12, 2026", amount: 500, network: "BSC", txHash: "0x7d2a91ffe3c4b8a55f0c2d31e7b6aa30f81c", date: "Jun 24, 10:23 AM", status: "pending", hasProof: true, processedBy: null, rejectReason: null },
+      { id: "TU-4090", userName: "Maria Santos", userId: "USR-10291", wallet: "0x3F8b1D6a2C9e5740B1a8F3c2D7e6A09bC4d1E5f3", registered: "Mar 5, 2026", amount: 1200, network: "Ethereum", txHash: "0x3b9145ca80de29c7e6f18b4d5a0c72aa20e9", date: "Jun 24, 9:48 AM", status: "pending", hasProof: true, processedBy: null, rejectReason: null },
+      { id: "TU-4089", userName: "James Tan", userId: "USR-10155", wallet: "0x5C2a9E7b3D1f06A84c2B9d7E5a1F3c08bD6e4A2c", registered: "Feb 18, 2026", amount: 250, network: "Polygon", txHash: "0x55c01de3f8a762b4c9a0e18d30c7d31e", date: "Jun 24, 8:12 AM", status: "verifying", hasProof: true, processedBy: null, rejectReason: null },
+      { id: "TU-4088", userName: "Sarah Kim", userId: "USR-10340", wallet: "0x7A3f9C2bD4e15F8a06B3c9D7e2A1f4B8c5D0e6F2", registered: "Apr 1, 2026", amount: 800, network: "BSC", txHash: "0x1f8e40b71a2c9d3e56f0a8b72c4e6d1ab6c4", date: "Jun 23, 4:30 PM", status: "approved", hasProof: true, processedBy: "Sarah (Admin)", rejectReason: null },
+      { id: "TU-4087", userName: "Carlos Reyes", userId: "USR-10098", wallet: "0x2B5c8D3a1E7f4609A8c3b2D6e0F5a1C9bD4e7A3c", registered: "Dec 20, 2025", amount: 150, network: "Solana", txHash: "0xa9f2c1b7e34d8a55f0c2d31e7b6cc40", date: "Jun 23, 2:15 PM", status: "rejected", hasProof: false, processedBy: "Sarah (Admin)", rejectReason: "Transaction hash could not be found on-chain." },
+      { id: "TU-4086", userName: "Lena Park", userId: "USR-10411", wallet: "0x6E9a1C4b2D8f5703B1c7e3A0d9F2b6C8aD5e1A4f", registered: "May 10, 2026", amount: 2000, network: "Base", txHash: "0xcc710f3a8b25d9e4c6f01a7d2e8b5a31", date: "Jun 24, 11:02 AM", status: "pending", hasProof: true, processedBy: null, rejectReason: null },
+      { id: "TU-4085", userName: "David Chen", userId: "USR-10220", wallet: "0x1A8c3D6b2E9f0754B1c7e2A5d3F8b4C0aD9e6A1f", registered: "Jan 30, 2026", amount: 350, network: "Ethereum", txHash: "0xef502a91c3d8b76e4f01a2d7e9c5b8a30f1e", date: "Jun 23, 11:45 AM", status: "flagged", hasProof: true, processedBy: null, rejectReason: null },
+    ],
+    auditLog: [
+      { admin: "Sarah (Admin)", action: "approved", reqId: "TU-4088", amount: 800, prevStatus: "pending", newStatus: "approved", note: "800 USDT credited as 800 Aura Points. TX verified on BSC.", timestamp: "Jun 23, 4:45 PM" },
+      { admin: "Sarah (Admin)", action: "rejected", reqId: "TU-4087", amount: 150, prevStatus: "pending", newStatus: "rejected", note: "Reason: Transaction hash could not be found on-chain.", timestamp: "Jun 23, 2:30 PM" },
+      { admin: "Mark (Finance)", action: "flagged", reqId: "TU-4085", amount: 350, prevStatus: "pending", newStatus: "flagged", note: "Flagged for duplicate TX hash investigation.", timestamp: "Jun 23, 12:10 PM" },
+      { admin: "Sarah (Admin)", action: "approved", reqId: "TU-4083", amount: 1000, prevStatus: "verifying", newStatus: "approved", note: "1,000 USDT credited as 1,000 Aura Points. TX verified on Polygon.", timestamp: "Jun 22, 3:20 PM" },
+      { admin: "Mark (Finance)", action: "status_change", reqId: "TU-4089", amount: 250, prevStatus: "pending", newStatus: "verifying", note: "Moved to under verification for manual review.", timestamp: "Jun 24, 8:30 AM" },
+    ],
+  };
+
+  CHECKLIST = [
+    "Transaction hash exists on-chain",
+    "Transaction is successful (confirmed)",
+    "Amount matches submitted value",
+    "Network matches supported network",
+    "Receiving wallet matches Aurora Vault wallet",
+    "Screenshot appears valid",
+  ];
+
+  REJECT_REASONS = [
+    { value: "", label: "Select a reason…" },
+    { value: "invalid_hash", label: "Invalid transaction hash" },
+    { value: "not_found", label: "Transfer not found on-chain" },
+    { value: "wrong_amount", label: "Incorrect amount" },
+    { value: "wrong_network", label: "Unsupported network" },
+    { value: "screenshot_mismatch", label: "Screenshot mismatch" },
+    { value: "duplicate", label: "Duplicate submission" },
+    { value: "fraud", label: "Suspected fraud" },
+  ];
+
+  REASON_TEXT = {
+    invalid_hash: "Invalid transaction hash — could not be parsed or verified.",
+    not_found: "Transfer not found on the specified blockchain network.",
+    wrong_amount: "The on-chain amount does not match the submitted value.",
+    wrong_network: "Transaction was sent on an unsupported or incorrect network.",
+    screenshot_mismatch: "Uploaded screenshot does not match the transaction details.",
+    duplicate: "This transaction hash has already been submitted for another request.",
+    fraud: "This request has been flagged for suspected fraudulent activity.",
+  };
+
+  ic(name, size) {
+    const R = React.createElement;
+    const s = { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 2, strokeLinecap: "round", strokeLinejoin: "round" };
+    const p = (d) => R("path", { d });
+    const wrap = (...c) => R("svg", s, ...c);
+    switch (name) {
+      case "inbox": return wrap(p("M22 12h-6l-2 3H10l-2-3H2"), p("M5.5 5.5 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-6.5A2 2 0 0 0 16.7 4H7.3a2 2 0 0 0-1.8 1.1z"));
+      case "audit": return wrap(p("M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"), p("M14 2v6h6"), p("M16 13H8"), p("M16 17H8"), p("M10 9H8"));
+      case "search": return wrap(R("circle", { cx: 11, cy: 11, r: 8 }), p("m21 21-4.3-4.3"));
+      case "close": return wrap(p("M18 6 6 18"), p("m6 6 12 12"));
+      case "copy": return wrap(R("rect", { x: 9, y: 9, width: 13, height: 13, rx: 2 }), p("M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"));
+      case "check": return wrap(p("M20 6 9 17l-5-5"));
+      case "image": return wrap(R("rect", { x: 3, y: 3, width: 18, height: 18, rx: 2 }), R("circle", { cx: 9, cy: 9, r: 2 }), p("m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"));
+      case "expand": return wrap(p("M15 3h6v6"), p("M9 21H3v-6"), p("M21 3l-7 7"), p("M3 21l7-7"));
+      case "download": return wrap(p("M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"), p("M7 10l5 5 5-5"), p("M12 15V3"));
+      case "flag": return wrap(p("M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"), p("M4 22v-7"));
+      case "check-circle": return wrap(p("M22 11.1V12a10 10 0 1 1-5.9-9.1"), p("m22 4-10 10-3-3"));
+      case "x-circle": return wrap(R("circle", { cx: 12, cy: 12, r: 10 }), p("M15 9l-6 6"), p("M9 9l6 6"));
+      case "shield": return wrap(p("M20 13c0 5-3.5 7.5-7.7 8.8a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.5 1.5 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"));
+      case "alert": return wrap(p("m12 3 9 16H3z"), p("M12 10v4"), p("M12 17h.01"));
+      default: return null;
+    }
+  }
+
+  statusMeta(status) {
+    return {
+      pending: { label: "Pending review", color: "#FDE68A", bg: "rgba(253,230,138,0.12)", dot: "#FDE68A" },
+      verifying: { label: "Under verification", color: "#A9C7FF", bg: "rgba(11,132,255,0.12)", dot: "#0B84FF" },
+      approved: { label: "Approved", color: "#BBF7D0", bg: "rgba(187,247,208,0.12)", dot: "#3FB984" },
+      rejected: { label: "Rejected", color: "#FCA5A5", bg: "rgba(248,113,113,0.12)", dot: "#F87171" },
+      flagged: { label: "Flagged", color: "#FDE68A", bg: "rgba(253,230,138,0.12)", dot: "#E0A93B" },
+    }[status] || { label: status, color: "#A1A1AA", bg: "#1C2028", dot: "#A1A1AA" };
+  }
+
+  goQueue = () => this.setState({ view: "queue" });
+  goAudit = () => this.setState({ view: "audit" });
+  onSearch = (e) => this.setState({ searchQuery: (e.target.value || "").toLowerCase() });
+  setStatusFilter = (f) => () => this.setState({ statusFilter: f });
+  setNetworkFilter = (f) => () => this.setState({ networkFilter: f });
+
+  openReview = (id) => () => this.setState({ drawerOpen: true, selectedId: id, actionMode: null, rejectReason: "", rejectNote: "", checks: {} });
+  closeDrawer = () => this.setState({ drawerOpen: false, selectedId: null, actionMode: null });
+
+  toggleCheck = (idx) => () => this.setState((s) => { const c = Object.assign({}, s.checks); c[idx] = !c[idx]; return { checks: c }; });
+
+  startApprove = () => this.setState({ actionMode: "approve" });
+  cancelApprove = () => this.setState({ actionMode: null });
+  confirmApprove = () => {
+    this.setState((s) => {
+      const reqs = s.requests.map((r) => r.id === s.selectedId ? Object.assign({}, r, { status: "approved", processedBy: (this.props && this.props.adminName) || "Sarah (Admin)" }) : r);
+      const sel = reqs.find((r) => r.id === s.selectedId);
+      const log = { admin: (this.props && this.props.adminName) || "Sarah (Admin)", action: "approved", reqId: s.selectedId, amount: sel.amount, prevStatus: "pending", newStatus: "approved", note: sel.amount.toLocaleString("en-US") + " USDT credited as " + sel.amount.toLocaleString("en-US") + " Aura Points. TX verified on " + sel.network + ".", timestamp: "Just now" };
+      return { requests: reqs, auditLog: [log, ...s.auditLog], actionMode: null, toast: "Request " + s.selectedId + " approved", toastShow: true };
+    });
+    clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toastShow: false }), 2400);
+  };
+
+  startReject = () => this.setState({ actionMode: "reject", rejectReason: "", rejectNote: "" });
+  cancelReject = () => this.setState({ actionMode: null });
+  onRejectReason = (e) => this.setState({ rejectReason: e.target.value });
+  onRejectNote = (e) => this.setState({ rejectNote: e.target.value });
+  confirmReject = () => {
+    this.setState((s) => {
+      const reasonText = this.REASON_TEXT[s.rejectReason] || s.rejectReason;
+      const fullReason = reasonText + (s.rejectNote ? " — " + s.rejectNote : "");
+      const reqs = s.requests.map((r) => r.id === s.selectedId ? Object.assign({}, r, { status: "rejected", processedBy: (this.props && this.props.adminName) || "Sarah (Admin)", rejectReason: fullReason }) : r);
+      const sel = reqs.find((r) => r.id === s.selectedId);
+      const log = { admin: (this.props && this.props.adminName) || "Sarah (Admin)", action: "rejected", reqId: s.selectedId, amount: sel.amount, prevStatus: "pending", newStatus: "rejected", note: "Reason: " + fullReason, timestamp: "Just now" };
+      return { requests: reqs, auditLog: [log, ...s.auditLog], actionMode: null, toast: "Request " + s.selectedId + " rejected", toastShow: true };
+    });
+    clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toastShow: false }), 2400);
+  };
+
+  startFlag = () => this.setState({ actionMode: "flag" });
+  cancelFlag = () => this.setState({ actionMode: null });
+  confirmFlag = () => {
+    this.setState((s) => {
+      const reqs = s.requests.map((r) => r.id === s.selectedId ? Object.assign({}, r, { status: "flagged" }) : r);
+      const log = { admin: (this.props && this.props.adminName) || "Sarah (Admin)", action: "flagged", reqId: s.selectedId, amount: reqs.find((r) => r.id === s.selectedId).amount, prevStatus: "pending", newStatus: "flagged", note: "Flagged for further investigation.", timestamp: "Just now" };
+      return { requests: reqs, auditLog: [log, ...s.auditLog], actionMode: null, toast: "Request " + s.selectedId + " flagged", toastShow: true };
+    });
+    clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toastShow: false }), 2400);
+  };
+
+  copyHash = (hash) => () => { try { navigator.clipboard.writeText(hash); } catch (e) {} this.setState({ toast: "TX hash copied", toastShow: true }); clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toastShow: false }), 1600); };
+
+  componentWillUnmount() { clearTimeout(this._t); }
+
+  renderVals() {
+    const s = this.state;
+    const adminName = (this.props && this.props.adminName) || "Sarah";
+
+    const q = s.searchQuery;
+    const filtered = s.requests.filter((r) => {
+      if (s.statusFilter !== "all" && r.status !== s.statusFilter) return false;
+      if (s.networkFilter !== "all" && r.network !== s.networkFilter) return false;
+      if (q) {
+        const hay = (r.userName + " " + r.userId + " " + r.wallet + " " + r.txHash + " " + r.id).toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    });
+
+    const sel = s.selectedId ? s.requests.find((r) => r.id === s.selectedId) : null;
+    const selM = sel ? this.statusMeta(sel.status) : null;
+    const canAct = sel && (sel.status === "pending" || sel.status === "verifying" || sel.status === "flagged");
+
+    const checkedCount = this.CHECKLIST.reduce((n, _, i) => n + (s.checks[i] ? 1 : 0), 0);
+
+    const statCounts = {};
+    s.requests.forEach((r) => { statCounts[r.status] = (statCounts[r.status] || 0) + 1; });
+    const pendingAmt = s.requests.filter((r) => r.status === "pending" || r.status === "verifying").reduce((a, r) => a + r.amount, 0);
+    const totalProcessed = s.requests.filter((r) => r.status === "approved").reduce((a, r) => a + r.amount, 0);
+
+    const networks = [...new Set(s.requests.map((r) => r.network))].sort();
+
+    const auditLogMeta = (log) => {
+      const m = this.statusMeta(log.newStatus);
+      const icons = { approved: "check-circle", rejected: "x-circle", flagged: "flag", status_change: "shield" };
+      return { icon: this.ic(icons[log.action] || "audit", 16), iconBg: m.bg, iconColor: m.color, badgeBg: m.bg, badgeColor: m.color, badgeDot: m.dot, badgeLabel: m.label, admin: log.admin, action: log.action.replace("_", " ") + " " + log.reqId, detail: log.note, timestamp: log.timestamp };
+    };
+
+    return {
+      adminName,
+      pageTitle: s.view === "queue" ? "Verification queue" : "Audit trail",
+      isQueue: s.view === "queue", notQueue: s.view !== "queue",
+      isAudit: s.view === "audit", notAudit: s.view !== "audit",
+      goQueue: this.goQueue, goAudit: this.goAudit,
+      iconInbox: this.ic("inbox", 18), iconAudit: this.ic("audit", 18),
+      iconSearch: this.ic("search", 15), iconClose: this.ic("close", 18),
+      iconCopySm: this.ic("copy", 13), iconImage: this.ic("image", 13),
+      iconImageLg: this.ic("image", 24), iconExpand: this.ic("expand", 13), iconDownload: this.ic("download", 13),
+      iconCheck: this.ic("check", 16), iconFlag: this.ic("flag", 18),
+      iconCheckCircle: this.ic("check-circle", 18), iconXCircle: this.ic("x-circle", 18),
+      iconShield: this.ic("shield", 16),
+      searchQuery: s.searchQuery, onSearch: this.onSearch,
+
+      pendingCount: (statCounts.pending || 0) + (statCounts.verifying || 0),
+      approvedToday: statCounts.approved || 0,
+      rejectedToday: statCounts.rejected || 0,
+      underReviewUsdt: "$" + pendingAmt.toLocaleString("en-US"),
+      totalProcessed: "$" + totalProcessed.toLocaleString("en-US"),
+
+      statusFilters: [
+        { label: "All", count: "(" + s.requests.length + ")", active: s.statusFilter === "all", onClick: this.setStatusFilter("all") },
+        { label: "Pending", count: "(" + ((statCounts.pending || 0) + (statCounts.verifying || 0)) + ")", active: s.statusFilter === "pending" || s.statusFilter === "verifying", onClick: this.setStatusFilter("pending") },
+        { label: "Approved", count: "(" + (statCounts.approved || 0) + ")", active: s.statusFilter === "approved", onClick: this.setStatusFilter("approved") },
+        { label: "Rejected", count: "(" + (statCounts.rejected || 0) + ")", active: s.statusFilter === "rejected", onClick: this.setStatusFilter("rejected") },
+        { label: "Flagged", count: "(" + (statCounts.flagged || 0) + ")", active: s.statusFilter === "flagged", onClick: this.setStatusFilter("flagged") },
+      ],
+      networkFilters: [{ label: "All networks", active: s.networkFilter === "all", onClick: this.setNetworkFilter("all") }].concat(
+        networks.map((n) => ({ label: n, active: s.networkFilter === n, onClick: this.setNetworkFilter(n) }))
+      ),
+
+      rows: filtered.map((r) => {
+        const m = this.statusMeta(r.status);
+        return {
+          key: r.id, id: r.id, userName: r.userName, userId: r.userId, date: r.date,
+          amountText: r.amount.toLocaleString("en-US") + " USDT", network: r.network,
+          txHash: r.txHash,
+          txHashShort: r.txHash.slice(0, 8) + "…" + r.txHash.slice(-4),
+          hasProof: r.hasProof, noProof: !r.hasProof,
+          statusLabel: m.label, statusColor: m.color, statusBg: m.bg, statusDot: m.dot,
+          openReview: this.openReview(r.id),
+          copyHash: this.copyHash(r.txHash),
+          viewProof: this.openReview(r.id),
+        };
+      }),
+      hasRows: filtered.length > 0, noRows: filtered.length === 0,
+
+      drawerOpen: s.drawerOpen, closeDrawer: this.closeDrawer,
+      selected: sel || {},
+      selStatusLabel: selM ? selM.label : "", selStatusColor: selM ? selM.color : "", selStatusBg: selM ? selM.bg : "", selStatusDot: selM ? selM.dot : "",
+
+      checklist: this.CHECKLIST.map((label, i) => {
+        const checked = !!s.checks[i];
+        return {
+          label, toggle: this.toggleCheck(i),
+          borderColor: checked ? "#3FB984" : "#3A404B",
+          checkBg: checked ? "#3FB984" : "transparent",
+          checkColor: checked ? "#06231a" : "transparent",
+          checkIcon: checked ? "✓" : "",
+          textColor: checked ? "#BBF7D0" : "#D4D4D8",
+        };
+      }),
+      checkProgress: checkedCount + " of " + this.CHECKLIST.length + " verified",
+
+      canAction: canAct,
+      selIsProcessed: sel && (sel.status === "approved" || sel.status === "rejected"),
+      selIsApproved: sel && sel.status === "approved",
+      selIsRejected: sel && sel.status === "rejected",
+
+      showActionButtons: canAct && !s.actionMode,
+      showApproveConfirm: s.actionMode === "approve",
+      showRejectForm: s.actionMode === "reject",
+      showFlagConfirm: s.actionMode === "flag",
+
+      startApprove: this.startApprove, cancelApprove: this.cancelApprove, confirmApprove: this.confirmApprove,
+      startReject: this.startReject, cancelReject: this.cancelReject,
+      onRejectReason: this.onRejectReason, onRejectNote: this.onRejectNote, confirmReject: this.confirmReject,
+      rejectReasons: this.REJECT_REASONS.map((r) => ({ value: r.value, label: r.label })),
+      rejectValid: s.rejectReason !== "", rejectInvalid: s.rejectReason === "",
+      startFlag: this.startFlag, cancelFlag: this.cancelFlag, confirmFlag: this.confirmFlag,
+
+      auditLogs: s.auditLog.map(auditLogMeta),
+
+      toast: s.toast, toastShow: s.toastShow,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+/* Cobalt Midnight — spacing & radius tokens
+   Rhythm based on 6 / 12 / 24 / 48 / 64 / 128 jumps. */
+:root {
+  /* Spacing scale */
+  --space-xs: 6px;
+  --space-sm: 12px;
+  --space-md: 24px;
+  --space-lg: 48px;
+  --space-xl: 64px;
+  --space-xxl: 128px;
+
+  /* Corner radii — pills for actions/badges, sm–md for surfaces */
+  --radius-none: 0px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+  --radius-xl: 18px;
+  --radius-full: 9999px;
+
+  /* Depth — tonal layering + 1px borders, not drop shadows */
+  --shadow-none: none;
+  --shadow-subtle: 0 1px 0 rgba(0, 0, 0, 0.4);
+  --shadow-overlay: 0 12px 40px rgba(0, 0, 0, 0.55);
+}

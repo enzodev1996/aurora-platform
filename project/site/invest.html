@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aurora Wallet — Invest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sulphur+Point:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="app-root" data-page="invest">
+  <main class="app-main">
+    <div class="app-content">
+
+      <p class="muted" style="font:400 14px/1.5 var(--font-body);max-width:600px;margin:0">Tokenized real-world projects, vetted and held in escrow. Lend your Aurora Points into a SecureNest (guaranteed) or TrustBox (non-guaranteed) to support listed projects and earn Aura XP.</p>
+
+      <!-- Lending notice -->
+      <div class="callout info">
+        <span class="ico"><i data-icon="shield" style="display:flex;width:16px"></i></span>
+        <div class="txt"><strong style="color:var(--c-text)">Lending notice.</strong> Transactions between users and Aurora Vault are structured as lending arrangements, not investments. SecureNest guarantees the return of lent Aurora Points. TrustBox is subject to associated risks.</div>
+      </div>
+
+      <!-- Project grid -->
+      <div class="grid cols-cards">
+
+        <article class="project">
+          <div class="project-top"></div>
+          <div class="project-body">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+              <span class="badge-violet" style="background:rgba(12,122,99,0.10);border-color:rgba(12,122,99,0.25);color:var(--c-teal-ink)">Lower risk</span>
+              <span style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:9999px;background:var(--c-elevated);border:1px solid var(--c-border);font:500 11px/1 var(--font-body);color:var(--c-muted)"><span class="status-dot" style="background:#0E8A6F"></span>Funding</span>
+            </div>
+            <div class="project-title">Mindanao Agri Cooperative</div>
+            <div class="muted" style="font:400 13px/1.5 var(--font-body)">Tokenized farmland yield, escrow-held with quarterly distributions.</div>
+            <div class="progress"><i style="width:68%"></i></div>
+            <div class="row-between">
+              <span class="muted" style="font:400 12px var(--font-body)">68% funded · 142 investors</span>
+              <span style="font:600 13px var(--font-body);color:var(--c-accent)">12.4% APY</span>
+            </div>
+            <div class="row-between" style="font:400 12px var(--font-body)">
+              <span class="muted">Min. 1,000 AP</span>
+              <span class="muted">32 days left</span>
+            </div>
+            <button class="btn btn-accent full" data-modal="invest" data-project="Mindanao Agri Cooperative" data-apy="12.4%" style="margin-top:6px">Invest now</button>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-top" style="background:linear-gradient(135deg,#0c2218,#2AD9B7 70%,#5FF0CC)"></div>
+          <div class="project-body">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+              <span class="badge-violet" style="background:rgba(12,122,99,0.10);border-color:rgba(12,122,99,0.25);color:var(--c-teal-ink)">Lower risk</span>
+              <span style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:9999px;background:var(--c-elevated);border:1px solid var(--c-border);font:500 11px/1 var(--font-body);color:var(--c-muted)"><span class="status-dot" style="background:#0E8A6F"></span>Funding</span>
+            </div>
+            <div class="project-title">Cebu Solar Microgrid</div>
+            <div class="muted" style="font:400 13px/1.5 var(--font-body)">Renewable infrastructure note backed by power-purchase agreements.</div>
+            <div class="progress"><i style="width:41%"></i></div>
+            <div class="row-between">
+              <span class="muted" style="font:400 12px var(--font-body)">41% funded · 88 investors</span>
+              <span style="font:600 13px var(--font-body);color:var(--c-accent)">9.8% APY</span>
+            </div>
+            <div class="row-between" style="font:400 12px var(--font-body)">
+              <span class="muted">Min. 1,000 AP</span>
+              <span class="muted">58 days left</span>
+            </div>
+            <button class="btn btn-accent full" data-modal="invest" data-project="Cebu Solar Microgrid" data-apy="9.8%" style="margin-top:6px">Invest now</button>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-top" style="background:linear-gradient(135deg,#2A0F4A,#6D28D9 60%,#4C9ED9)"></div>
+          <div class="project-body">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+              <span class="badge-violet">Higher risk</span>
+              <span style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:9999px;background:var(--c-elevated);border:1px solid var(--c-border);font:500 11px/1 var(--font-body);color:var(--c-muted)"><span class="status-dot" style="background:#0E8A6F"></span>Funding</span>
+            </div>
+            <div class="project-title">Davao Logistics Hub</div>
+            <div class="muted" style="font:400 13px/1.5 var(--font-body)">Warehouse expansion note with senior collateral position.</div>
+            <div class="progress"><i style="width:23%"></i></div>
+            <div class="row-between">
+              <span class="muted" style="font:400 12px var(--font-body)">23% funded · 54 investors</span>
+              <span style="font:600 13px var(--font-body);color:var(--c-accent)">15.2% APY</span>
+            </div>
+            <div class="row-between" style="font:400 12px var(--font-body)">
+              <span class="muted">Min. 1,000 AP</span>
+              <span class="muted">77 days left</span>
+            </div>
+            <button class="btn btn-accent full" data-modal="invest" data-project="Davao Logistics Hub" data-apy="15.2%" style="margin-top:6px">Invest now</button>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-top" style="background:linear-gradient(135deg,#0a1a2e,#1e4d8c 60%,#2AD9B7)"></div>
+          <div class="project-body">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+              <span class="badge-violet" style="background:rgba(12,122,99,0.10);border-color:rgba(12,122,99,0.25);color:var(--c-teal-ink)">Medium risk</span>
+              <span style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:9999px;background:var(--c-elevated);border:1px solid var(--c-border);font:500 11px/1 var(--font-body);color:var(--c-muted)"><span class="status-dot" style="background:#2F6BD8"></span>Coming soon</span>
+            </div>
+            <div class="project-title">Manila Bay Marina</div>
+            <div class="muted" style="font:400 13px/1.5 var(--font-body)">Mixed-use waterfront development with escrow-protected tranches.</div>
+            <div class="progress"><i style="width:5%"></i></div>
+            <div class="row-between">
+              <span class="muted" style="font:400 12px var(--font-body)">5% funded · 12 investors</span>
+              <span style="font:600 13px var(--font-body);color:var(--c-accent)">11.0% APY</span>
+            </div>
+            <div class="row-between" style="font:400 12px var(--font-body)">
+              <span class="muted">Min. 5,000 AP</span>
+              <span class="muted">Opens Jul 15</span>
+            </div>
+            <button class="btn btn-accent full" data-modal="invest" data-project="Manila Bay Marina" data-apy="11.0%" style="margin-top:6px">Invest now</button>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>

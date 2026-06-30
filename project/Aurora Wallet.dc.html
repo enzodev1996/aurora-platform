@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/project-aurora-f8c3dcef-957d-46a5-ae15-a6ac9f3a1289/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/project-aurora-f8c3dcef-957d-46a5-ae15-a6ac9f3a1289/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/project-aurora-f8c3dcef-957d-46a5-ae15-a6ac9f3a1289/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/project-aurora-f8c3dcef-957d-46a5-ae15-a6ac9f3a1289/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/project-aurora-f8c3dcef-957d-46a5-ae15-a6ac9f3a1289/styles.css">
+  <script src="_ds/project-aurora-f8c3dcef-957d-46a5-ae15-a6ac9f3a1289/_ds_bundle.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { background: var(--c-canvas,#090916); font-family: "Inter", system-ui, sans-serif; }
+    [data-theme="light"] {
+      --c-canvas:#F4F5FA; --c-surface:#FFFFFF; --c-card:#FFFFFF; --c-elevated:#EEF0F7;
+      --c-hover:#E7EAF3; --c-border:#DDE0EC; --c-border-strong:#C7CBDC; --c-divider:#E7EAF3;
+      --c-text:#13132A; --c-muted:#5A5E72; --c-header:rgba(244,245,250,0.82);
+      --c-modal:#FFFFFF; --c-accent-ink:#0E8A6F; --c-info-ink:#3F5170;
+      --c-pos-ink:#0E8A6F; --c-pos-bg:rgba(42,217,183,0.14); --c-violet-ink:#6D28D9;
+      --c-teal-ink:#0C7A63; --c-amber-ink:#B45309; --c-body2:#4A4E62;
+      --c-warn-ink:#B45309; --c-warn-body:#7C4A0E; --c-warn-bg:rgba(180,83,9,0.08); --c-warn-border:rgba(180,83,9,0.28);
+      --c-err-ink:#DC2626; --c-err-bg:rgba(220,38,38,0.06); --c-err-border:rgba(220,38,38,0.26);
+      /* DS component token overrides for light mode */
+      --color-primary:#FFFFFF; --color-primary-80:#EEF0F7; --color-primary-60:#E7EAF3;
+      --color-secondary:#5A5E72; --color-tertiary:#E7EAF3; --color-neutral:#FFFFFF;
+      --color-surface:#FFFFFF; --color-surface-elevated:#EEF0F7; --color-on-surface:#13132A;
+      --color-border:#DDE0EC; --color-muted-border:#C7CBDC; --color-accent:#0E8A6F;
+      --color-accent-secondary:#6D28D9; --color-success:#0E8A6F; --color-warning:#B45309; --color-error:#DC2626;
+    }
+    [data-theme="dark"] {
+      --c-canvas:#090916; --c-surface:#0E0E1F; --c-card:#13132A; --c-elevated:#1A1A38;
+      --c-hover:#15152B; --c-border:#25254A; --c-border-strong:#35356A; --c-divider:#1E1E3A;
+      --c-text:#F8F8F8; --c-muted:#C0C2CB; --c-header:rgba(9,9,22,0.82);
+      --c-modal:#121016; --c-accent-ink:#2AD9B7; --c-info-ink:#A9C7FF;
+      --c-pos-ink:#BBF7D0; --c-pos-bg:rgba(187,247,208,0.12); --c-violet-ink:#D8B4FE;
+      --c-teal-ink:#7FE7C4; --c-amber-ink:#FCD34D; --c-body2:#D4D4D8;
+      --c-warn-ink:#FDE68A; --c-warn-body:#E9D8A6; --c-warn-bg:rgba(253,230,138,0.07); --c-warn-border:rgba(253,230,138,0.22);
+      --c-err-ink:#FCA5A5; --c-err-bg:rgba(248,113,113,0.06); --c-err-border:rgba(248,113,113,0.22);
+      --color-primary:#090916; --color-primary-80:#0E0E1F; --color-primary-60:#15152B;
+      --color-secondary:#C0C2CB; --color-tertiary:#25254A; --color-neutral:#13132A;
+      --color-surface:#0E0E1F; --color-surface-elevated:#1A1A38; --color-on-surface:#F8F8F8;
+      --color-border:#25254A; --color-muted-border:#35356A; --color-accent:#2AD9B7;
+      --color-accent-secondary:#7828E8; --color-success:#BBF7D0; --color-warning:#FDE68A; --color-error:#F87171;
+    }
+    @keyframes auroraSpin { to { transform: rotate(360deg); } }
+    @keyframes auroraFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    @keyframes auroraPop { 0% { transform: scale(0.6); opacity: 0; } 60% { transform: scale(1.08); } 100% { transform: scale(1); opacity: 1; } }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--c-border,#25254A); border-radius: 9999px; border: 3px solid var(--c-canvas,#090916); }
+    @media (max-width: 820px) {
+      .app-sidebar { width: 72px !important; }
+      .app-sidebar .sidebar-brand-name, .app-sidebar .sidebar-user-meta { display: none !important; }
+      .app-content { padding: 22px 16px !important; }
+    }
+    @media (max-width: 600px) {
+      .app-search { display: none !important; }
+      .app-header { padding: 14px 16px !important; }
+      .modal-overlay { padding: 0 !important; }
+      .modal-card { width: 100% !important; max-width: 100% !important; height: 100% !important; max-height: 100% !important; border-radius: 0 !important; }
+    }
+  </style>
+</helmet>
+
+<div class="app-root" data-theme="{{ theme }}" style="display:flex; height:100vh; width:100%; background:var(--c-canvas,#090916); color:var(--c-text,#F8F8F8); overflow:hidden;">
+
+  <!-- SIDEBAR -->
+  <aside class="app-sidebar" style="width:248px; flex:none; background:var(--c-surface,#0E0E1F); border-right:1px solid var(--c-border,#25254A); display:flex; flex-direction:column; padding:20px 16px;">
+    <div style="display:flex; align-items:center; gap:11px; padding:6px 8px 24px;">
+      <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
+        <defs><radialGradient id="wMark" cx="50%" cy="42%" r="62%"><stop offset="0%" stop-color="#9F5BF0"></stop><stop offset="100%" stop-color="#7828E8"></stop></radialGradient></defs>
+        <rect x="4" y="4" width="32" height="32" rx="10" fill="url(#wMark)"></rect>
+        <circle cx="20" cy="20" r="6" fill="var(--c-canvas,#090916)"></circle>
+      </svg>
+
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:4px;">
+      <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}">
+        <div onClick="{{ goDashboard }}" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; cursor:pointer; user-select:none; font:500 13px/1.2 Inter; color:var(--c-text,#F8F8F8); background:var(--c-elevated,#1A1A38);"><span style="display:flex; flex:none;">{{ iconDashboard }}</span><span class="sidebar-brand-name" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Dashboard</span></div>
+      </sc-if>
+      <sc-if value="{{ notDashboard }}" hint-placeholder-val="{{ false }}">
+        <div onClick="{{ goDashboard }}" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; cursor:pointer; user-select:none; font:500 13px/1.2 Inter; color:var(--c-muted,#C0C2CB); background:transparent; transition:background-color .15s ease, color .15s ease;" style-hover="background:var(--c-hover,#15152B); color:var(--c-text,#F8F8F8);"><span style="display:flex; flex:none;">{{ iconDashboard }}</span><span class="sidebar-brand-name" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Dashboard</span></div>
+      </sc-if>
+
+      <sc-if value="{{ isWallet }}" hint-placeholder-val="{{ false }}">
+        <div onClick="{{ goWallet }}" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; cursor:pointer; user-select:none; font:500 13px/1.2 Inter; color:var(--c-text,#F8F8F8); background:var(--c-elevated,#1A1A38);"><span style="display:flex; flex:none;">{{ iconWallet }}</span><span class="sidebar-brand-name" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Wallet</span></div>
+      </sc-if>
+      <sc-if value="{{ notWallet }}" hint-placeholder-val="{{ true }}">
+        <div onClick="{{ goWallet }}" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; cursor:pointer; user-select:none; font:500 13px/1.2 Inter; color:var(--c-muted,#C0C2CB); background:transparent; transition:background-color .15s ease, color .15s ease;" style-hover="background:var(--c-hover,#15152B); color:var(--c-text,#F8F8F8);"><span style="display:flex; flex:none;">{{ iconWallet }}</span><span class="sidebar-brand-name" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Wallet</span></div>
+      </sc-if>
+
+      <sc-if value="{{ isInvest }}" hint-placeholder-val="{{ false }}">
+        <div onClick="{{ goInvest }}" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; cursor:pointer; user-select:none; font:500 13px/1.2 Inter; color:var(--c-text,#F8F8F8); background:var(--c-elevated,#1A1A38);"><span style="display:flex; flex:none;">{{ iconInvest }}</span><span class="sidebar-brand-name" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Invest</span></div>
+      </sc-if>
+      <sc-if value="{{ notInvest }}" hint-placeholder-val="{{ true }}">
+        <div onClick="{{ goInvest }}" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; cursor:pointer; user-select:none; font:500 13px/1.2 Inter; color:var(--c-muted,#C0C2CB); background:transparent; transition:background-color .15s ease, color .15s ease;" style-hover="background:var(--c-hover,#15152B); color:var(--c-text,#F8F8F8);"><span style="display:flex; flex:none;">{{ iconInvest }}</span><span class="sidebar-brand-name" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Invest</span></div>
+      </sc-if>
+
+      <sc-if value="{{ isVault }}" hint-placeholder-val="{{ false }}">
+        <div onClick="{{ goVault }}" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; cursor:pointer; user-select:none; font:500 13px/1.2 Inter; color:var(--c-text,#F8F8F8); background:var(--c-elevated,#1A1A38);"><span style="display:flex; flex:none;">{{ iconVault }}</span><span class="sidebar-brand-name" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Aura Vault</span></div>
+      </sc-if>
+      <sc-if value="{{ notVault }}" hint-placeholder-val="{{ true }}">
+        <div onClick="{{ goVault }}" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; cursor:pointer; user-select:none; font:500 13px/1.2 Inter; color:var(--c-muted,#C0C2CB); background:transparent; transition:background-color .15s ease, color .15s ease;" style-hover="background:var(--c-hover,#15152B); color:var(--c-text,#F8F8F8);"><span style="display:flex; flex:none;">{{ iconVault }}</span><span class="sidebar-brand-name" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Aura Vault</span></div>
+      </sc-if>
+
+      <sc-if value="{{ isTransactions }}" hint-placeholder-val="{{ false }}">
+        <div onClick="{{ goTransactions }}" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; cursor:pointer; user-select:none; font:500 13px/1.2 Inter; color:var(--c-text,#F8F8F8); background:var(--c-elevated,#1A1A38);"><span style="display:flex; flex:none;">{{ iconTxns }}</span><span class="sidebar-brand-name" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Transactions</span></div>
+      </sc-if>
+      <sc-if value="{{ notTransactions }}" hint-placeholder-val="{{ true }}">
+        <div onClick="{{ goTransactions }}" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; cursor:pointer; user-select:none; font:500 13px/1.2 Inter; color:var(--c-muted,#C0C2CB); background:transparent; transition:background-color .15s ease, color .15s ease;" style-hover="background:var(--c-hover,#15152B); color:var(--c-text,#F8F8F8);"><span style="display:flex; flex:none;">{{ iconTxns }}</span><span class="sidebar-brand-name" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Transactions</span></div>
+      </sc-if>
+
+      <div onClick="{{ openTopup }}" style="display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; cursor:pointer; user-select:none; font:500 13px/1.2 Inter; color:var(--c-muted,#C0C2CB); background:transparent; transition:background-color .15s ease, color .15s ease;" style-hover="background:var(--c-hover,#15152B); color:var(--c-text,#F8F8F8);"><span style="display:flex; flex:none;">{{ iconTopup }}</span><span class="sidebar-brand-name" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Top up</span></div>
+    </div>
+
+    <div style="flex:1;"></div>
+
+    <div style="display:flex; align-items:center; gap:10px; padding:12px 8px; border-top:1px solid var(--c-border,#25254A);">
+      <div style="width:34px; height:34px; border-radius:9999px; background:linear-gradient(135deg,#7828E8,#2AD9B7); display:flex; align-items:center; justify-content:center; font:600 12px/1 Inter; color:#fff; flex:none;">{{ userInitials }}</div>
+      <div class="sidebar-user-meta" style="flex:1; min-width:0;">
+        <div style="font:500 13px/1.2 Inter; color:var(--c-text,#F8F8F8); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ userName }}</div>
+        <div style="font:400 11px/1.3 Inter; color:var(--c-muted,#C0C2CB); margin-top:2px;">Verified · Pro</div>
+      </div>
+      <span style="color:var(--c-muted,#C0C2CB); display:flex; cursor:pointer;">{{ iconSettings }}</span>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main style="flex:1; min-width:0; overflow:auto;">
+    <header class="app-header" style="position:sticky; top:0; z-index:5; display:flex; align-items:center; gap:16px; padding:16px 32px; background:var(--c-header,rgba(9,9,22,0.82)); backdrop-filter:blur(12px); border-bottom:1px solid var(--c-border,#25254A);">
+      <div style="flex:1; min-width:0;">
+        <h1 style="margin:0; font:700 22px/1.1 'Sulphur Point'; letter-spacing:-0.02em; color:var(--c-text,#F8F8F8);">{{ pageTitle }}</h1>
+      </div>
+      <div class="app-search" style="width:230px; flex:none;">
+        <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Input" placeholder="Search" leading-icon="{{ iconSearch }}" shortcut="⌘K" hint-size="230px,40px" style="width:230px;"></x-import>
+      </div>
+      <button style="width:40px; height:40px; flex:none; display:flex; align-items:center; justify-content:center; background:transparent; border:1px solid var(--c-border,#25254A); border-radius:9999px; color:var(--c-muted,#C0C2CB); cursor:pointer;" style-hover="color:var(--c-text,#F8F8F8); border-color:var(--c-border-strong,#35356A);">{{ iconBell }}</button>
+      <button onClick="{{ toggleTheme }}" title="Toggle theme" style="width:40px; height:40px; flex:none; display:flex; align-items:center; justify-content:center; background:transparent; border:1px solid var(--c-border,#25254A); border-radius:9999px; color:var(--c-muted,#C0C2CB); cursor:pointer;" style-hover="color:var(--c-text,#F8F8F8); border-color:var(--c-border-strong,#35356A);">{{ iconTheme }}</button>
+      <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" onClick="{{ openTopup }}" leading-icon="{{ iconDown }}" hint-size="auto,40px">Top up</x-import>
+    </header>
+
+    <div class="app-content" style="padding:40px; max-width:none; margin:0;">
+
+      <!-- DASHBOARD -->
+      <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; flex-direction:column; gap:24px;">
+          <div data-theme="dark" style="position:relative; overflow:hidden; border-radius:14px; border:1px solid var(--c-border,#25254A); background:linear-gradient(155deg,#0F0A24 0%,#0E0E22 46%,#11112A 100%); color:#F8F8F8; padding:34px;">
+            <div style="position:absolute; top:-140px; left:-40px; width:440px; height:440px; border-radius:50%; background:radial-gradient(circle, rgba(120,40,232,0.45) 0%, transparent 62%); pointer-events:none;"></div>
+            <div style="position:relative; display:flex; flex-wrap:wrap; gap:32px; justify-content:space-between; align-items:flex-end;">
+              <div style="min-width:240px;">
+                <div style="font:400 12px/1.2 Inter; color:#C0C2CB; letter-spacing:0.04em; text-transform:uppercase;">Total balance</div>
+                <div style="display:flex; align-items:center; gap:14px; flex-wrap:nowrap; margin-top:14px;">
+                  <span style="font:700 56px/1 'Sulphur Point'; letter-spacing:-0.025em; color:#F8F8F8; font-variant-numeric:tabular-nums; white-space:nowrap;">{{ balanceUsd }}</span>
+                  <span style="display:inline-flex; align-items:center; gap:4px; padding:5px 10px; border-radius:9999px; background:rgba(187,247,208,0.12); color:var(--c-pos-ink,#BBF7D0); font:500 12px/1 Inter;">▲ 2.4%</span>
+                </div>
+                <div style="font:400 14px/1.4 Inter; color:#C0C2CB; margin-top:10px;">≈ {{ balanceUsdt }} · +$291.40 today</div>
+                <div style="display:flex; gap:10px; margin-top:24px;">
+                  <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" onClick="{{ openTopup }}" leading-icon="{{ iconDown }}" hint-size="auto,40px">Top up</x-import>
+                  <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="secondary" onClick="{{ goWallet }}" leading-icon="{{ iconUp }}" hint-size="auto,40px">Withdraw</x-import>
+                </div>
+              </div>
+              <sc-if value="{{ showSparkline }}" hint-placeholder-val="{{ true }}">
+                <div style="flex:1; min-width:240px; max-width:380px;">{{ spark }}</div>
+              </sc-if>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:24px; align-items:start;">
+            <div style="background:var(--c-card,#13132A); border:1px solid var(--c-border,#25254A); border-radius:12px; padding:20px;">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+                <span style="font:500 15px/1 Inter; color:var(--c-text,#F8F8F8);">Your assets</span>
+                <span style="font:400 12px/1 Inter; color:var(--c-muted,#C0C2CB);">1 asset</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:14px; padding:14px; border-radius:10px; background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A);">
+                <span style="flex:none; display:flex;">{{ usdt }}</span>
+                <div style="flex:1; min-width:0;">
+                  <div style="font:500 15px/1.2 Inter; color:var(--c-text,#F8F8F8);">Tether USD</div>
+                  <div style="font:400 12px/1.3 Inter; color:var(--c-muted,#C0C2CB); margin-top:3px;">USDT · Stablecoin</div>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font:500 15px/1.2 Inter; color:var(--c-text,#F8F8F8); font-variant-numeric:tabular-nums;">{{ assetBalance }}</div>
+                  <div style="font:400 12px/1.3 Inter; color:var(--c-muted,#C0C2CB); margin-top:3px;">{{ assetUsd }}</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="background:var(--c-card,#13132A); border:1px solid var(--c-border,#25254A); border-radius:12px; padding:20px;">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                <span style="font:500 15px/1 Inter; color:var(--c-text,#F8F8F8);">Recent activity</span>
+                <span onClick="{{ goTransactions }}" style="font:500 12px/1 Inter; color:var(--c-accent-ink,#2AD9B7); cursor:pointer;">View all</span>
+              </div>
+              <sc-for list="{{ recent }}" as="t" hint-placeholder-count="4">
+                <div style="display:flex; align-items:center; gap:12px; padding:12px 2px; border-bottom:1px solid var(--c-divider,#1E1E3A);">
+                  <span style="width:36px; height:36px; border-radius:9999px; display:flex; align-items:center; justify-content:center; flex:none; background:{{ t.iconBg }}; color:{{ t.iconColor }};">{{ t.icon }}</span>
+                  <div style="flex:1; min-width:0;">
+                    <div style="font:500 14px/1.2 Inter; color:var(--c-text,#F8F8F8);">{{ t.title }}</div>
+                    <div style="font:400 12px/1.3 Inter; color:var(--c-muted,#C0C2CB); margin-top:3px;">{{ t.sub }}</div>
+                  </div>
+                  <div style="text-align:right; flex:none;">
+                    <div style="font:500 14px/1.2 Inter; color:{{ t.amountColor }}; font-variant-numeric:tabular-nums;">{{ t.amountText }}</div>
+                    <div style="display:inline-flex; align-items:center; gap:5px; margin-top:5px; font:400 11px/1 Inter; color:var(--c-muted,#C0C2CB);"><span style="width:6px; height:6px; border-radius:50%; background:{{ t.statusColor }};"></span>{{ t.statusLabel }}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+              <span style="font:500 15px/1 Inter; color:var(--c-text,#F8F8F8);">Featured projects</span>
+              <span onClick="{{ goInvest }}" style="font:500 12px/1 Inter; color:var(--c-accent-ink,#2AD9B7); cursor:pointer;">Browse all</span>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:24px;">
+              <sc-for list="{{ featured }}" as="p" hint-placeholder-count="2">
+                <dc-import name="ProjectCard" p="{{ p }}" on-open="{{ p.onOpen }}" hint-size="100%,430px"></dc-import>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- INVEST -->
+      <sc-if value="{{ isInvest }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div style="font:400 14px/1.5 Inter; color:var(--c-muted,#C0C2CB); max-width:560px;">Tokenized real-world projects, vetted and held in escrow. Invest your cash balance to receive AUR project tokens.</div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:24px;">
+            <sc-for list="{{ projects }}" as="p" hint-placeholder-count="6">
+              <dc-import name="ProjectCard" p="{{ p }}" on-open="{{ p.onOpen }}" hint-size="100%,430px"></dc-import>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- AURA VAULT -->
+      <sc-if value="{{ isVault }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:24px;">
+          <div data-theme="dark" style="position:relative; overflow:hidden; border-radius:14px; border:1px solid var(--c-border,#25254A); background:linear-gradient(150deg,#1a0c2e 0%,#150f24 50%,#13131a 100%); padding:32px;">
+            <div style="position:absolute; top:-150px; right:-60px; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle, rgba(120,40,232,0.4) 0%, transparent 64%); pointer-events:none;"></div>
+            <div style="position:relative; display:flex; flex-wrap:wrap; gap:28px; justify-content:space-between; align-items:flex-end;">
+              <div style="min-width:240px;">
+                <div style="display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:9999px; background:rgba(120,40,232,0.14); border:1px solid rgba(120,40,232,0.3); color:var(--c-violet-ink,#D8B4FE); font:500 11px/1 Inter; letter-spacing:0.03em; text-transform:uppercase;">
+                  <span style="display:flex;">{{ iconSparkles }}</span> Aura Vault
+                </div>
+                <div style="font:400 12px/1.2 Inter; color:var(--c-muted,#C0C2CB); letter-spacing:0.04em; text-transform:uppercase; margin-top:18px;">Vault balance</div>
+                <div style="display:flex; align-items:baseline; gap:10px; margin-top:12px;">
+                  <span style="font:700 52px/1 'Sulphur Point'; letter-spacing:-0.025em; color:var(--c-text,#F8F8F8); font-variant-numeric:tabular-nums; white-space:nowrap;">{{ vaultBalance }}</span>
+                  <span style="font:500 18px/1 Inter; color:var(--c-violet-ink,#D8B4FE);">AP</span>
+                </div>
+                <div style="font:400 14px/1.4 Inter; color:var(--c-muted,#C0C2CB); margin-top:10px;">≈ {{ vaultBalanceUsd }} · {{ pointsRateText }}</div>
+                <div style="margin-top:24px;">
+                  <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" onClick="{{ openVault }}" leading-icon="{{ iconSparkles }}" hint-size="auto,44px">Top up vault</x-import>
+                </div>
+              </div>
+              <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                <div style="min-width:120px; background:rgba(20,8,36,0.6); border:1px solid var(--c-border,#25254A); border-radius:12px; padding:16px;">
+                  <div style="font:400 11px/1 Inter; color:var(--c-muted,#C0C2CB);">Total topped up</div>
+                  <div style="font:600 18px/1 Inter; color:var(--c-text,#F8F8F8); margin-top:9px; font-variant-numeric:tabular-nums;">{{ vTotalToppedText }}</div>
+                </div>
+                <div style="min-width:120px; background:rgba(20,8,36,0.6); border:1px solid var(--c-border,#25254A); border-radius:12px; padding:16px;">
+                  <div style="font:400 11px/1 Inter; color:var(--c-muted,#C0C2CB);">Pending requests</div>
+                  <div style="font:600 18px/1 Inter; color:#FDE68A; margin-top:9px; font-variant-numeric:tabular-nums;">{{ vPendingCount }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:10px; padding:14px 16px; border-radius:12px; background:rgba(11,132,255,0.06); border:1px solid rgba(11,132,255,0.18);">
+            <span style="flex:none; color:var(--c-accent-ink,#2AD9B7); display:flex;">{{ iconInfo }}</span>
+            <div style="font:400 13px/1.5 Inter; color:var(--c-info-ink,#A9C7FF);">Top-ups are credited after our finance team verifies your transfer. Approval usually completes within a few hours — you'll see each request's status below.</div>
+          </div>
+
+          <div style="background:var(--c-card,#13132A); border:1px solid var(--c-border,#25254A); border-radius:12px; padding:6px 20px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 2px 12px; border-bottom:1px solid var(--c-divider,#1E1E3A);">
+              <span style="font:500 15px/1 Inter; color:var(--c-text,#F8F8F8);">Top-up requests</span>
+              <span style="font:400 12px/1 Inter; color:var(--c-muted,#C0C2CB);">Tap a request for details</span>
+            </div>
+            <sc-for list="{{ vaultRequests }}" as="r" hint-placeholder-count="4">
+              <div onClick="{{ r.onOpen }}" style="display:flex; align-items:center; gap:14px; padding:16px 2px; border-bottom:1px solid var(--c-divider,#1E1E3A); cursor:pointer;">
+                <span style="width:40px; height:40px; border-radius:9999px; display:flex; align-items:center; justify-content:center; flex:none; background:{{ r.statusBg }}; color:{{ r.statusColor }};">{{ iconSparkles }}</span>
+                <div style="flex:1; min-width:0;">
+                  <div style="font:500 14px/1.2 Inter; color:var(--c-text,#F8F8F8);">{{ r.amountText }} <span style="color:#676182; font-weight:400;">· {{ r.id }}</span></div>
+                  <div style="font:400 12px/1.3 Inter; color:var(--c-muted,#C0C2CB); margin-top:4px;">TX {{ r.txHash }} · {{ r.date }}</div>
+                </div>
+                <div style="text-align:right; flex:none;">
+                  <div style="font:500 14px/1.2 Inter; color:{{ r.statusColor }}; font-variant-numeric:tabular-nums;">{{ r.pointsText }}</div>
+                  <div style="display:inline-flex; align-items:center; gap:5px; margin-top:5px; font:400 11px/1 Inter; color:var(--c-muted,#C0C2CB);"><span style="width:6px; height:6px; border-radius:50%; background:{{ r.statusDot }};"></span>{{ r.statusLabel }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- WALLET -->
+      <sc-if value="{{ isWallet }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:24px; align-items:start;">
+          <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Wallet" peso-balance="{{ pesoBalance }}" token-balance="{{ tokenBalance }}" token-symbol="AUR" onDeposit="{{ openTopup }}" onRedeem="{{ redeem }}" hint-size="100%,260px"></x-import>
+          <div style="background:var(--c-card,#13132A); border:1px solid var(--c-border,#25254A); border-radius:12px; padding:24px;">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <span style="flex:none; display:flex;">{{ usdt }}</span>
+              <div>
+                <div style="font:500 16px/1.2 Inter; color:var(--c-text,#F8F8F8);">Tether USD</div>
+                <div style="font:400 12px/1.3 Inter; color:var(--c-muted,#C0C2CB); margin-top:3px;">USDT · Stablecoin</div>
+              </div>
+            </div>
+            <div style="margin-top:24px;">
+              <div style="font:400 12px/1 Inter; color:var(--c-muted,#C0C2CB); letter-spacing:0.04em; text-transform:uppercase;">Balance</div>
+              <div style="font:700 38px/1.1 'Sulphur Point'; letter-spacing:-0.02em; color:var(--c-text,#F8F8F8); margin-top:10px; font-variant-numeric:tabular-nums;">{{ assetBalance }}</div>
+              <div style="font:400 14px/1.4 Inter; color:var(--c-muted,#C0C2CB); margin-top:4px;">≈ {{ assetUsd }}</div>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:24px;">
+              <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" onClick="{{ openTopup }}" leading-icon="{{ iconDown }}" hint-size="auto,44px" style="flex:1;">Top up</x-import>
+              <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="secondary" leading-icon="{{ iconUp }}" hint-size="auto,44px" style="flex:1;">Withdraw</x-import>
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:22px; padding-top:20px; border-top:1px solid var(--c-border,#25254A);">
+              <span style="font:400 11px/1 Inter; color:var(--c-muted,#C0C2CB);">Supported networks</span>
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;">
+              <span style="font:400 11px/1 Inter; color:var(--c-muted,#C0C2CB); background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A); border-radius:9999px; padding:6px 12px;">Ethereum</span>
+              <span style="font:400 11px/1 Inter; color:var(--c-muted,#C0C2CB); background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A); border-radius:9999px; padding:6px 12px;">Binance Network</span>
+              <span style="font:400 11px/1 Inter; color:var(--c-muted,#C0C2CB); background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A); border-radius:9999px; padding:6px 12px;">Solana</span>
+              <span style="font:400 11px/1 Inter; color:var(--c-muted,#C0C2CB); background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A); border-radius:9999px; padding:6px 12px;">Polygon</span>
+              <span style="font:400 11px/1 Inter; color:var(--c-muted,#C0C2CB); background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A); border-radius:9999px; padding:6px 12px;">Base</span>
+            </div>
+          </div>
+
+          <div style="background:var(--c-card,#13132A); border:1px solid var(--c-border,#25254A); border-radius:12px; padding:24px; display:flex; flex-direction:column; gap:16px;">
+            <div>
+              <div style="font:500 15px/1 Inter; color:var(--c-text,#F8F8F8);">Deposit address</div>
+              <div style="font:400 12px/1.3 Inter; color:var(--c-muted,#C0C2CB); margin-top:5px;">Network · Binance Network (BEP-20)</div>
+            </div>
+            <div style="align-self:center; width:158px; height:158px; background:#fff; border-radius:12px; padding:10px;">{{ qrWallet }}</div>
+            <div style="background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A); border-radius:8px; padding:12px 14px; font:400 12px/1.5 Inter; color:var(--c-text,#F8F8F8); word-break:break-all; font-variant-numeric:tabular-nums;">{{ walletAddr }}</div>
+            <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="secondary" onClick="{{ copyWallet }}" leading-icon="{{ copyWalletIcon }}" hint-size="100%,42px" style="width:100%;">{{ copyWalletLabel }}</x-import>
+            <div style="display:flex; gap:10px; padding:12px 14px; border-radius:10px; background:var(--c-warn-bg,rgba(253,230,138,0.07)); border:1px solid var(--c-warn-border,rgba(253,230,138,0.22));">
+              <span style="flex:none; color:var(--c-warn-ink,#FDE68A); display:flex;">{{ iconShield }}</span>
+              <div style="font:500 12px/1.5 Inter; color:var(--c-warn-body,#E9D8A6);">Send only USDT on the selected network. Wrong-network transfers may not be recoverable.</div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- TRANSACTIONS -->
+      <sc-if value="{{ isTransactions }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <sc-for list="{{ filters }}" as="f" hint-placeholder-count="4">
+              <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Chip" selected="{{ f.active }}" onClick="{{ f.onClick }}" hint-size="auto,32px">{{ f.label }}</x-import>
+            </sc-for>
+          </div>
+          <div style="background:var(--c-card,#13132A); border:1px solid var(--c-border,#25254A); border-radius:12px; padding:6px 20px;">
+            <sc-for list="{{ filtered }}" as="t" hint-placeholder-count="5">
+              <div style="display:flex; align-items:center; gap:14px; padding:16px 2px; border-bottom:1px solid var(--c-divider,#1E1E3A);">
+                <span style="width:40px; height:40px; border-radius:9999px; display:flex; align-items:center; justify-content:center; flex:none; background:{{ t.iconBg }}; color:{{ t.iconColor }};">{{ t.icon }}</span>
+                <div style="flex:1; min-width:0;">
+                  <div style="font:500 14px/1.2 Inter; color:var(--c-text,#F8F8F8);">{{ t.title }}</div>
+                  <div style="font:400 12px/1.3 Inter; color:var(--c-muted,#C0C2CB); margin-top:4px;">{{ t.sub }}</div>
+                </div>
+                <div style="text-align:right; flex:none;">
+                  <div style="font:500 15px/1.2 Inter; color:{{ t.amountColor }}; font-variant-numeric:tabular-nums;">{{ t.amountText }}</div>
+                  <div style="display:inline-flex; align-items:center; gap:5px; margin-top:5px; font:400 11px/1 Inter; color:var(--c-muted,#C0C2CB);"><span style="width:6px; height:6px; border-radius:50%; background:{{ t.statusColor }};"></span>{{ t.statusLabel }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+    </div>
+  </main>
+</div>
+
+<!-- TOP-UP MODAL -->
+<sc-if value="{{ topupOpen }}" hint-placeholder-val="{{ false }}">
+  <div data-theme="{{ theme }}" style="position:fixed; inset:0; z-index:50; display:flex; align-items:center; justify-content:center; padding:24px; background:rgba(5,3,12,0.66); backdrop-filter:blur(6px);">
+    <div style="width:440px; max-width:100%; max-height:92vh; overflow:auto; background:var(--c-modal,#121016); border:1px solid var(--c-border,#25254A); border-radius:16px; box-shadow:0 24px 60px rgba(0,0,0,0.6);">
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:20px 22px 16px;">
+        <div style="font:700 18px/1.1 'Sulphur Point'; letter-spacing:-0.01em; color:var(--c-text,#F8F8F8);">{{ modalTitle }}</div>
+        <button onClick="{{ closeTopup }}" style="width:32px; height:32px; display:flex; align-items:center; justify-content:center; background:transparent; border:none; color:var(--c-muted,#C0C2CB); cursor:pointer; border-radius:9999px;" style-hover="background:#1A1A1F; color:var(--c-text,#F8F8F8);">{{ iconClose }}</button>
+      </div>
+
+      <div style="display:flex; gap:6px; padding:0 22px 18px;">
+        <span style="flex:1; height:3px; border-radius:9999px; background:{{ segColor1 }};"></span>
+        <span style="flex:1; height:3px; border-radius:9999px; background:{{ segColor2 }};"></span>
+        <span style="flex:1; height:3px; border-radius:9999px; background:{{ segColor3 }};"></span>
+      </div>
+
+      <div style="padding:4px 22px 24px;">
+
+        <!-- STEP 1: amount -->
+        <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex; flex-direction:column; gap:20px;">
+            <div style="text-align:center; padding:8px 0 4px;">
+              <div style="font:400 12px/1 Inter; color:var(--c-muted,#C0C2CB); letter-spacing:0.04em; text-transform:uppercase;">Amount to deposit</div>
+              <div style="display:inline-flex; align-items:baseline; justify-content:center; gap:8px; margin-top:16px;">
+                <input value="{{ amount }}" onChange="{{ onAmount }}" placeholder="0" inputmode="decimal" style="width:150px; background:transparent; border:none; outline:none; text-align:right; font:700 44px/1 'Sulphur Point'; color:var(--c-text,#F8F8F8); padding:0;" />
+                <span style="font:500 18px/1 Inter; color:var(--c-muted,#C0C2CB);">USDT</span>
+              </div>
+              <div style="font:400 13px/1.3 Inter; color:var(--c-muted,#C0C2CB); margin-top:8px;">≈ {{ amountUsd }}</div>
+              <sc-if value="{{ amountErrorShow }}" hint-placeholder-val="{{ false }}">
+                <div style="font:400 12px/1.3 Inter; color:#F87171; margin-top:8px;">{{ amountError }}</div>
+              </sc-if>
+            </div>
+            <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+              <sc-for list="{{ amountChips }}" as="chip" hint-placeholder-count="4">
+                <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Chip" selected="{{ chip.selected }}" onClick="{{ chip.onClick }}" hint-size="auto,32px">{{ chip.label }}</x-import>
+              </sc-for>
+            </div>
+            <sc-if value="{{ amountValid }}" hint-placeholder-val="{{ true }}">
+              <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" onClick="{{ next }}" hint-size="100%,48px" style="width:100%;">Continue</x-import>
+            </sc-if>
+            <sc-if value="{{ amountInvalid }}" hint-placeholder-val="{{ false }}">
+              <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" disabled="{{ true }}" hint-size="100%,48px" style="width:100%;">Continue</x-import>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <!-- STEP 2: network -->
+        <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            <div style="font:400 13px/1.5 Inter; color:var(--c-muted,#C0C2CB);">Choose the network you'll send USDT on. It must match the network of the sending wallet.</div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <sc-for list="{{ networks }}" as="n" hint-placeholder-count="4">
+                <div onClick="{{ n.onClick }}" style="display:flex; align-items:center; gap:12px; padding:14px; border-radius:10px; cursor:pointer; border:1px solid {{ n.borderColor }}; background:{{ n.bg }}; transition:border-color .15s ease, background-color .15s ease;">
+                  <span style="width:18px; height:18px; border-radius:50%; border:2px solid {{ n.ringColor }}; display:flex; align-items:center; justify-content:center; flex:none;"><span style="width:8px; height:8px; border-radius:50%; background:{{ n.dotColor }};"></span></span>
+                  <div style="flex:1; min-width:0;">
+                    <div style="font:500 14px/1.2 Inter; color:var(--c-text,#F8F8F8);">{{ n.label }} <span style="color:var(--c-muted,#C0C2CB); font-weight:400;">({{ n.tag }})</span></div>
+                    <div style="font:400 12px/1.3 Inter; color:var(--c-muted,#C0C2CB); margin-top:4px;">Fee {{ n.feeText }} · arrives {{ n.eta }}</div>
+                  </div>
+                  <sc-if value="{{ n.rec }}" hint-placeholder-val="{{ false }}">
+                    <span style="flex:none; font:500 10px/1 Inter; color:var(--c-pos-ink,#BBF7D0); background:var(--c-pos-bg,rgba(187,247,208,0.12)); border-radius:9999px; padding:5px 9px; letter-spacing:0.02em;">Recommended</span>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:4px;">
+              <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="secondary" onClick="{{ back }}" hint-size="auto,48px" style="flex:1;">Back</x-import>
+              <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" onClick="{{ next }}" hint-size="auto,48px" style="flex:2;">Continue</x-import>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- STEP 3: deposit + submit request -->
+        <sc-if value="{{ isStep3 }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-radius:10px; background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A);">
+              <div>
+                <div style="font:400 11px/1 Inter; color:var(--c-muted,#C0C2CB);">You're depositing</div>
+                <div style="font:600 17px/1.2 Inter; color:var(--c-text,#F8F8F8); margin-top:5px; font-variant-numeric:tabular-nums;">{{ receiveAmt }}</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font:400 11px/1 Inter; color:var(--c-muted,#C0C2CB);">Network</div>
+                <div style="font:500 13px/1.2 Inter; color:var(--c-text,#F8F8F8); margin-top:5px;">{{ netLabel }}</div>
+              </div>
+            </div>
+
+            <div style="align-self:center; width:172px; height:172px; background:#fff; border-radius:14px; padding:11px;">{{ qr }}</div>
+            <div style="font:400 12px/1.3 Inter; color:var(--c-muted,#C0C2CB); text-align:center;">Scan the QR or copy the receiving address below</div>
+
+            <div>
+              <div style="font:500 12px/1 Inter; color:var(--c-muted,#C0C2CB); margin-bottom:8px;">Receiving wallet address</div>
+              <div style="background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A); border-radius:8px; padding:12px 14px; font:400 12px/1.5 Inter; color:var(--c-text,#F8F8F8); word-break:break-all; font-variant-numeric:tabular-nums;">{{ netAddr }}</div>
+            </div>
+            <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="secondary" onClick="{{ copyAddr }}" leading-icon="{{ copyAddrIcon }}" hint-size="100%,42px" style="width:100%;">{{ copyAddrLabel }}</x-import>
+
+            <div style="display:flex; gap:10px; padding:12px 14px; border-radius:10px; background:var(--c-warn-bg,rgba(253,230,138,0.07)); border:1px solid var(--c-warn-border,rgba(253,230,138,0.22));">
+              <span style="flex:none; color:var(--c-warn-ink,#FDE68A); display:flex;">{{ iconShield }}</span>
+              <div style="font:500 12px/1.5 Inter; color:var(--c-warn-body,#E9D8A6);">Send only USDT on the selected network. Wrong-network transfers may not be recoverable.</div>
+            </div>
+
+            <div style="height:1px; background:var(--c-border,#25254A); margin:2px 0;"></div>
+            <div style="font:400 12px/1.4 Inter; color:var(--c-muted,#C0C2CB);">After sending, confirm your transfer so our team can verify and credit your wallet.</div>
+
+            <div>
+              <div style="font:500 12px/1 Inter; color:var(--c-muted,#C0C2CB); margin-bottom:8px;">Transaction hash</div>
+              <div style="display:flex; align-items:center; gap:10px; background:var(--c-surface,#0E0E1F); border:1px solid var(--c-border,#25254A); border-radius:9999px; padding:0 16px; height:46px;">
+                <span style="flex:none; color:var(--c-muted,#C0C2CB); display:flex;">{{ iconHash }}</span>
+                <input value="{{ txHash }}" onChange="{{ onTxHash }}" placeholder="0x… or transaction ID" style="flex:1; min-width:0; background:transparent; border:none; outline:none; font:400 13px/1 Inter; color:var(--c-text,#F8F8F8);" />
+              </div>
+            </div>
+
+            <div>
+              <div style="font:500 12px/1 Inter; color:var(--c-muted,#C0C2CB); margin-bottom:8px;">Payment screenshot <span style="color:#676182; font-weight:400;">(optional)</span></div>
+              <label style="display:flex; align-items:center; gap:10px; background:var(--c-surface,#0E0E1F); border:1px dashed var(--c-border-strong,#35356A); border-radius:10px; padding:13px 16px; cursor:pointer; transition:border-color .15s ease;" style-hover="border-color:var(--c-accent-ink,#2AD9B7);">
+                <span style="flex:none; color:var(--c-accent-ink,#2AD9B7); display:flex;">{{ iconUpload }}</span>
+                <sc-if value="{{ hasScreenshot }}" hint-placeholder-val="{{ false }}">
+                  <span style="flex:1; min-width:0; font:400 13px/1.3 Inter; color:var(--c-text,#F8F8F8); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:7px;">{{ iconFile }} {{ screenshotName }}</span>
+                </sc-if>
+                <sc-if value="{{ noScreenshot }}" hint-placeholder-val="{{ true }}">
+                  <span style="flex:1; font:400 13px/1.3 Inter; color:var(--c-muted,#C0C2CB);">Upload proof of payment (PNG, JPG)</span>
+                </sc-if>
+                <input type="file" accept="image/*" onChange="{{ onScreenshot }}" style="display:none;" />
+              </label>
+            </div>
+
+            <div style="display:flex; gap:10px; margin-top:2px;">
+              <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="secondary" onClick="{{ back }}" hint-size="auto,48px" style="flex:1;">Back</x-import>
+              <sc-if value="{{ submitValid }}" hint-placeholder-val="{{ false }}">
+                <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" onClick="{{ submitRequest }}" hint-size="auto,48px" style="flex:2;">Submit request</x-import>
+              </sc-if>
+              <sc-if value="{{ submitInvalid }}" hint-placeholder-val="{{ true }}">
+                <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" disabled="{{ true }}" hint-size="auto,48px" style="flex:2;">Submit request</x-import>
+              </sc-if>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- STEP 4: review status -->
+        <sc-if value="{{ isStep4 }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:16px; padding:14px 6px 8px;">
+            <sc-if value="{{ statusSubmitting }}" hint-placeholder-val="{{ true }}">
+              <div style="width:64px; height:64px; border-radius:50%; border:3px solid var(--c-border,#25254A); border-top-color:var(--c-accent-ink,#2AD9B7); animation:auroraSpin .9s linear infinite;"></div>
+              <div style="font:700 20px/1.2 'Sulphur Point'; color:var(--c-text,#F8F8F8);">Submitting your request</div>
+              <div style="font:400 13px/1.5 Inter; color:var(--c-muted,#C0C2CB); max-width:300px;">Sending your transfer details for {{ receiveAmt }} on {{ netLabel }}.</div>
+            </sc-if>
+            <sc-if value="{{ statusSubmitted }}" hint-placeholder-val="{{ false }}">
+              <div style="width:64px; height:64px; border-radius:50%; background:var(--c-warn-bg,rgba(253,230,138,0.12)); color:var(--c-warn-ink,#FDE68A); display:flex; align-items:center; justify-content:center;">{{ iconClockBig }}</div>
+              <div style="font:700 22px/1.2 'Sulphur Point'; color:var(--c-text,#F8F8F8);">Request submitted</div>
+              <div style="font:400 14px/1.5 Inter; color:var(--c-muted,#C0C2CB); max-width:320px;">Your deposit of {{ receiveAmt }} is pending admin approval. We'll verify your transaction and credit your wallet, usually within a few hours.</div>
+              <div style="width:100%; display:flex; flex-direction:column; gap:10px; margin-top:4px; padding:14px; border-radius:10px; background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A);">
+                <div style="display:flex; justify-content:space-between; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB);">Amount</span><span style="color:var(--c-text,#F8F8F8); font-variant-numeric:tabular-nums;">{{ receiveAmt }}</span></div>
+                <div style="display:flex; justify-content:space-between; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB);">Network</span><span style="color:var(--c-text,#F8F8F8);">{{ netLabel }}</span></div>
+                <div style="display:flex; justify-content:space-between; gap:16px; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB); flex:none;">Tx hash</span><span style="color:var(--c-text,#F8F8F8); font-variant-numeric:tabular-nums; word-break:break-all; text-align:right;">{{ txHashShort }}</span></div>
+                <div style="display:flex; justify-content:space-between; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB);">Status</span><span style="color:var(--c-warn-ink,#FDE68A); display:inline-flex; align-items:center; gap:5px;"><span style="width:6px; height:6px; border-radius:50%; background:#FDE68A;"></span>Pending approval</span></div>
+              </div>
+              <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" onClick="{{ finishDone }}" hint-size="100%,48px" style="width:100%; margin-top:2px;">Done</x-import>
+            </sc-if>
+          </div>
+        </sc-if>
+
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<!-- PROJECT DETAIL MODAL -->
+<sc-if value="{{ projectOpen }}" hint-placeholder-val="{{ false }}">
+  <div data-theme="{{ theme }}" style="position:fixed; inset:0; z-index:50; display:flex; align-items:center; justify-content:center; padding:24px; background:rgba(5,3,12,0.66); backdrop-filter:blur(6px);">
+    <div style="width:580px; max-width:100%; max-height:92vh; overflow:auto; background:var(--c-modal,#121016); border:1px solid var(--c-border,#25254A); border-radius:16px; box-shadow:0 24px 60px rgba(0,0,0,0.6);">
+      <div data-theme="dark" style="position:relative; height:150px; background:{{ ap.bannerBg }}; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+        <span style="color:#fff; opacity:0.24; transform:scale(1.5);">{{ ap.glyphLg }}</span>
+        <div style="position:absolute; top:14px; left:14px;">
+          <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.StatusBadge" status="{{ ap.status }}" hint-size="auto,26px"></x-import>
+        </div>
+        <button onClick="{{ closeProject }}" style="position:absolute; top:14px; right:14px; width:32px; height:32px; display:flex; align-items:center; justify-content:center; background:rgba(9,9,22,0.55); border:1px solid rgba(255,255,255,0.12); color:var(--c-text,#F8F8F8); cursor:pointer; border-radius:9999px;" style-hover="background:rgba(9,9,22,0.85);">{{ iconClose }}</button>
+      </div>
+
+      <div style="padding:24px; display:flex; flex-direction:column; gap:20px;">
+
+        <sc-if value="{{ notInvested }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex; flex-direction:column; gap:20px;">
+            <sc-if value="{{ pNotDetails }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="display:flex; align-items:center; gap:8px;"><span style="width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font:600 12px/1 Inter; background:{{ p1Bg }}; color:{{ p1Fg }}; border:1.5px solid {{ p1Ring }};">1</span><span style="font:500 12px/1 Inter; color:{{ p1Lbl }};">Allocation</span></div>
+              <div style="flex:1; height:1.5px; border-radius:2px; background:{{ pBar1 }};"></div>
+              <div style="display:flex; align-items:center; gap:8px;"><span style="width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font:600 12px/1 Inter; background:{{ p2Bg }}; color:{{ p2Fg }}; border:1.5px solid {{ p2Ring }};">2</span><span style="font:500 12px/1 Inter; color:{{ p2Lbl }};">Amount</span></div>
+              <div style="flex:1; height:1.5px; border-radius:2px; background:{{ pBar2 }};"></div>
+              <div style="display:flex; align-items:center; gap:8px;"><span style="width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font:600 12px/1 Inter; background:{{ p3Bg }}; color:{{ p3Fg }}; border:1.5px solid {{ p3Ring }};">3</span><span style="font:500 12px/1 Inter; color:{{ p3Lbl }};">Review</span></div>
+            </div>
+            </sc-if>
+
+            <sc-if value="{{ pIsDetails }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex; flex-direction:column; gap:20px;">
+            <div>
+              <div style="font:700 24px/1.2 'Sulphur Point'; letter-spacing:-0.01em; color:var(--c-text,#F8F8F8);">{{ ap.title }}</div>
+              <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:12px;">
+                <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.MetaBadge" type="location" hint-size="auto,26px">{{ ap.location }}</x-import>
+                <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.MetaBadge" type="category" hint-size="auto,26px">{{ ap.category }}</x-import>
+                <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.RiskBadge" level="{{ ap.risk }}" hint-size="auto,26px"></x-import>
+              </div>
+              <div style="font:400 14px/1.6 Inter; color:var(--c-muted,#C0C2CB); margin-top:14px;">{{ ap.summary }}</div>
+            </div>
+
+            <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.FundingProgress" raised="{{ ap.raised }}" goal="{{ ap.goal }}" height="10" hint-size="100%,56px"></x-import>
+
+            <div style="display:flex; flex-wrap:wrap; gap:12px;">
+              <div style="flex:1; min-width:118px; background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A); border-radius:10px; padding:13px 14px;">
+                <div style="font:400 11px/1 Inter; color:var(--c-muted,#C0C2CB);">Investors</div>
+                <div style="margin-top:8px;"><x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.InvestorCount" count="{{ ap.investors }}" show-label="{{ false }}" hint-size="auto,20px"></x-import></div>
+              </div>
+              <div style="flex:1; min-width:118px; background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A); border-radius:10px; padding:13px 14px;">
+                <div style="font:400 11px/1 Inter; color:var(--c-muted,#C0C2CB);">Days left</div>
+                <div style="font:500 15px/1 Inter; color:var(--c-text,#F8F8F8); margin-top:8px;">{{ ap.daysLeft }} days</div>
+              </div>
+              <div style="flex:1; min-width:118px; background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A); border-radius:10px; padding:13px 14px;">
+                <div style="font:400 11px/1 Inter; color:var(--c-muted,#C0C2CB);">Target yield</div>
+                <div style="font:500 15px/1 Inter; color:var(--c-pos-ink,#BBF7D0); margin-top:8px;">{{ ap.apy }}</div>
+              </div>
+              <div style="flex:1; min-width:118px; background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A); border-radius:10px; padding:13px 14px;">
+                <div style="font:400 11px/1 Inter; color:var(--c-muted,#C0C2CB);">Min · token</div>
+                <div style="font:500 15px/1 Inter; color:var(--c-text,#F8F8F8); margin-top:8px;">{{ ap.minFmt }} · {{ ap.tokenPriceFmt }}</div>
+              </div>
+            </div>
+
+            <div>
+              <div style="font:500 13px/1 Inter; color:var(--c-muted,#C0C2CB); margin-bottom:12px;">Protections</div>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <sc-for list="{{ apTrust }}" as="tb" hint-placeholder-count="4">
+                  <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.TrustBadge" type="{{ tb }}" hint-size="auto,28px"></x-import>
+                </sc-for>
+              </div>
+            </div>
+
+            <div>
+              <div style="font:500 13px/1 Inter; color:var(--c-muted,#C0C2CB); margin-bottom:14px;">Milestones</div>
+              <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.MilestoneTimeline" items="{{ apMilestones }}" hint-size="100%,200px"></x-import>
+            </div>
+
+            <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.RiskDisclosureCard" hint-size="100%,180px"></x-import>
+
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.TrustBadge" type="no-guaranteed-return" hint-size="auto,28px"></x-import>
+              <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.TrustBadge" type="no-external-transfer" hint-size="auto,28px"></x-import>
+            </div>
+
+            <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" onClick="{{ pGoType }}" trailing-icon="{{ iconArrow }}" hint-size="100%,48px" style="width:100%;">Continue to invest</x-import>
+            </div>
+            </sc-if>
+
+            <sc-if value="{{ pIsType }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; flex-direction:column; gap:20px;">
+            <div>
+              <div style="font:500 13px/1 Inter; color:var(--c-muted,#C0C2CB); margin-bottom:12px;">Choose how to invest. The two options differ in whether your invested Aura XP is guaranteed.</div>
+              <div style="display:flex; gap:12px;">
+                <div onClick="{{ selectSecure }}" style="flex:1; min-width:0; cursor:pointer; border:1.5px solid {{ secureCardBorder }}; background:{{ secureCardBg }}; border-radius:12px; padding:16px; transition:border-color .15s ease, background-color .15s ease;">
+                  <span style="width:36px; height:36px; border-radius:10px; background:rgba(63,185,132,0.14); color:var(--c-teal-ink,#7FE7C4); display:flex; align-items:center; justify-content:center;">{{ iconLock }}</span>
+                  <div style="font:600 15px/1.2 Inter; color:var(--c-text,#F8F8F8); margin-top:12px;">SecureNest</div>
+                  <div style="font:400 12px/1.4 Inter; color:var(--c-teal-ink,#7FE7C4); margin-top:5px;">Guaranteed return</div>
+                  <div style="font:400 12px/1.5 Inter; color:var(--c-muted,#C0C2CB); margin-top:8px;">Lower risk · listed projects</div>
+                </div>
+                <div onClick="{{ selectTrust }}" style="flex:1; min-width:0; cursor:pointer; border:1.5px solid {{ trustCardBorder }}; background:{{ trustCardBg }}; border-radius:12px; padding:16px; transition:border-color .15s ease, background-color .15s ease;">
+                  <span style="width:36px; height:36px; border-radius:10px; background:rgba(224,169,59,0.14); color:var(--c-amber-ink,#FCD34D); display:flex; align-items:center; justify-content:center;">{{ iconBox }}</span>
+                  <div style="font:600 15px/1.2 Inter; color:var(--c-text,#F8F8F8); margin-top:12px;">TrustBox</div>
+                  <div style="font:400 12px/1.4 Inter; color:var(--c-amber-ink,#FCD34D); margin-top:5px;">Non-guaranteed</div>
+                  <div style="font:400 12px/1.5 Inter; color:var(--c-muted,#C0C2CB); margin-top:8px;">Higher risk · listed projects</div>
+                </div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:8px; margin-top:12px;">
+                <div style="display:flex; gap:9px; padding:11px 13px; border-radius:10px; background:rgba(63,185,132,0.06); border:1px solid rgba(63,185,132,0.2);">
+                  <span style="flex:none; color:var(--c-teal-ink,#7FE7C4); display:flex;">{{ iconLock }}</span>
+                  <div style="font:400 12px/1.5 Inter; color:var(--c-teal-ink,#A7E0C8);"><span style="font-weight:500; color:var(--c-pos-ink,#BBF7D0);">SecureNest.</span> Aurora Vault guarantees the return of Aura XP allocated to SecureNests.</div>
+                </div>
+                <div style="display:flex; gap:9px; padding:11px 13px; border-radius:10px; background:rgba(224,169,59,0.06); border:1px solid rgba(224,169,59,0.2);">
+                  <span style="flex:none; color:var(--c-amber-ink,#FCD34D); display:flex;">{{ iconAlert }}</span>
+                  <div style="font:400 12px/1.5 Inter; color:#E6C98A;"><span style="font-weight:500; color:var(--c-amber-ink,#FCD34D);">TrustBox.</span> Aura XP allocated to TrustBoxes is not guaranteed and remains subject to associated risks.</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:10px;">
+              <button onClick="{{ pGoDetails }}" style="flex:1; height:48px; background:transparent; color:var(--c-text,#F8F8F8); border:1px solid var(--c-border-strong,#35356A); border-radius:9999px; font:500 15px/1 Inter; cursor:pointer; transition:background-color .15s ease;" style-hover="background:var(--c-hover,#15152B);">Back</button>
+              <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" onClick="{{ pGoAmount }}" trailing-icon="{{ iconArrow }}" hint-size="auto,48px" style="flex:2;">Continue with {{ lTypeLabel }}</x-import>
+            </div>
+            </div>
+            </sc-if>
+
+            <sc-if value="{{ pIsAmount }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; flex-direction:column; gap:20px;">
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 14px; border-radius:10px; background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A);">
+              <button onClick="{{ pGoType }}" style="width:30px; height:30px; flex:none; display:flex; align-items:center; justify-content:center; background:transparent; border:1px solid var(--c-border-strong,#35356A); border-radius:9999px; color:var(--c-muted,#C0C2CB); cursor:pointer;" style-hover="color:var(--c-text,#F8F8F8);">{{ iconBack }}</button>
+              <div style="flex:1; min-width:0;"><div style="font:500 14px/1.2 Inter; color:var(--c-text,#F8F8F8); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ ap.title }}</div><div style="font:400 12px/1.3 Inter; color:var(--c-muted,#C0C2CB); margin-top:3px;">via {{ lTypeLabel }} · {{ lTypeGuarantee }}</div></div>
+            </div>
+
+            <div style="background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A); border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:14px;">
+              <div style="display:flex; align-items:flex-start; justify-content:space-between;">
+                <span style="font:500 14px/1 Inter; color:var(--c-text,#F8F8F8);">Aurora Points to lend</span>
+                <span style="font:400 12px/1 Inter; color:var(--c-muted,#C0C2CB);">Available {{ apBalanceText }}</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:10px; background:var(--c-surface,#0E0E1F); border:1px solid var(--c-border,#25254A); border-radius:9999px; padding:0 16px; height:48px;">
+                <span style="font:500 14px/1 Inter; color:var(--c-muted,#C0C2CB);">AP</span>
+                <input value="{{ investAmount }}" onChange="{{ onInvest }}" placeholder="0" inputmode="decimal" style="flex:1; min-width:0; background:transparent; border:none; outline:none; font:600 18px/1 Inter; color:var(--c-text,#F8F8F8);" />
+                <span style="font:400 13px/1.3 Inter; color:var(--c-muted,#C0C2CB); white-space:nowrap;">≈ {{ xpEquivText }}</span>
+              </div>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <sc-for list="{{ investChips }}" as="chip" hint-placeholder-count="4">
+                  <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Chip" selected="{{ chip.selected }}" onClick="{{ chip.onClick }}" hint-size="auto,32px">{{ chip.label }}</x-import>
+                </sc-for>
+              </div>
+              <div style="display:flex; gap:9px; padding:11px 13px; border-radius:10px; background:rgba(11,132,255,0.06); border:1px solid rgba(11,132,255,0.18);">
+                <span style="flex:none; color:var(--c-accent-ink,#2AD9B7); display:flex;">{{ iconSwap }}</span>
+                <div style="font:400 12px/1.5 Inter; color:var(--c-info-ink,#A9C7FF);"><span style="font-weight:500; color:var(--c-text,#F8F8F8);">Exchange rate.</span> {{ apRateText }} — your Aurora Points are converted to Aura XP for lending (modeled on a USDT to PHP rate).</div>
+              </div>
+              <sc-if value="{{ investErrorShow }}" hint-placeholder-val="{{ false }}">
+                <div style="font:400 12px/1.3 Inter; color:#F87171;">{{ investError }}</div>
+              </sc-if>
+              <sc-if value="{{ investValid }}" hint-placeholder-val="{{ true }}">
+                <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" onClick="{{ pGoReview }}" trailing-icon="{{ iconArrow }}" hint-size="100%,48px" style="width:100%;">Review request</x-import>
+              </sc-if>
+              <sc-if value="{{ investInvalid }}" hint-placeholder-val="{{ false }}">
+                <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" disabled="{{ true }}" hint-size="100%,48px" style="width:100%;">Review request</x-import>
+              </sc-if>
+            </div>
+            </div>
+            </sc-if>
+
+            <sc-if value="{{ pIsReview }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; flex-direction:column; gap:20px;">
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 14px; border-radius:10px; background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A);">
+              <button onClick="{{ pGoAmount }}" style="width:30px; height:30px; flex:none; display:flex; align-items:center; justify-content:center; background:transparent; border:1px solid var(--c-border-strong,#35356A); border-radius:9999px; color:var(--c-muted,#C0C2CB); cursor:pointer;" style-hover="color:var(--c-text,#F8F8F8);">{{ iconBack }}</button>
+              <div style="flex:1; min-width:0;"><div style="font:500 14px/1.2 Inter; color:var(--c-text,#F8F8F8); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ ap.title }}</div><div style="font:400 12px/1.3 Inter; color:var(--c-muted,#C0C2CB); margin-top:3px;">via {{ lTypeLabel }} · {{ lTypeGuarantee }}</div></div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:11px; padding:16px; border-radius:12px; background:var(--c-elevated,#1A1A38); border:1px solid rgba(63,185,132,0.35);">
+              <div style="display:flex; align-items:center; gap:8px; font:500 12px/1 Inter; color:var(--c-muted,#C0C2CB); margin-bottom:2px;"><span style="color:var(--c-teal-ink,#7FE7C4); display:flex;">{{ iconSwap }}</span> Calculated conversion</div>
+              <div style="display:flex; justify-content:space-between; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB);">Aurora Points</span><span style="color:var(--c-text,#F8F8F8); font-variant-numeric:tabular-nums;">{{ reviewApText }}</span></div>
+              <div style="display:flex; justify-content:space-between; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB);">Exchange rate</span><span style="color:var(--c-text,#F8F8F8); font-variant-numeric:tabular-nums;">{{ apRateText }}</span></div>
+              <div style="height:1px; background:var(--c-border,#25254A);"></div>
+              <div style="display:flex; justify-content:space-between; align-items:center;"><span style="font:500 14px/1 Inter; color:var(--c-text,#F8F8F8);">Equivalent Aura XP</span><span style="font:600 18px/1 Inter; color:var(--c-teal-ink,#7FE7C4); font-variant-numeric:tabular-nums;">{{ reviewXpText }}</span></div>
+              <div style="display:flex; justify-content:space-between; font:400 12px/1 Inter;"><span style="color:#676182;">≈ value</span><span style="color:var(--c-muted,#C0C2CB); font-variant-numeric:tabular-nums;">{{ reviewUsdtText }} · {{ reviewPhpText }}</span></div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:10px; padding:16px; border-radius:12px; background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A);">
+              <div style="display:flex; justify-content:space-between; align-items:center; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB);">Allocation type</span><span style="color:var(--c-text,#F8F8F8); font-weight:500;">{{ lTypeLabel }}</span></div>
+              <div style="display:flex; justify-content:space-between; align-items:center; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB);">Listed project</span><span style="color:var(--c-text,#F8F8F8); max-width:60%; text-align:right;">{{ ap.title }}</span></div>
+              <div style="display:flex; justify-content:space-between; align-items:center; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB);">Risk level</span><span style="color:var(--c-text,#F8F8F8);">{{ lTypeRisk }}</span></div>
+            </div>
+
+            <div style="display:flex; gap:9px; padding:11px 13px; border-radius:10px; background:rgba(11,132,255,0.06); border:1px solid rgba(11,132,255,0.18);">
+              <span style="flex:none; color:var(--c-accent-ink,#2AD9B7); display:flex;">{{ iconInfo }}</span>
+              <div style="font:400 12px/1.5 Inter; color:var(--c-info-ink,#A9C7FF);"><span style="font-weight:500; color:var(--c-text,#F8F8F8);">Lending notice.</span> Transactions between users and Aurora Vault are structured as lending arrangements, not investments. If you agree, submit the request below; otherwise cancel.</div>
+            </div>
+
+            <div style="display:flex; gap:10px;">
+              <button onClick="{{ pGoAmount }}" style="flex:1; height:48px; background:transparent; color:var(--c-text,#F8F8F8); border:1px solid var(--c-border-strong,#35356A); border-radius:9999px; font:500 15px/1 Inter; cursor:pointer; transition:background-color .15s ease;" style-hover="background:var(--c-hover,#15152B);">Cancel</button>
+              <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" onClick="{{ confirmInvest }}" hint-size="auto,48px" style="flex:2;">Submit request</x-import>
+            </div>
+            </div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ invested }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:16px; padding:10px 6px 6px;">
+            <div style="width:64px; height:64px; border-radius:50%; background:var(--c-pos-bg,rgba(187,247,208,0.14)); color:var(--c-pos-ink,#BBF7D0); display:flex; align-items:center; justify-content:center;">{{ iconCheckBig }}</div>
+            <div style="font:700 22px/1.2 'Sulphur Point'; color:var(--c-text,#F8F8F8);">Request submitted</div>
+            <div style="font:400 14px/1.5 Inter; color:var(--c-muted,#C0C2CB);">{{ investedXpText }} is now allocated to your {{ lTypeLabel }} for {{ ap.title }}.</div>
+            <div style="width:100%; display:flex; flex-direction:column; gap:10px; padding:14px; border-radius:10px; background:var(--c-elevated,#1A1A38); border:1px solid rgba(63,185,132,0.35);">
+              <div style="font:500 12px/1 Inter; color:var(--c-muted,#C0C2CB); text-align:left; margin-bottom:2px;">Reflected in your profile</div>
+              <div style="display:flex; justify-content:space-between; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB);">Active SecureNests</span><span style="color:var(--c-teal-ink,#7FE7C4); font-variant-numeric:tabular-nums;">{{ activeSecureCount }}</span></div>
+              <div style="display:flex; justify-content:space-between; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB);">Active TrustBoxes</span><span style="color:var(--c-amber-ink,#FCD34D); font-variant-numeric:tabular-nums;">{{ activeTrustCount }}</span></div>
+              <div style="height:1px; background:rgba(63,185,132,0.2);"></div>
+              <div style="display:flex; justify-content:space-between; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB);">Aura XP allocated</span><span style="color:var(--c-text,#F8F8F8); font-variant-numeric:tabular-nums;">{{ investedXpText }}</span></div>
+              <div style="display:flex; justify-content:space-between; align-items:center;"><span style="font:500 14px/1 Inter; color:var(--c-text,#F8F8F8);">Aurora Points left</span><span style="font:600 16px/1 Inter; color:var(--c-text,#F8F8F8); font-variant-numeric:tabular-nums;">{{ apBalanceText }}</span></div>
+            </div>
+            <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" onClick="{{ closeProject }}" hint-size="100%,48px" style="width:100%;">Done</x-import>
+          </div>
+        </sc-if>
+
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<!-- TOAST -->
+<sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed; bottom:24px; left:50%; transform:translateX(-50%); z-index:60; background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border-strong,#35356A); border-radius:9999px; padding:12px 20px; color:var(--c-text,#F8F8F8); font:500 13px/1 Inter; box-shadow:0 12px 40px rgba(0,0,0,0.5);">{{ toast }}</div>
+</sc-if>
+
+<!-- AURA VAULT TOP-UP MODAL -->
+<sc-if value="{{ vaultOpen }}" hint-placeholder-val="{{ false }}">
+  <div class="modal-overlay" data-theme="{{ theme }}" style="position:fixed; inset:0; z-index:55; display:flex; align-items:center; justify-content:center; padding:24px; background:rgba(5,3,12,0.7); backdrop-filter:blur(6px);">
+    <div class="modal-card" style="width:480px; max-width:100%; max-height:92vh; overflow:auto; background:var(--c-modal,#121016); border:1px solid var(--c-border,#25254A); border-radius:16px; box-shadow:0 24px 60px rgba(0,0,0,0.6); display:flex; flex-direction:column;">
+      <div style="display:flex; align-items:center; gap:12px; padding:20px 22px 16px;">
+        <span style="width:34px; height:34px; flex:none; border-radius:10px; background:rgba(120,40,232,0.16); color:var(--c-violet-ink,#D8B4FE); display:flex; align-items:center; justify-content:center;">{{ iconSparkles }}</span>
+        <div style="flex:1; min-width:0;">
+          <div style="font:700 17px/1.1 'Sulphur Point'; letter-spacing:-0.01em; color:var(--c-text,#F8F8F8);">Top up Aura Vault</div>
+          <div style="font:400 12px/1.3 Inter; color:var(--c-muted,#C0C2CB); margin-top:3px;">{{ pointsRateText }}</div>
+        </div>
+        <button onClick="{{ closeVault }}" style="width:32px; height:32px; flex:none; display:flex; align-items:center; justify-content:center; background:transparent; border:none; color:var(--c-muted,#C0C2CB); cursor:pointer; border-radius:9999px;" style-hover="background:#1A1A1F; color:var(--c-text,#F8F8F8);">{{ iconClose }}</button>
+      </div>
+
+      <div style="display:flex; gap:6px; padding:0 22px 18px;">
+        <span style="flex:1; height:3px; border-radius:9999px; background:{{ vSeg1Color }};"></span>
+        <span style="flex:1; height:3px; border-radius:9999px; background:{{ vSeg2Color }};"></span>
+        <span style="flex:1; height:3px; border-radius:9999px; background:{{ vSeg3Color }};"></span>
+        <span style="flex:1; height:3px; border-radius:9999px; background:{{ vSeg4Color }};"></span>
+      </div>
+
+      <div style="padding:0 22px 24px;">
+
+        <!-- VAULT STEP: instructions -->
+        <sc-if value="{{ vIsInstructions }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex; flex-direction:column; gap:18px;">
+            <div style="font:400 13px/1.6 Inter; color:var(--c-muted,#C0C2CB);">Add Aura Points by transferring USDT from your own wallet to the Aura Vault address below, then submit your transaction details for verification.</div>
+
+            <div style="display:flex; flex-direction:column; gap:14px;">
+              <div style="display:flex; gap:12px; align-items:flex-start;">
+                <span style="width:24px; height:24px; flex:none; border-radius:9999px; background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A); color:var(--c-violet-ink,#D8B4FE); font:600 12px/1 Inter; display:flex; align-items:center; justify-content:center;">1</span>
+                <div style="font:400 13px/1.5 Inter; color:var(--c-body2,#D4D4D8);">Send USDT from your wallet to the Aura Vault receiving address.</div>
+              </div>
+              <div style="display:flex; gap:12px; align-items:flex-start;">
+                <span style="width:24px; height:24px; flex:none; border-radius:9999px; background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A); color:var(--c-violet-ink,#D8B4FE); font:600 12px/1 Inter; display:flex; align-items:center; justify-content:center;">2</span>
+                <div style="font:400 13px/1.5 Inter; color:var(--c-body2,#D4D4D8);">Copy your transaction hash, amount, and sending wallet address.</div>
+              </div>
+              <div style="display:flex; gap:12px; align-items:flex-start;">
+                <span style="width:24px; height:24px; flex:none; border-radius:9999px; background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A); color:var(--c-violet-ink,#D8B4FE); font:600 12px/1 Inter; display:flex; align-items:center; justify-content:center;">3</span>
+                <div style="font:400 13px/1.5 Inter; color:var(--c-body2,#D4D4D8);">Upload a screenshot as proof and submit for finance review.</div>
+              </div>
+            </div>
+
+            <div>
+              <div style="font:500 12px/1 Inter; color:var(--c-muted,#C0C2CB); margin-bottom:8px;">Aura Vault receiving address · BEP-20</div>
+              <div style="background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A); border-radius:8px; padding:12px 14px; font:400 12px/1.5 Inter; color:var(--c-text,#F8F8F8); word-break:break-all; font-variant-numeric:tabular-nums;">{{ vAddr }}</div>
+            </div>
+            <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="secondary" onClick="{{ copyVaultAddr }}" leading-icon="{{ vCopyIcon }}" hint-size="100%,42px" style="width:100%;">{{ vCopyLabel }}</x-import>
+
+            <div style="display:flex; gap:10px; padding:12px 14px; border-radius:10px; background:var(--c-err-bg,rgba(248,113,113,0.06)); border:1px solid var(--c-err-border,rgba(248,113,113,0.22));">
+              <span style="flex:none; color:var(--c-err-ink,#FCA5A5); display:flex;">{{ iconShield }}</span>
+              <div style="font:500 12px/1.5 Inter; color:var(--c-err-ink,#FCA5A5);">Send only USDT on the BEP-20 network to this exact address. Wrong-network or wrong-address transfers may not be recoverable.</div>
+            </div>
+
+            <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" onClick="{{ vGoForm }}" trailing-icon="{{ iconArrow }}" hint-size="100%,48px" style="width:100%;">I've sent the funds</x-import>
+          </div>
+        </sc-if>
+
+        <!-- VAULT STEP: form -->
+        <sc-if value="{{ vIsForm }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div>
+              <div style="font:500 12px/1 Inter; color:var(--c-muted,#C0C2CB); margin-bottom:8px;">USDT amount sent</div>
+              <div style="display:flex; align-items:center; gap:10px; background:var(--c-surface,#0E0E1F); border:1px solid var(--c-border,#25254A); border-radius:9999px; padding:0 16px; height:48px;">
+                <input value="{{ vAmount }}" onChange="{{ onVAmount }}" placeholder="0" inputmode="decimal" style="flex:1; min-width:0; background:transparent; border:none; outline:none; font:600 17px/1 Inter; color:var(--c-text,#F8F8F8);" />
+                <span style="font:500 14px/1 Inter; color:var(--c-muted,#C0C2CB);">USDT</span>
+              </div>
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-top:9px;">
+                <div style="display:flex; gap:7px; flex-wrap:wrap;">
+                  <sc-for list="{{ vAmountChips }}" as="chip" hint-placeholder-count="4">
+                    <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Chip" selected="{{ chip.selected }}" onClick="{{ chip.onClick }}" hint-size="auto,30px">{{ chip.label }}</x-import>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="font:400 12px/1.3 Inter; color:var(--c-violet-ink,#D8B4FE); margin-top:10px;">You'll receive {{ vPointsText }}</div>
+            </div>
+
+            <div>
+              <div style="font:500 12px/1 Inter; color:var(--c-muted,#C0C2CB); margin-bottom:8px;">Transaction hash (TX hash)</div>
+              <div style="display:flex; align-items:center; gap:10px; background:var(--c-surface,#0E0E1F); border:1px solid var(--c-border,#25254A); border-radius:9999px; padding:0 16px; height:46px;">
+                <span style="flex:none; color:var(--c-muted,#C0C2CB); display:flex;">{{ iconHash }}</span>
+                <input value="{{ vTxHash }}" onChange="{{ onVTxHash }}" placeholder="0x… transaction hash" style="flex:1; min-width:0; background:transparent; border:none; outline:none; font:400 13px/1 Inter; color:var(--c-text,#F8F8F8);" />
+              </div>
+            </div>
+
+            <div>
+              <div style="font:500 12px/1 Inter; color:var(--c-muted,#C0C2CB); margin-bottom:8px;">Your wallet address (sender)</div>
+              <div style="display:flex; align-items:center; gap:10px; background:var(--c-surface,#0E0E1F); border:1px solid var(--c-border,#25254A); border-radius:9999px; padding:0 16px; height:46px;">
+                <span style="flex:none; color:var(--c-muted,#C0C2CB); display:flex;">{{ iconWallet }}</span>
+                <input value="{{ vWallet }}" onChange="{{ onVWallet }}" placeholder="0x… your sending address" style="flex:1; min-width:0; background:transparent; border:none; outline:none; font:400 13px/1 Inter; color:var(--c-text,#F8F8F8);" />
+              </div>
+            </div>
+
+            <div style="display:flex; gap:10px; margin-top:4px;">
+              <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="secondary" onClick="{{ vGoInstructions }}" hint-size="auto,48px" style="flex:1;">Back</x-import>
+              <sc-if value="{{ vFormValid }}" hint-placeholder-val="{{ false }}">
+                <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" onClick="{{ vGoUpload }}" hint-size="auto,48px" style="flex:2;">Continue</x-import>
+              </sc-if>
+              <sc-if value="{{ vFormInvalid }}" hint-placeholder-val="{{ true }}">
+                <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" disabled="{{ true }}" hint-size="auto,48px" style="flex:2;">Continue</x-import>
+              </sc-if>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- VAULT STEP: upload -->
+        <sc-if value="{{ vIsUpload }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div style="font:400 13px/1.5 Inter; color:var(--c-muted,#C0C2CB);">Upload a screenshot of your completed transaction as proof of payment.</div>
+
+            <sc-if value="{{ vNoFile }}" hint-placeholder-val="{{ true }}">
+              <label onDragOver="{{ onVaultDragOver }}" onDragLeave="{{ onVaultDragLeave }}" onDrop="{{ onVaultDrop }}" style="display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center; padding:34px 20px; border:1.5px dashed {{ vUploadBorder }}; border-radius:14px; background:{{ vUploadBg }}; cursor:pointer; transition:border-color .15s ease, background-color .15s ease;">
+                <span style="width:52px; height:52px; border-radius:9999px; background:rgba(11,132,255,0.1); color:var(--c-accent-ink,#2AD9B7); display:flex; align-items:center; justify-content:center;">{{ iconUploadCloud }}</span>
+                <div style="font:500 14px/1.3 Inter; color:var(--c-text,#F8F8F8);">Drag &amp; drop your screenshot here</div>
+                <div style="font:400 12px/1.3 Inter; color:var(--c-muted,#C0C2CB);">or <span style="color:var(--c-accent-ink,#2AD9B7);">browse files</span> · PNG, JPG up to 10MB</div>
+                <input type="file" accept="image/*" onChange="{{ onVaultFile }}" style="display:none;" />
+              </label>
+            </sc-if>
+
+            <sc-if value="{{ vHasFile }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; gap:14px; align-items:center; padding:14px; border-radius:12px; background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A);">
+                <div style="width:56px; height:56px; flex:none; border-radius:8px; overflow:hidden; background:var(--c-surface,#0E0E1F); display:flex; align-items:center; justify-content:center;">{{ vFileThumb }}</div>
+                <div style="flex:1; min-width:0;">
+                  <div style="font:500 13px/1.3 Inter; color:var(--c-text,#F8F8F8); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ vFileName }}</div>
+                  <div style="display:inline-flex; align-items:center; gap:6px; margin-top:6px; font:400 12px/1 Inter; color:var(--c-pos-ink,#BBF7D0);"><span style="width:6px; height:6px; border-radius:50%; background:#3FB984;"></span>Uploaded</div>
+                </div>
+                <button onClick="{{ clearVaultFile }}" style="width:34px; height:34px; flex:none; display:flex; align-items:center; justify-content:center; background:transparent; border:1px solid var(--c-border-strong,#35356A); border-radius:9999px; color:var(--c-muted,#C0C2CB); cursor:pointer;" style-hover="color:#FCA5A5; border-color:#5a3a3a;">{{ iconTrash }}</button>
+              </div>
+            </sc-if>
+
+            <div style="display:flex; flex-direction:column; gap:9px; padding:14px; border-radius:10px; background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A);">
+              <div style="font:500 12px/1 Inter; color:var(--c-muted,#C0C2CB); margin-bottom:2px;">Request summary</div>
+              <div style="display:flex; justify-content:space-between; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB);">Amount</span><span style="color:var(--c-text,#F8F8F8); font-variant-numeric:tabular-nums;">{{ vReviewAmount }}</span></div>
+              <div style="display:flex; justify-content:space-between; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB);">Aura Points</span><span style="color:var(--c-violet-ink,#D8B4FE); font-variant-numeric:tabular-nums;">{{ vPointsText }}</span></div>
+            </div>
+
+            <div style="display:flex; gap:10px; margin-top:2px;">
+              <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="secondary" onClick="{{ vGoForm }}" hint-size="auto,48px" style="flex:1;">Back</x-import>
+              <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" onClick="{{ submitVault }}" hint-size="auto,48px" style="flex:2;">Submit request</x-import>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- VAULT STEP: status -->
+        <sc-if value="{{ vIsStatus }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; gap:18px;">
+
+            <sc-if value="{{ vReviewInProgress }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:16px; padding:10px 6px 4px;">
+                <div style="width:60px; height:60px; border-radius:50%; border:3px solid var(--c-border,#25254A); border-top-color:var(--c-accent-ink,#2AD9B7); animation:auroraSpin .9s linear infinite;"></div>
+                <div style="font:700 20px/1.2 'Sulphur Point'; color:var(--c-text,#F8F8F8);">Verifying your top-up</div>
+                <div style="font:400 13px/1.5 Inter; color:var(--c-muted,#C0C2CB); max-width:300px;">Our finance team is checking your transaction hash, amount, wallet address, and proof.</div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:14px; padding:16px; border-radius:12px; background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A);">
+                <div style="display:flex; align-items:center; gap:12px;">
+                  <span style="width:26px; height:26px; flex:none; border-radius:9999px; background:{{ vStepPendingColor }}; color:#fff; display:flex; align-items:center; justify-content:center;">{{ iconCheckSm }}</span>
+                  <span style="font:500 13px/1.2 Inter; color:var(--c-text,#F8F8F8);">Request received</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:12px;">
+                  <span style="width:26px; height:26px; flex:none; border-radius:9999px; background:{{ vStepVerifyColor }}; color:#fff; display:flex; align-items:center; justify-content:center; font:600 12px/1 Inter;">2</span>
+                  <span style="font:500 13px/1.2 Inter; color:var(--c-text,#F8F8F8);">Under verification</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:12px;">
+                  <span style="width:26px; height:26px; flex:none; border-radius:9999px; background:{{ vStepApprovedColor }}; color:#fff; display:flex; align-items:center; justify-content:center; font:600 12px/1 Inter;">3</span>
+                  <span style="font:500 13px/1.2 Inter; color:var(--c-muted,#C0C2CB);">Approved &amp; credited</span>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ vReviewApproved }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px; padding:8px 6px 2px;">
+                <div style="width:64px; height:64px; border-radius:50%; background:var(--c-pos-bg,rgba(187,247,208,0.14)); color:var(--c-pos-ink,#BBF7D0); display:flex; align-items:center; justify-content:center;">{{ iconCheckBig }}</div>
+                <div style="font:700 22px/1.2 'Sulphur Point'; color:var(--c-text,#F8F8F8);">Top-up approved</div>
+                <div style="font:400 14px/1.5 Inter; color:var(--c-muted,#C0C2CB);">Your transfer was verified and {{ vCreditPoints }} has been credited to your Aura Vault.</div>
+              </div>
+              <div data-theme="dark" style="display:flex; flex-direction:column; gap:12px; padding:16px; border-radius:12px; background:linear-gradient(150deg,#1a0c2e,#13131a); border:1px solid rgba(120,40,232,0.25);">
+                <div style="display:flex; justify-content:space-between; align-items:center; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB);">Previous balance</span><span style="color:var(--c-body2,#D4D4D8); font-variant-numeric:tabular-nums;">{{ vCreditPrev }}</span></div>
+                <div style="display:flex; justify-content:space-between; align-items:center; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB);">Top-up amount</span><span style="color:var(--c-body2,#D4D4D8); font-variant-numeric:tabular-nums;">{{ vCreditAmount }}</span></div>
+                <div style="display:flex; justify-content:space-between; align-items:center; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB);">Aura Points received</span><span style="color:var(--c-violet-ink,#D8B4FE); font-variant-numeric:tabular-nums;">{{ vCreditPoints }}</span></div>
+                <div style="height:1px; background:rgba(120,40,232,0.2);"></div>
+                <div style="display:flex; justify-content:space-between; align-items:center;"><span style="font:500 14px/1 Inter; color:var(--c-text,#F8F8F8);">Updated balance</span><span style="font:600 18px/1 Inter; color:var(--c-text,#F8F8F8); font-variant-numeric:tabular-nums;">{{ vCreditNext }}</span></div>
+              </div>
+              <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" onClick="{{ vaultDone }}" hint-size="100%,48px" style="width:100%;">Back to Aura Vault</x-import>
+            </sc-if>
+
+            <sc-if value="{{ vReviewRejected }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px; padding:8px 6px 2px;">
+                <div style="width:64px; height:64px; border-radius:50%; background:rgba(248,113,113,0.12); color:#FCA5A5; display:flex; align-items:center; justify-content:center;">{{ iconXBig }}</div>
+                <div style="font:700 22px/1.2 'Sulphur Point'; color:var(--c-text,#F8F8F8);">Request rejected</div>
+                <div style="font:400 14px/1.5 Inter; color:var(--c-muted,#C0C2CB); max-width:320px;">Your top-up could not be verified. No Aura Points were deducted — check your details and try again.</div>
+              </div>
+              <sc-if value="{{ vRejectionReasonShow }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex; gap:10px; padding:13px 14px; border-radius:10px; background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.22);">
+                  <span style="flex:none; color:#FCA5A5; display:flex;">{{ iconInfo }}</span>
+                  <div><div style="font:500 12px/1.3 Inter; color:#FCA5A5;">Reason</div><div style="font:400 12px/1.5 Inter; color:#E9A8A8; margin-top:5px;">{{ vRejectionReason }}</div></div>
+                </div>
+              </sc-if>
+              <div style="display:flex; gap:10px; margin-top:4px;">
+                <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="secondary" onClick="{{ vGoForm }}" hint-size="auto,48px" style="flex:1;">Try again</x-import>
+                <x-import component-from-global-scope="CobaltMidnightDesignSystem_f8c3dc.Button" variant="accent" onClick="{{ closeVault }}" hint-size="auto,48px" style="flex:1;">Done</x-import>
+              </div>
+            </sc-if>
+
+          </div>
+        </sc-if>
+
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<!-- STATUS CARD MODAL -->
+<sc-if value="{{ statusCardOpen }}" hint-placeholder-val="{{ false }}">
+  <div class="modal-overlay" data-theme="{{ theme }}" style="position:fixed; inset:0; z-index:56; display:flex; align-items:center; justify-content:center; padding:24px; background:rgba(5,3,12,0.7); backdrop-filter:blur(6px);">
+    <div class="modal-card" style="width:420px; max-width:100%; max-height:92vh; overflow:auto; background:var(--c-modal,#121016); border:1px solid var(--c-border,#25254A); border-radius:16px; box-shadow:0 24px 60px rgba(0,0,0,0.6);">
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:20px 22px 8px;">
+        <div style="font:700 17px/1.1 'Sulphur Point'; letter-spacing:-0.01em; color:var(--c-text,#F8F8F8);">Request {{ statusCard.id }}</div>
+        <button onClick="{{ closeStatusCard }}" style="width:32px; height:32px; flex:none; display:flex; align-items:center; justify-content:center; background:transparent; border:none; color:var(--c-muted,#C0C2CB); cursor:pointer; border-radius:9999px;" style-hover="background:#1A1A1F; color:var(--c-text,#F8F8F8);">{{ iconClose }}</button>
+      </div>
+      <div style="padding:8px 22px 24px; display:flex; flex-direction:column; gap:16px;">
+        <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; padding:8px 0 4px;">
+          <sc-if value="{{ scIsApproved }}" hint-placeholder-val="{{ true }}">
+            <div style="width:58px; height:58px; border-radius:50%; background:rgba(187,247,208,0.14); color:var(--c-pos-ink,#BBF7D0); display:flex; align-items:center; justify-content:center;">{{ iconCheckBig }}</div>
+          </sc-if>
+          <sc-if value="{{ scIsRejected }}" hint-placeholder-val="{{ false }}">
+            <div style="width:58px; height:58px; border-radius:50%; background:rgba(248,113,113,0.12); color:#FCA5A5; display:flex; align-items:center; justify-content:center;">{{ iconXBig }}</div>
+          </sc-if>
+          <sc-if value="{{ scIsActive }}" hint-placeholder-val="{{ false }}">
+            <div style="width:58px; height:58px; border-radius:50%; background:var(--c-warn-bg,rgba(253,230,138,0.12)); color:var(--c-warn-ink,#FDE68A); display:flex; align-items:center; justify-content:center;">{{ iconClockBig }}</div>
+          </sc-if>
+          <span style="display:inline-flex; align-items:center; gap:6px; padding:6px 12px; border-radius:9999px; background:{{ scBg }}; color:{{ scColor }}; font:500 12px/1 Inter;"><span style="width:6px; height:6px; border-radius:50%; background:{{ scDot }};"></span>{{ scLabel }}</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:11px; padding:16px; border-radius:12px; background:var(--c-elevated,#1A1A38); border:1px solid var(--c-border,#25254A);">
+          <div style="display:flex; justify-content:space-between; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB);">Amount</span><span style="color:var(--c-text,#F8F8F8); font-variant-numeric:tabular-nums;">{{ scAmountText }}</span></div>
+          <div style="display:flex; justify-content:space-between; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB);">Aura Points</span><span style="color:{{ scColor }}; font-variant-numeric:tabular-nums;">{{ scPointsText }}</span></div>
+          <div style="display:flex; justify-content:space-between; gap:16px; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB); flex:none;">TX hash</span><span style="color:var(--c-text,#F8F8F8); font-variant-numeric:tabular-nums; word-break:break-all; text-align:right;">{{ statusCard.txHash }}</span></div>
+          <div style="display:flex; justify-content:space-between; gap:16px; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB); flex:none;">Wallet</span><span style="color:var(--c-text,#F8F8F8); font-variant-numeric:tabular-nums; word-break:break-all; text-align:right;">{{ statusCard.wallet }}</span></div>
+          <div style="display:flex; justify-content:space-between; font:400 13px/1 Inter;"><span style="color:var(--c-muted,#C0C2CB);">Submitted</span><span style="color:var(--c-text,#F8F8F8);">{{ statusCard.date }}</span></div>
+        </div>
+
+        <sc-if value="{{ scIsRejected }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; gap:10px; padding:13px 14px; border-radius:10px; background:var(--c-err-bg,rgba(248,113,113,0.06)); border:1px solid var(--c-err-border,rgba(248,113,113,0.22));">
+            <span style="flex:none; color:#FCA5A5; display:flex;">{{ iconInfo }}</span>
+            <div><div style="font:500 12px/1.3 Inter; color:#FCA5A5;">Reason for rejection</div><div style="font:400 12px/1.5 Inter; color:#E9A8A8; margin-top:5px;">{{ statusCard.reason }}</div></div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ scIsActive }}" hint-placeholder-val="{{ false }}">
+          <div style="font:400 12px/1.5 Inter; color:var(--c-muted,#C0C2CB); text-align:center;">We'll credit your Aura Points as soon as the finance team finishes verifying this transfer.</div>
+        </sc-if>
+
+        <button onClick="{{ closeStatusCard }}" style="width:100%; height:46px; background:transparent; color:var(--c-text,#F8F8F8); border:1px solid var(--c-border-strong,#35356A); border-radius:9999px; font:500 14px/1 Inter; cursor:pointer; transition:background-color .15s ease;" style-hover="background:#1A1A1F;">Close</button>
+      </div>
+    </div>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100%&quot;},&quot;userName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Alex Mercer&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;startBalance&quot;:{&quot;editor&quot;:&quot;float&quot;,&quot;default&quot;:13480.5,&quot;min&quot;:0,&quot;tsType&quot;:&quot;number&quot;},&quot;showSparkline&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;defaultNetwork&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;eth&quot;,&quot;bsc&quot;,&quot;sol&quot;,&quot;polygon&quot;,&quot;base&quot;],&quot;default&quot;:&quot;bsc&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  componentDidMount() {
+    if (!document.getElementById('aurora-progress-style')) {
+      const s = document.createElement('style');
+      s.id = 'aurora-progress-style';
+      s.textContent = '[role="progressbar"]>div{background-image:linear-gradient(90deg,#2A0F4A 0%,#7828E8 22%,#4C9ED9 50%,#2AD9B7 76%,#5FF0CC 100%)!important;background-size:560px 100%!important;background-repeat:no-repeat!important;}';
+      document.head.appendChild(s);
+    }
+  }
+  state = {
+    theme: "light",
+    view: "dashboard",
+    topupOpen: false,
+    step: 1,
+    amount: "",
+    network: (this.props && this.props.defaultNetwork) || "bsc",
+    txHash: "",
+    screenshotName: "",
+    submitting: false,
+    vaultBalance: 248500,
+    vaultOpen: false,
+    vStep: "instructions",
+    vAmount: "",
+    vTxHash: "",
+    vWallet: "",
+    vFileName: "",
+    vFilePreview: "",
+    vCopied: false,
+    vDragActive: false,
+    vReview: "pending",
+    vRejectionReason: "",
+    vCredit: null,
+    statusCardOpen: false,
+    statusCard: null,
+    xpTotal: 5000,
+    lendOpen: false,
+    lStep: "type",
+    lType: "securenest",
+    lAmount: "",
+    lProject: "",
+    lStatus: "idle",
+    lendFilter: "all",
+    lendAllocations: [
+      { id: "LN-3082", type: "securenest", project: "Cebu Coastal Residences", amount: 800, date: "Jun 19, 2026", status: "active", risk: "low" },
+      { id: "LN-3079", type: "trustbox", project: "Iloilo SME Growth Note", amount: 450, date: "Jun 17, 2026", status: "active", risk: "high" },
+      { id: "LN-3071", type: "securenest", project: "Luzon Solar Microgrid", amount: 600, date: "May 28, 2026", status: "completed", risk: "low" },
+      { id: "LN-3064", type: "trustbox", project: "Mindanao Agri Cooperative", amount: 300, date: "May 14, 2026", status: "closed", risk: "medium" },
+    ],
+    vaultRequests: [
+      { id: "AV-2041", amount: 500, points: 50000, txHash: "0x7d2a…f81c", wallet: "0x9C4d…0D7a", date: "Jun 20, 2026", status: "approved" },
+      { id: "AV-2038", amount: 1200, points: 120000, txHash: "0x3b91…aa20", wallet: "0x7A3f…e6F2", date: "Jun 19, 2026", status: "verifying" },
+      { id: "AV-2035", amount: 250, points: 25000, txHash: "0x55c0…d31e", wallet: "0x3F8b…E5f3", date: "Jun 18, 2026", status: "pending" },
+      { id: "AV-2030", amount: 800, points: 0, txHash: "0x1f8e…b6c4", wallet: "0x5C2a…4A2c", date: "Jun 15, 2026", status: "rejected", reason: "Transaction hash could not be found on-chain. Please resubmit with a confirmed hash." },
+    ],
+    status: "idle",
+    balance: (this.props && this.props.startBalance != null) ? this.props.startBalance : 12480.5,
+    copiedAddr: false,
+    copiedWallet: false,
+    filter: "all",
+    pesoBalance: 84250,
+    tokenBalance: 1240.5,
+    projectOpen: false,
+    pStep: "details",
+    investedXp: 0,
+    investedPoints: 0,
+    activeId: null,
+    investAmount: "",
+    invested: false,
+    toast: "",
+    projects: [
+      { id: "p1", title: "Cebu Coastal Residences", category: "Real estate", location: "Cebu City", status: "funding", risk: "low", raised: 32500000, goal: 50000000, investors: 1284, daysLeft: 18, min: 5000, tokenPrice: 50, apy: "12.5%", summary: "A 9-storey mixed-use residential tower on Cebu's reclaimed waterfront, tokenized into fractional shares with quarterly rental distributions.", trust: ["kyc-verified", "escrow-protected", "admin-approved", "smart-contract"], milestones: [ { label: "Offering opens", date: "Mar 2026", status: "done" }, { label: "Funding target met", date: "Jun 2026", status: "active" }, { label: "Groundbreaking", date: "Sep 2026", status: "upcoming" }, { label: "First distribution", date: "Mar 2027", status: "upcoming" } ] },
+      { id: "p2", title: "Mindanao Agri Cooperative", category: "Agriculture", location: "Davao", status: "funding", risk: "medium", raised: 8200000, goal: 15000000, investors: 642, daysLeft: 31, min: 2500, tokenPrice: 25, apy: "9.8%", summary: "Working-capital financing for a 1,200-hectare banana and cacao cooperative, repaid from verified harvest export receipts.", trust: ["kyc-verified", "escrow-protected", "reserve-backed", "blockchain"], milestones: [ { label: "Offering opens", date: "May 2026", status: "done" }, { label: "Funding window", date: "Jul 2026", status: "active" }, { label: "Harvest cycle 1", date: "Nov 2026", status: "upcoming" } ] },
+      { id: "p3", title: "Luzon Solar Microgrid", category: "Energy", location: "Pampanga", status: "funded", risk: "low", raised: 22000000, goal: 22000000, investors: 2105, daysLeft: 0, min: 10000, tokenPrice: 100, apy: "11.2%", summary: "A 4.5 MW rooftop solar microgrid serving an industrial park under a 15-year power purchase agreement.", trust: ["kyc-verified", "escrow-protected", "admin-approved", "reserve-backed", "smart-contract"], milestones: [ { label: "Offering opens", date: "Jan 2026", status: "done" }, { label: "Fully funded", date: "Apr 2026", status: "done" }, { label: "Grid connection", date: "Aug 2026", status: "active" }, { label: "First distribution", date: "Dec 2026", status: "upcoming" } ] },
+      { id: "p4", title: "Manila Last-Mile Hub", category: "Logistics", location: "Quezon City", status: "upcoming", risk: "medium", raised: 0, goal: 18000000, investors: 0, daysLeft: 9, min: 5000, tokenPrice: 50, apy: "10.4%", summary: "A cold-chain fulfilment hub leased to two e-grocery operators; offering opens in 9 days.", trust: ["kyc-verified", "escrow-protected", "smart-contract"], milestones: [ { label: "Pre-registration", date: "Jun 2026", status: "active" }, { label: "Offering opens", date: "Jul 2026", status: "upcoming" }, { label: "Fit-out begins", date: "Oct 2026", status: "upcoming" } ] },
+      { id: "p5", title: "Iloilo SME Growth Note", category: "SME", location: "Iloilo City", status: "funding", risk: "high", raised: 3100000, goal: 6000000, investors: 318, daysLeft: 24, min: 2500, tokenPrice: 25, apy: "16.5%", summary: "A pooled credit note funding 14 vetted small businesses in the Western Visayas region. Higher yield, higher risk.", trust: ["kyc-verified", "reserve-backed", "blockchain"], milestones: [ { label: "Offering opens", date: "Jun 2026", status: "done" }, { label: "Funding window", date: "Jul 2026", status: "active" }, { label: "Disbursement", date: "Sep 2026", status: "upcoming" } ] },
+      { id: "p6", title: "Palawan Eco-Resort", category: "Tourism", location: "El Nido", status: "paused", risk: "very-high", raised: 14000000, goal: 40000000, investors: 489, daysLeft: 0, min: 10000, tokenPrice: 100, apy: "14.0%", summary: "A 28-key sustainable resort development. Offering temporarily paused pending an updated environmental permit.", trust: ["kyc-verified", "escrow-protected", "admin-approved"], milestones: [ { label: "Offering opens", date: "Feb 2026", status: "done" }, { label: "Permit review", date: "Jun 2026", status: "active" }, { label: "Construction", date: "2027", status: "upcoming" } ] },
+    ],
+    txns: [
+      { type: "deposit", net: "Tron (TRC-20)", amount: 5000, status: "completed", date: "Jun 21, 2026" },
+      { type: "withdraw", net: "Ethereum (ERC-20)", amount: -1200, status: "completed", date: "Jun 18, 2026" },
+      { type: "deposit", net: "BNB Smart Chain (BEP-20)", amount: 2500, status: "completed", date: "Jun 15, 2026" },
+      { type: "withdraw", net: "Tron (TRC-20)", amount: -340.5, status: "pending", date: "Jun 14, 2026" },
+      { type: "deposit", net: "Solana (SPL)", amount: 800, status: "completed", date: "Jun 10, 2026" },
+    ],
+  };
+
+  NETWORKS = {
+    eth: { id: "eth", label: "Ethereum", tag: "ERC-20", fee: 8.5, eta: "~5 min", addr: "0x7A3f9C2bD4e15F8a06B3c9D7e2A1f4B8c5D0e6F2", rec: false },
+    bsc: { id: "bsc", label: "Binance Network", tag: "BEP-20", fee: 0.8, eta: "~2 min", addr: "0x9C4d2E7a1B5f8C3d6A0e9B2c7D4f1A8e5C3b0D7a", rec: true },
+    sol: { id: "sol", label: "Solana", tag: "SPL", fee: 0.5, eta: "~30 sec", addr: "9xQeWz4Kp2RtVuY7mNbHs3XcZaLqWtUv1eRfDgHj8", rec: false },
+    polygon: { id: "polygon", label: "Polygon", tag: "POS", fee: 0.4, eta: "~1 min", addr: "0x3F8b1D6a2C9e5740B1a8F3c2D7e6A09bC4d1E5f3", rec: false },
+    base: { id: "base", label: "Base", tag: "Base", fee: 0.3, eta: "~1 min", addr: "0x5C2a9E7b3D1f06A84c2B9d7E5a1F3c08bD6e4A2c", rec: false },
+  };
+  ORDER = ["eth", "bsc", "sol", "polygon", "base"];
+
+  fmtUsd(n) { return "$" + Number(n).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  fmtNum(n) { return Number(n).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+
+  ic(name, size) {
+    const S = size || 18;
+    const R = React.createElement;
+    const p = (d) => R("path", { d });
+    const wrap = (...k) => R("svg", { width: S, height: S, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round", strokeLinejoin: "round" }, ...k);
+    switch (name) {
+      case "grid": return wrap(R("rect", { x: 3, y: 3, width: 7, height: 7, rx: 1.5 }), R("rect", { x: 14, y: 3, width: 7, height: 7, rx: 1.5 }), R("rect", { x: 14, y: 14, width: 7, height: 7, rx: 1.5 }), R("rect", { x: 3, y: 14, width: 7, height: 7, rx: 1.5 }));
+      case "wallet": return wrap(p("M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"), p("M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"));
+      case "in": return wrap(p("M12 17V3"), p("m6 11 6 6 6-6"), p("M5 21h14"));
+      case "out": return wrap(p("M12 21V7"), p("m6 13 6-6 6 6"), p("M5 3h14"));
+      case "list": return wrap(p("M8 6h13"), p("M8 12h13"), p("M8 18h13"), p("M3 6h.01"), p("M3 12h.01"), p("M3 18h.01"));
+      case "settings": return wrap(R("circle", { cx: 12, cy: 12, r: 3 }), p("M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"));
+      case "search": return wrap(R("circle", { cx: 11, cy: 11, r: 8 }), p("m21 21-4.3-4.3"));
+      case "bell": return wrap(p("M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"), p("M10.3 21a1.94 1.94 0 0 0 3.4 0"));
+      case "sun": return wrap(R("circle", { cx: 12, cy: 12, r: 4 }), p("M12 2v2"), p("M12 20v2"), p("m4.93 4.93 1.41 1.41"), p("m17.66 17.66 1.41 1.41"), p("M2 12h2"), p("M20 12h2"), p("m6.34 17.66-1.41 1.41"), p("m19.07 4.93-1.41 1.41"));
+      case "moon": return wrap(p("M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"));
+      case "copy": return wrap(R("rect", { x: 9, y: 9, width: 11, height: 11, rx: 2 }), p("M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"));
+      case "check": return wrap(p("M20 6 9 17l-5-5"));
+      case "shield": return wrap(p("M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"), p("M12 8v4"), p("M12 16h.01"));
+      case "close": return wrap(p("M18 6 6 18"), p("M6 6l12 12"));
+      case "usdt": {
+        const d = size || 34;
+        return R("svg", { width: d, height: d, viewBox: "0 0 32 32" },
+          R("circle", { cx: 16, cy: 16, r: 16, fill: "#26A17B" }),
+          R("path", { fill: "#fff", d: "M17.9 17.4v-2.2h5V11.9H9.1v3.3h5v2.2c-4.1.2-7.1 1-7.1 2 0 1 3 1.8 7.1 2v6.9h3.8v-6.9c4.1-.2 7.1-1 7.1-2 0-1-3-1.8-7.1-2zm0 3.4c-.1 0-.7.1-2 .1-1 0-1.7 0-1.9-.1-4-.2-7-.9-7-1.7 0-.9 3-1.6 7-1.8v2.9c.2 0 .9.1 1.9.1 1.3 0 1.9-.1 2-.1v-2.9c4 .2 7 .9 7 1.8 0 .8-3 1.5-7 1.7z" })
+        );
+      }
+      case "invest": return wrap(p("M3 3v18h18"), p("m19 9-5 5-4-4-3 3"));
+      case "building": return wrap(p("M6 22V4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v18"), p("M6 12h9"), p("M6 8h9"), p("M6 16h9"), p("M3 22h18"));
+      case "leaf": return wrap(p("M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"), p("M2 21c0-3 1.85-5.36 5.08-6"));
+      case "energy": return wrap(p("M13 2 3 14h9l-1 8 10-12h-9z"));
+      case "store": return wrap(p("M2 7l1.5-4h17L22 7"), p("M4 7v13a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7"), p("M9 21v-6h6v6"), p("M2 7h20"));
+      case "truck": return wrap(p("M14 18V6a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h1"), p("M14 9h4l3 3v5a1 1 0 0 1-1 1h-1"), R("circle", { cx: 7, cy: 18, r: 2 }), R("circle", { cx: 17, cy: 18, r: 2 }));
+      case "sun": return wrap(R("circle", { cx: 12, cy: 12, r: 4 }), p("M12 2v2"), p("M12 20v2"), p("m4.9 4.9 1.4 1.4"), p("m17.7 17.7 1.4 1.4"), p("M2 12h2"), p("M20 12h2"), p("m6.3 17.7-1.4 1.4"), p("m19.1 4.9-1.4 1.4"));
+      case "upload": return wrap(p("M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"), p("M17 8l-5-5-5 5"), p("M12 3v12"));
+      case "hash": return wrap(p("M4 9h16"), p("M4 15h16"), p("M10 3 8 21"), p("M16 3l-2 18"));
+      case "file": return wrap(p("M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"), p("M14 2v5h5"));
+      case "clock": return wrap(R("circle", { cx: 12, cy: 12, r: 10 }), p("M12 6v6l4 2"));
+      case "vault": return wrap(R("rect", { x: 3, y: 3, width: 18, height: 18, rx: 2 }), R("circle", { cx: 12, cy: 12, r: 4 }), p("M12 8v0"), p("M16.5 7.5 15 9"), p("M7.5 16.5 9 15"), p("M16.5 16.5 15 15"), p("M7.5 7.5 9 9"));
+      case "sparkles": return wrap(p("M12 3l1.9 4.6L18.5 9.5 13.9 11.4 12 16l-1.9-4.6L5.5 9.5l4.6-1.9z"), p("M19 14l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"));
+      case "xcircle": return wrap(R("circle", { cx: 12, cy: 12, r: 10 }), p("M15 9l-6 6"), p("M9 9l6 6"));
+      case "image": return wrap(R("rect", { x: 3, y: 3, width: 18, height: 18, rx: 2 }), R("circle", { cx: 9, cy: 9, r: 2 }), p("m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"));
+      case "info": return wrap(R("circle", { cx: 12, cy: 12, r: 10 }), p("M12 16v-4"), p("M12 8h.01"));
+      case "arrow": return wrap(p("M5 12h14"), p("m12 5 7 7-7 7"));
+      case "trash": return wrap(p("M3 6h18"), p("M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"), p("M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"));
+      case "lend": return wrap(p("M3 21h18"), p("M5 21V9l7-5 7 5v12"), p("M9 21v-6h6v6"), p("M12 4v0"));
+      case "lock": return wrap(R("rect", { x: 5, y: 11, width: 14, height: 10, rx: 2 }), p("M8 11V7a4 4 0 0 1 8 0v4"));
+      case "box": return wrap(p("M21 8V16a2 2 0 0 1-1 1.73l-7 4a2 2 0 0 1-2 0l-7-4A2 2 0 0 1 3 16V8a2 2 0 0 1 1-1.73l7-4a2 2 0 0 1 2 0l7 4A2 2 0 0 1 21 8z"), p("m3.3 7 8.7 5 8.7-5"), p("M12 22V12"));
+      case "swap": return wrap(p("M7 10h14l-4-4"), p("M17 14H3l4 4"));
+      case "alert": return wrap(p("m12 3 9 16H3z"), p("M12 10v4"), p("M12 17h.01"));
+      case "arrow-left": return wrap(p("M19 12H5"), p("m12 19-7-7 7-7"));
+      default: return wrap();
+    }
+  }
+
+  qr(seed) {
+    const R = React.createElement;
+    const size = 25, cell = 8;
+    let h = 2166136261;
+    for (let i = 0; i < seed.length; i++) { h ^= seed.charCodeAt(i); h = Math.imul(h, 16777619); }
+    const rand = () => { h ^= h << 13; h ^= h >>> 17; h ^= h << 5; return (h >>> 0) / 4294967296; };
+    const inBox = (x, y, bx, by) => x >= bx && x < bx + 7 && y >= by && y < by + 7;
+    const isFinder = (x, y) => inBox(x, y, 0, 0) || inBox(x, y, size - 7, 0) || inBox(x, y, 0, size - 7);
+    const rects = [];
+    for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+      if (isFinder(x, y)) continue;
+      if (rand() > 0.52) rects.push(R("rect", { key: x + "-" + y, x: x * cell, y: y * cell, width: cell, height: cell, fill: "#090916" }));
+    }
+    const finder = (bx, by) => [
+      R("rect", { key: "fa" + bx + by, x: bx * cell, y: by * cell, width: 7 * cell, height: 7 * cell, fill: "#090916" }),
+      R("rect", { key: "fb" + bx + by, x: (bx + 1) * cell, y: (by + 1) * cell, width: 5 * cell, height: 5 * cell, fill: "#fff" }),
+      R("rect", { key: "fc" + bx + by, x: (bx + 2) * cell, y: (by + 2) * cell, width: 3 * cell, height: 3 * cell, fill: "#090916" }),
+    ];
+    const dim = size * cell;
+    return R("svg", { width: "100%", height: "100%", viewBox: "0 0 " + dim + " " + dim, style: { display: "block" } },
+      R("rect", { x: 0, y: 0, width: dim, height: dim, fill: "#fff" }),
+      ...rects, ...finder(0, 0), ...finder(size - 7, 0), ...finder(0, size - 7)
+    );
+  }
+
+  spark() {
+    const R = React.createElement;
+    const v = [30, 34, 31, 38, 42, 40, 47, 44, 52, 49, 58, 55, 63, 68, 64, 72, 70, 79, 83, 80, 88, 92, 96, 104];
+    const w = 340, hgt = 100, pad = 10;
+    const min = Math.min(...v), max = Math.max(...v);
+    const xs = (i) => pad + i / (v.length - 1) * (w - 2 * pad);
+    const ys = (val) => (hgt - pad) - (val - min) / (max - min) * (hgt - 2 * pad);
+    let line = "";
+    v.forEach((val, i) => { line += (i ? " L" : "M") + xs(i).toFixed(1) + " " + ys(val).toFixed(1); });
+    const area = line + " L" + xs(v.length - 1).toFixed(1) + " " + hgt + " L" + xs(0).toFixed(1) + " " + hgt + " Z";
+    return R("svg", { width: "100%", height: hgt, viewBox: "0 0 " + w + " " + hgt, preserveAspectRatio: "none", style: { display: "block" } },
+      R("defs", {}, R("linearGradient", { id: "sparkFill", x1: 0, y1: 0, x2: 0, y2: 1 },
+        R("stop", { offset: "0%", stopColor: "#7828E8", stopOpacity: 0.32 }),
+        R("stop", { offset: "100%", stopColor: "#7828E8", stopOpacity: 0 }))),
+      R("path", { d: area, fill: "url(#sparkFill)" }),
+      R("path", { d: line, fill: "none", stroke: "#7828E8", strokeWidth: 2, strokeLinecap: "round", strokeLinejoin: "round" })
+    );
+  }
+
+  go = (v) => () => this.setState({ view: v });
+  openTopup = () => this.setState({ topupOpen: true, step: 1, amount: "", status: "idle", txHash: "", screenshotName: "" });
+  closeTopup = () => this.setState({ topupOpen: false });
+  next = () => this.setState((s) => ({ step: Math.min(4, s.step + 1) }));
+  back = () => this.setState((s) => ({ step: Math.max(1, s.step - 1) }));
+  onAmount = (e) => { const v = (e.target.value || "").replace(/[^0-9.]/g, ""); this.setState({ amount: v }); };
+  setAmount = (v) => () => this.setState({ amount: String(v) });
+  pickNet = (id) => () => this.setState({ network: id });
+  setFilter = (f) => () => this.setState({ filter: f });
+
+  openProject = (id) => () => this.setState({ projectOpen: true, activeId: id, investAmount: "", invested: false, lType: "securenest", pStep: "details" });
+  pGo = (step) => () => this.setState({ pStep: step });
+  closeProject = () => this.setState({ projectOpen: false });
+  onInvest = (e) => { const v = (e.target.value || "").replace(/[^0-9.]/g, ""); this.setState({ investAmount: v }); };
+  setInvest = (v) => () => this.setState({ investAmount: String(v) });
+  confirmInvest = () => this.setState((s) => {
+    const apj = s.projects.find((x) => x.id === s.activeId);
+    if (!apj) return {};
+    const points = parseFloat(s.investAmount) || 0;
+    if (points < this.MIN_AP || points > s.vaultBalance) return {};
+    const xp = points / this.AP_PER_XP;
+    const type = s.lType;
+    const risk = type === "securenest" ? "low" : "high";
+    const id = "LN-" + (3083 + s.lendAllocations.length);
+    const alloc = { id, type, project: apj.title, amount: xp, date: "Just now", status: "active", risk };
+    const php = xp * this.XP_PHP;
+    const projects = s.projects.map((x) => x.id === s.activeId ? { ...x, raised: x.raised + php, investors: x.investors + 1 } : x);
+    return { projects, vaultBalance: s.vaultBalance - points, lendAllocations: [alloc, ...s.lendAllocations], invested: true, investedXp: xp, investedPoints: points };
+  });
+  redeem = () => this.showToast("Redemption request submitted — funds arrive in 1–2 days");
+  showToast = (msg) => { this.setState({ toast: msg }); clearTimeout(this._tt); this._tt = setTimeout(() => this.setState({ toast: "" }), 2800); };
+
+  decorateProject(p) {
+    const cat = {
+      "Real estate": { bg: "linear-gradient(135deg,#1d1340,#0f1430)", glyph: "building" },
+      "Agriculture": { bg: "linear-gradient(135deg,#10271c,#0e1a2a)", glyph: "leaf" },
+      "Energy": { bg: "linear-gradient(135deg,#2a1530,#161029)", glyph: "energy" },
+      "SME": { bg: "linear-gradient(135deg,#13203a,#0f1428)", glyph: "store" },
+      "Logistics": { bg: "linear-gradient(135deg,#22182e,#101626)", glyph: "truck" },
+      "Tourism": { bg: "linear-gradient(135deg,#2a1d12,#141026)", glyph: "sun" },
+    }[p.category] || { bg: "linear-gradient(135deg,#1d1340,#0f1430)", glyph: "building" };
+    return Object.assign({}, p, {
+      bannerBg: cat.bg,
+      glyph: this.ic(cat.glyph, 56),
+      glyphLg: this.ic(cat.glyph, 80),
+      trustTop: p.trust.slice(0, 3),
+      onOpen: this.openProject(p.id),
+      pctText: Math.round((p.raised / p.goal) * 100) + "%",
+      minFmt: "₱" + p.min.toLocaleString("en-PH"),
+      tokenPriceFmt: "₱" + p.tokenPrice.toLocaleString("en-PH"),
+    });
+  }
+
+  onTxHash = (e) => this.setState({ txHash: (e.target.value || "").trim() });
+  onScreenshot = (e) => { const f = e.target.files && e.target.files[0]; this.setState({ screenshotName: f ? f.name : "" }); };
+  submitRequest = () => {
+    this.setState({ step: 4, status: "submitting", submitting: true });
+    clearTimeout(this._t);
+    this._t = setTimeout(() => {
+      this.setState((s) => {
+        const amt = parseFloat(s.amount) || 0;
+        const net = this.NETWORKS[s.network];
+        const tx = { type: "deposit", net: net.label + " (" + net.tag + ")", amount: amt, status: "pending", date: "Just now" };
+        return { status: "submitted", submitting: false, txns: [tx, ...s.txns] };
+      });
+    }, 1600);
+  };
+  finishDone = () => this.setState({ topupOpen: false, view: "transactions", step: 1, amount: "", status: "idle", txHash: "", screenshotName: "" });
+
+  POINTS_RATE = 100;
+  VAULT_ADDR = "0x9C4d2E7a1B5f8C3d6A0e9B2c7D4f1A8e5C3b0D7a";
+
+  openVault = () => this.setState({ vaultOpen: true, vStep: "instructions", vAmount: "", vTxHash: "", vWallet: "", vFileName: "", vFilePreview: "", vReview: "pending", vCredit: null });
+  closeVault = () => this.setState({ vaultOpen: false });
+  vGo = (step) => () => this.setState({ vStep: step });
+  onVAmount = (e) => this.setState({ vAmount: (e.target.value || "").replace(/[^0-9.]/g, "") });
+  setVAmount = (v) => () => this.setState({ vAmount: String(v) });
+  onVTxHash = (e) => this.setState({ vTxHash: (e.target.value || "").trim() });
+  onVWallet = (e) => this.setState({ vWallet: (e.target.value || "").trim() });
+  copyVaultAddr = () => { try { navigator.clipboard.writeText(this.VAULT_ADDR); } catch (e) {} this.setState({ vCopied: true }); clearTimeout(this._cv); this._cv = setTimeout(() => this.setState({ vCopied: false }), 1600); };
+
+  readVaultFile = (file) => {
+    if (!file) return;
+    let preview = "";
+    try { preview = URL.createObjectURL(file); } catch (e) {}
+    this.setState({ vFileName: file.name, vFilePreview: preview });
+  };
+  onVaultFile = (e) => { const f = e.target.files && e.target.files[0]; this.readVaultFile(f); };
+  onVaultDragOver = (e) => { e.preventDefault(); if (!this.state.vDragActive) this.setState({ vDragActive: true }); };
+  onVaultDragLeave = (e) => { e.preventDefault(); this.setState({ vDragActive: false }); };
+  onVaultDrop = (e) => { e.preventDefault(); this.setState({ vDragActive: false }); const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]; this.readVaultFile(f); };
+  clearVaultFile = () => { if (this.state.vFilePreview) { try { URL.revokeObjectURL(this.state.vFilePreview); } catch (e) {} } this.setState({ vFileName: "", vFilePreview: "" }); };
+
+  submitVault = () => {
+    this.setState({ vStep: "status", vReview: "submitting" });
+    clearTimeout(this._v1); clearTimeout(this._v2); clearTimeout(this._v3);
+    this._v1 = setTimeout(() => this.setState({ vReview: "pending" }), 1100);
+    this._v2 = setTimeout(() => this.setState({ vReview: "verifying" }), 2600);
+    this._v3 = setTimeout(() => {
+      this.setState((s) => {
+        const amt = parseFloat(s.vAmount) || 0;
+        const points = Math.round(amt * this.POINTS_RATE);
+        const prev = s.vaultBalance;
+        const next = prev + points;
+        const req = { id: "AV-" + (2042 + s.vaultRequests.length), amount: amt, points, txHash: s.vTxHash ? (s.vTxHash.slice(0, 6) + "…" + s.vTxHash.slice(-4)) : "—", wallet: s.vWallet ? (s.vWallet.slice(0, 6) + "…" + s.vWallet.slice(-4)) : "—", date: "Just now", status: "approved" };
+        return { vReview: "approved", vaultBalance: next, vCredit: { prev, points, next, amount: amt }, vaultRequests: [req, ...s.vaultRequests] };
+      });
+    }, 4600);
+  };
+  vaultDone = () => this.setState({ vaultOpen: false });
+  openStatusCard = (req) => () => this.setState({ statusCardOpen: true, statusCard: req });
+  closeStatusCard = () => this.setState({ statusCardOpen: false });
+
+  XP_USDT = 1;
+  XP_PHP = 58;
+  AP_PER_XP = 100;
+  MIN_AP = 500;
+  LEND_PROJECTS = {
+    securenest: ["Cebu Coastal Residences", "Luzon Solar Microgrid", "Manila Last-Mile Hub"],
+    trustbox: ["Iloilo SME Growth Note", "Mindanao Agri Cooperative", "Palawan Eco-Resort"],
+  };
+  lentActive() { return this.state.lendAllocations.filter((a) => a.status === "active" || a.status === "pending").reduce((s, a) => s + a.amount, 0); }
+  availableXP() { return this.state.xpTotal - this.lentActive(); }
+
+  openLend = () => this.setState({ lendOpen: true, lStep: "type", lType: "securenest", lAmount: "", lProject: "", lStatus: "idle" });
+  closeLend = () => this.setState({ lendOpen: false });
+  lGo = (step) => () => this.setState({ lStep: step });
+  selectLType = (t) => () => this.setState({ lType: t, lProject: "" });
+  onLAmount = (e) => this.setState({ lAmount: (e.target.value || "").replace(/[^0-9.]/g, "") });
+  setLPct = (pct) => () => { const v = Math.floor(this.availableXP() * pct); this.setState({ lAmount: String(v) }); };
+  selectLProject = (e) => this.setState({ lProject: e.target.value });
+  confirmLend = () => {
+    this.setState({ lStep: "status", lStatus: "processing" });
+    clearTimeout(this._l1);
+    this._l1 = setTimeout(() => {
+      this.setState((s) => {
+        const amt = parseFloat(s.lAmount) || 0;
+        const proj = s.lProject || this.LEND_PROJECTS[s.lType][0];
+        const risk = s.lType === "securenest" ? "low" : "high";
+        const id = "LN-" + (3083 + s.lendAllocations.length);
+        const alloc = { id, type: s.lType, project: proj, amount: amt, date: "Just now", status: "active", risk };
+        return { lStatus: "success", lendAllocations: [alloc, ...s.lendAllocations] };
+      });
+    }, 2200);
+  };
+  lendDone = () => this.setState({ lendOpen: false, view: "lend", lendFilter: "all" });
+  setLendFilter = (f) => () => this.setState({ lendFilter: f });
+  copyAddr = () => { try { navigator.clipboard.writeText(this.NETWORKS[this.state.network].addr); } catch (e) {} this.setState({ copiedAddr: true }); clearTimeout(this._c1); this._c1 = setTimeout(() => this.setState({ copiedAddr: false }), 1600); };
+  copyWallet = () => { try { navigator.clipboard.writeText(this.NETWORKS.bsc.addr); } catch (e) {} this.setState({ copiedWallet: true }); clearTimeout(this._c2); this._c2 = setTimeout(() => this.setState({ copiedWallet: false }), 1600); };
+
+  componentWillUnmount() { clearTimeout(this._t); clearTimeout(this._c1); clearTimeout(this._c2); clearTimeout(this._cv); clearTimeout(this._v1); clearTimeout(this._v2); clearTimeout(this._v3); clearTimeout(this._l1); }
+
+  renderNav() {
+    const R = React.createElement;
+    const s = this.state;
+    const items = [
+      { key: "dashboard", label: "Dashboard", icon: "grid", onClick: this.go("dashboard") },
+      { key: "wallet", label: "Wallet", icon: "wallet", onClick: this.go("wallet") },
+      { key: "invest", label: "Invest", icon: "invest", onClick: this.go("invest") },
+      { key: "vault", label: "Aura Vault", icon: "vault", onClick: this.go("vault") },
+      { key: "transactions", label: "Transactions", icon: "list", onClick: this.go("transactions") },
+      { key: "topup", label: "Top up", icon: "in", onClick: this.openTopup },
+    ];
+    return R("div", { style: { display: "flex", flexDirection: "column", gap: 4 } },
+      items.map((n) => {
+        const active = n.key !== "topup" && s.view === n.key;
+        const hovered = s.navHover === n.key;
+        return R("div", {
+          key: n.key,
+          onClick: n.onClick,
+          onMouseEnter: () => this.setState({ navHover: n.key }),
+          onMouseLeave: () => this.setState({ navHover: null }),
+          style: {
+            display: "flex", alignItems: "center", gap: 10, padding: "10px 12px",
+            borderRadius: 8, cursor: "pointer", userSelect: "none",
+            font: "500 13px/1.2 Inter",
+            color: active || hovered ? "var(--c-text,#F8F8F8)" : "var(--c-muted,#C0C2CB)",
+            background: active ? "var(--c-elevated,#1A1A38)" : hovered ? "var(--c-hover,#15152B)" : "transparent",
+            transition: "background-color .15s ease, color .15s ease",
+          },
+        },
+          R("span", { style: { display: "flex", flexShrink: 0 } }, this.ic(n.icon, 18)),
+          R("span", { className: "sidebar-brand-name", style: { flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" } }, n.label)
+        );
+      })
+    );
+  }
+
+  vStatusMeta(status) {
+    const light = this.state.theme === "light";
+    return {
+      approved: { label: "Approved", color: light ? "#0E8A6F" : "#BBF7D0", bg: light ? "rgba(14,138,111,0.12)" : "rgba(187,247,208,0.12)", dot: light ? "#0E8A6F" : "#3FB984" },
+      verifying: { label: "Under verification", color: light ? "#2F6BD8" : "#A9C7FF", bg: light ? "rgba(47,107,216,0.12)" : "rgba(11,132,255,0.12)", dot: light ? "#2F6BD8" : "#2AD9B7" },
+      pending: { label: "Pending review", color: light ? "#B45309" : "#FDE68A", bg: light ? "rgba(180,83,9,0.12)" : "rgba(253,230,138,0.12)", dot: light ? "#B45309" : "#FDE68A" },
+      rejected: { label: "Rejected", color: light ? "#DC2626" : "#FCA5A5", bg: light ? "rgba(220,38,38,0.12)" : "rgba(248,113,113,0.12)", dot: light ? "#DC2626" : "#F87171" },
+    }[status] || { label: status, color: "var(--c-muted,#C0C2CB)", bg: "var(--c-elevated,#1A1A38)", dot: "var(--c-muted,#C0C2CB)" };
+  }
+
+  decorate(t, i) {
+    const dep = t.type === "deposit";
+    return {
+      key: i,
+      icon: this.ic(dep ? "in" : "out", 16),
+      iconBg: dep ? (this.state.theme==="light" ? "rgba(42,217,183,0.12)" : "rgba(187,247,208,0.10)") : (this.state.theme==="light" ? "rgba(90,94,114,0.10)" : "rgba(161,161,170,0.10)"),
+      iconColor: dep ? (this.state.theme==="light" ? "#0E8A6F" : "#BBF7D0") : "var(--c-muted,#C0C2CB)",
+      title: dep ? "Deposit" : "Withdrawal",
+      sub: t.net + " · " + t.date,
+      amountText: (t.amount > 0 ? "+" : "−") + this.fmtNum(Math.abs(t.amount)) + " USDT",
+      amountColor: t.amount > 0 ? (this.state.theme==="light" ? "#0E8A6F" : "#BBF7D0") : "var(--c-text,#F8F8F8)",
+      statusColor: t.status === "completed" ? (this.state.theme==="light" ? "#0E8A6F" : "#3FB984") : (this.state.theme==="light" ? "#B45309" : "#FDE68A"),
+      statusLabel: t.status === "completed" ? "Completed" : "Pending",
+      _type: t.type, _status: t.status,
+    };
+  }
+
+  renderVals() {
+    const s = this.state;
+    const userName = this.props.userName || "Alex Mercer";
+    const toggleTheme = () => this.setState(st => ({ theme: st.theme === "dark" ? "light" : "dark" }));
+    const showSparkline = this.props.showSparkline !== false;
+
+    const amtNum = parseFloat(s.amount) || 0;
+    const amountValid = amtNum >= 10;
+    const amountError = s.amount === "" ? "" : (amtNum < 10 ? "Minimum deposit is 10 USDT" : "");
+    const net = this.NETWORKS[s.network];
+    const invAmtTopupValid = s.txHash.length >= 6;
+
+    const networks = this.ORDER.map((id) => {
+      const n = this.NETWORKS[id];
+      const sel = s.network === id;
+      return {
+        id, label: n.label, tag: n.tag, eta: n.eta, rec: !!n.rec,
+        feeText: n.fee + " USDT",
+        onClick: this.pickNet(id),
+        ringColor: sel ? "#2AD9B7" : "var(--c-border-strong,#35356A)",
+        dotColor: sel ? "#2AD9B7" : "transparent",
+        borderColor: sel ? "#2AD9B7" : "var(--c-border,#25254A)",
+        bg: sel ? "rgba(11,132,255,0.08)" : "var(--c-elevated,#1A1A38)",
+      };
+    });
+
+    const amountChips = [100, 500, 1000, 5000].map((v) => ({
+      label: v.toLocaleString("en-US"), value: v, selected: amtNum === v, onClick: this.setAmount(v),
+    }));
+
+    const filters = [["all", "All"], ["deposit", "Deposits"], ["withdraw", "Withdrawals"], ["pending", "Pending"]]
+      .map(([k, l]) => ({ key: k, label: l, active: s.filter === k, onClick: this.setFilter(k) }));
+
+    const allDecor = s.txns.map((t, i) => this.decorate(t, i));
+    const filtered = allDecor.filter((t) => s.filter === "all" ? true : s.filter === "pending" ? t._status === "pending" : t._type === s.filter);
+    const recent = allDecor.slice(0, 4);
+
+    const pageTitle = s.view === "dashboard" ? "Dashboard" : s.view === "wallet" ? "Wallet" : s.view === "invest" ? "Invest" : s.view === "vault" ? "Aura Vault" : s.view === "lend" ? "Lend Aura XP" : "Transactions";
+
+    // ---- Lend Aura XP ----
+    const fmtXP = (n) => Number(n).toLocaleString("en-US");
+    const lentActive = this.lentActive();
+    const availXP = s.xpTotal - lentActive;
+    const lAmtNum = parseFloat(s.lAmount) || 0;
+    const lUsdt = lAmtNum * this.XP_USDT;
+    const lPhp = lAmtNum * this.XP_PHP;
+    const lInsufficient = lAmtNum > availXP;
+    const lAmountValid = lAmtNum >= 1 && !lInsufficient;
+    const lProjList = this.LEND_PROJECTS[s.lType];
+    const lProjectChosen = s.lProject || lProjList[0];
+    const isSecure = s.lType === "securenest";
+    const activeSecure = s.lendAllocations.filter((a) => a.type === "securenest" && a.status === "active").length;
+    const activeTrust = s.lendAllocations.filter((a) => a.type === "trustbox" && a.status === "active").length;
+    const lightT = s.theme === "light";
+    const allocStatusMeta = (st) => ({
+      active: { label: "Active", color: lightT ? "#0E8A6F" : "#BBF7D0", dot: lightT ? "#0E8A6F" : "#3FB984" },
+      completed: { label: "Completed", color: lightT ? "#2F6BD8" : "#A9C7FF", dot: lightT ? "#2F6BD8" : "#2AD9B7" },
+      pending: { label: "Pending", color: lightT ? "#B45309" : "#FDE68A", dot: lightT ? "#B45309" : "#FDE68A" },
+      closed: { label: "Closed", color: "var(--c-muted,#C0C2CB)", dot: "var(--c-muted,#C0C2CB)" },
+    }[st] || { label: st, color: "var(--c-muted,#C0C2CB)", dot: "var(--c-muted,#C0C2CB)" });
+    const riskMeta = (r) => ({ low: "Lower", medium: "Medium", high: "Higher", "very-high": "Higher" }[r] || r);
+    const lendRows = s.lendAllocations
+      .filter((a) => s.lendFilter === "all" ? true : a.status === s.lendFilter)
+      .map((a) => { const m = allocStatusMeta(a.status); return {
+        key: a.id, id: a.id, project: a.project,
+        typeLabel: a.type === "securenest" ? "SecureNest" : "TrustBox",
+        typeColor: a.type === "securenest" ? (lightT ? "#0C7A63" : "#7FE7C4") : (lightT ? "#B45309" : "#FCD34D"),
+        typeIcon: this.ic(a.type === "securenest" ? "lock" : "box", 14),
+        typeBg: a.type === "securenest" ? (lightT ? "rgba(12,122,99,0.10)" : "rgba(63,185,132,0.12)") : (lightT ? "rgba(180,83,9,0.10)" : "rgba(253,211,77,0.12)"),
+        amountText: fmtXP(a.amount) + " XP", date: a.date,
+        statusLabel: m.label, statusColor: m.color, statusDot: m.dot,
+        riskText: riskMeta(a.risk),
+      }; });
+    const lendFilters = [["all", "All"], ["active", "Active"], ["completed", "Completed"], ["pending", "Pending"], ["closed", "Closed"]]
+      .map(([k, l]) => ({ key: k, label: l, active: s.lendFilter === k, onClick: this.setLendFilter(k) }));
+    const lProjectOptions = lProjList.map((p) => ({ value: p, label: p, selected: lProjectChosen === p }));
+
+    // ---- Aura Vault ----
+    const fmtAP = (n) => Number(n).toLocaleString("en-US");
+    const vStepNum = { instructions: 1, form: 2, upload: 3, status: 4 }[s.vStep] || 1;
+    const vAmtNum = parseFloat(s.vAmount) || 0;
+    const vPoints = Math.round(vAmtNum * this.POINTS_RATE);
+    const vAmountValid = vAmtNum >= 10;
+    const vFormValid = vAmountValid && s.vTxHash.length >= 6 && s.vWallet.length >= 6;
+    const vAmountChips = [100, 500, 1000, 5000].map((v) => ({ label: v.toLocaleString("en-US"), value: v, selected: vAmtNum === v, onClick: this.setVAmount(v) }));
+    const vReqs = s.vaultRequests.map((r) => { const m = this.vStatusMeta(r.status); return Object.assign({}, r, { statusLabel: m.label, statusColor: m.color, statusBg: m.bg, statusDot: m.dot, pointsText: r.status === "rejected" ? "—" : "+" + fmtAP(r.points) + " AP", amountText: r.amount.toLocaleString("en-US") + " USDT", onOpen: this.openStatusCard(r) }); });
+    const vPending = s.vaultRequests.filter((r) => r.status === "pending" || r.status === "verifying").length;
+    const vTotalTopped = s.vaultRequests.filter((r) => r.status === "approved").reduce((a, r) => a + r.amount, 0);
+    const scMeta = s.statusCard ? this.vStatusMeta(s.statusCard.status) : null;
+
+    const navDef = [
+      { key: "dashboard", label: "Dashboard", icon: "grid", onClick: this.go("dashboard") },
+      { key: "wallet", label: "Wallet", icon: "wallet", onClick: this.go("wallet") },
+      { key: "invest", label: "Invest", icon: "invest", onClick: this.go("invest") },
+      { key: "vault", label: "Aura Vault", icon: "vault", onClick: this.go("vault") },
+      { key: "transactions", label: "Transactions", icon: "list", onClick: this.go("transactions") },
+      { key: "topup", label: "Top up", icon: "in", onClick: this.openTopup },
+    ];
+    const navItems = navDef.map((n) => {
+      const active = s.view === n.key;
+      return { key: n.key, label: n.label, icon: this.ic(n.icon, 18), onClick: n.onClick, bg: active ? "var(--c-elevated,#1A1A38)" : "transparent", color: active ? "var(--c-text,#F8F8F8)" : "var(--c-muted,#C0C2CB)" };
+    });
+
+    const decProjects = s.projects.map((p) => this.decorateProject(p));
+    const featured = decProjects.filter((p) => p.status === "funding").slice(0, 2);
+    const ap = decProjects.find((p) => p.id === s.activeId) || null;
+    const apBal = s.vaultBalance;
+    const apIn = parseFloat(s.investAmount) || 0;
+    const xpOut = apIn / this.AP_PER_XP;
+    const fmtXP2 = (n) => Number(n).toLocaleString("en-US", { maximumFractionDigits: 2 });
+    const invValid = apIn >= this.MIN_AP && apIn <= apBal;
+    let invError = "";
+    if (s.investAmount !== "") {
+      if (apIn < this.MIN_AP) invError = "Minimum is " + fmtAP(this.MIN_AP) + " AP";
+      else if (apIn > apBal) invError = "Exceeds your Aurora Points balance";
+    }
+    const investChips = [1000, 5000, 10000, 25000].map((v) => ({
+      label: fmtAP(v) + " AP", value: v, selected: apIn === v, onClick: this.setInvest(v),
+    }));
+    const apRateText = fmtAP(this.AP_PER_XP) + " AP = 1 Aura XP";
+    const phpText = "₱" + (xpOut * this.XP_PHP).toLocaleString("en-PH", { maximumFractionDigits: 0 });
+    const modalTitle = s.step === 1 ? "Add funds" : s.step === 2 ? "Select network" : s.step === 3 ? "Deposit USDT" : (s.status === "submitted" ? "Request submitted" : "Submitting request");
+
+    const pStepNum = s.pStep === "type" ? 1 : s.pStep === "amount" ? 2 : s.pStep === "review" ? 3 : 0;
+    const pAccent = "#2AD9B7";
+    const pStepCol = (n) => {
+      const reached = pStepNum >= n;
+      return {
+        bg: reached ? pAccent : "transparent",
+        fg: reached ? "#06231a" : "var(--c-muted,#C0C2CB)",
+        ring: reached ? pAccent : "var(--c-border-strong,#35356A)",
+        lbl: pStepNum === n ? "var(--c-text,#F8F8F8)" : reached ? "var(--c-body2,#D4D4D8)" : "var(--c-muted,#C0C2CB)",
+      };
+    };
+    const pc1 = pStepCol(1), pc2 = pStepCol(2), pc3 = pStepCol(3);
+
+    return {
+      userName, userInitials: userName.split(" ").map((w) => w[0]).slice(0, 2).join(""),
+      showSparkline,
+      isDashboard: s.view === "dashboard", isWallet: s.view === "wallet", isTransactions: s.view === "transactions",
+      goDashboard: this.go("dashboard"), goWallet: this.go("wallet"), goTransactions: this.go("transactions"), goInvest: this.go("invest"),
+      isInvest: s.view === "invest",
+      iconInvest: this.ic("invest", 18),
+      isVault: s.view === "vault", goVault: this.go("vault"),
+      navEl: this.renderNav(),
+      notDashboard: s.view !== "dashboard", notWallet: s.view !== "wallet", notInvest: s.view !== "invest",
+      notVault: s.view !== "vault", notLend: s.view !== "lend", notTransactions: s.view !== "transactions",
+      goLend: this.go("lend"),
+      iconTopup: this.ic("in", 18),
+      // ---- Lend Aura XP ----
+      isLend: s.view === "lend",
+      xpTotalText: fmtXP(s.xpTotal) + " XP", xpLentText: fmtXP(lentActive) + " XP", xpAvailText: fmtXP(availXP) + " XP",
+      xpTotalUsd: this.fmtUsd(s.xpTotal * this.XP_USDT),
+      activeSecureCount: activeSecure, activeTrustCount: activeTrust,
+      lendRows, lendFilters, hasLendRows: lendRows.length > 0, noLendRows: lendRows.length === 0,
+      openLend: this.openLend, closeLend: this.closeLend, lendDone: this.lendDone,
+      lendOpen: s.lendOpen,
+      lIsType: s.lStep === "type", lIsAmount: s.lStep === "amount", lIsReview: s.lStep === "review", lIsStatus: s.lStep === "status",
+      lGoType: this.lGo("type"), lGoAmount: this.lGo("amount"), lGoReview: this.lGo("review"),
+      selectSecure: this.selectLType("securenest"), selectTrust: this.selectLType("trustbox"),
+      lTypeIsSecure: isSecure, lTypeIsTrust: !isSecure,
+      lTypeLabel: isSecure ? "SecureNest" : "TrustBox",
+      lTypeRisk: isSecure ? "Lower" : "Higher",
+      lTypeGuarantee: isSecure ? "Guaranteed" : "Not guaranteed",
+      secureCardBorder: isSecure ? "#3FB984" : "var(--c-border,#25254A)", secureCardBg: isSecure ? "rgba(63,185,132,0.06)" : "var(--c-card,#13132A)",
+      trustCardBorder: !isSecure ? "#E0A93B" : "var(--c-border,#25254A)", trustCardBg: !isSecure ? "rgba(224,169,59,0.06)" : "var(--c-card,#13132A)",
+      iconLock: this.ic("lock", 20), iconBox: this.ic("box", 20), iconSwap: this.ic("swap", 16), iconAlert: this.ic("alert", 16), iconLend: this.ic("lend", 18),
+      lAmount: s.lAmount, onLAmount: this.onLAmount,
+      lAvailText: fmtXP(availXP) + " XP available",
+      lUsdtText: this.fmtUsd(lUsdt), lPhpText: "₱" + lPhp.toLocaleString("en-PH", { maximumFractionDigits: 0 }),
+      lAmountValid, lAmountInvalid: !lAmountValid, lInsufficient,
+      lPct25: this.setLPct(0.25), lPct50: this.setLPct(0.5), lPct75: this.setLPct(0.75), lPctMax: this.setLPct(1),
+      lProjectOptions, selectLProject: this.selectLProject, lProjectChosen,
+      lReviewAmount: fmtXP(lAmtNum) + " XP", lReviewUsdt: this.fmtUsd(lUsdt), lReviewPhp: "₱" + lPhp.toLocaleString("en-PH", { maximumFractionDigits: 0 }),
+      confirmLend: this.confirmLend,
+      lProcessing: s.lStatus === "processing", lSuccess: s.lStatus === "success", lFailed: s.lStatus === "failed",
+      iconVault: this.ic("vault", 18), iconSparkles: this.ic("sparkles", 18),
+      vaultBalance: fmtAP(s.vaultBalance), vaultBalanceUsd: this.fmtUsd(s.vaultBalance / this.POINTS_RATE),
+      vaultRequests: vReqs, vPendingCount: vPending, vTotalToppedText: this.fmtNum(vTotalTopped) + " USDT",
+      pointsRateText: "1 USDT = " + this.POINTS_RATE + " AP",
+      openVault: this.openVault, closeVault: this.closeVault, vaultDone: this.vaultDone,
+      vaultOpen: s.vaultOpen,
+      vIsInstructions: s.vStep === "instructions", vIsForm: s.vStep === "form", vIsUpload: s.vStep === "upload", vIsStatus: s.vStep === "status",
+      vGoForm: this.vGo("form"), vGoInstructions: this.vGo("instructions"), vGoUpload: this.vGo("upload"),
+      vAddr: this.VAULT_ADDR, copyVaultAddr: this.copyVaultAddr,
+      vCopyLabel: s.vCopied ? "Address copied" : "Copy vault address",
+      vCopyIcon: s.vCopied ? this.ic("check", 15) : this.ic("copy", 15),
+      vAmount: s.vAmount, onVAmount: this.onVAmount, vAmountChips,
+      vPointsText: fmtAP(vPoints) + " AP", vAmountValid,
+      vTxHash: s.vTxHash, onVTxHash: this.onVTxHash,
+      vWallet: s.vWallet, onVWallet: this.onVWallet,
+      vFormValid, vFormInvalid: !vFormValid,
+      vFileName: s.vFileName, vFilePreview: s.vFilePreview,
+      vFileThumb: s.vFilePreview ? React.createElement("img", { src: s.vFilePreview, alt: "proof", style: { width: "100%", height: "100%", objectFit: "cover" } }) : React.createElement("span", { style: { color: "var(--c-muted,#C0C2CB)", display: "flex" } }, this.ic("image", 18)),
+      vHasFile: !!s.vFileName, vNoFile: !s.vFileName,
+      onVaultFile: this.onVaultFile, onVaultDragOver: this.onVaultDragOver, onVaultDragLeave: this.onVaultDragLeave, onVaultDrop: this.onVaultDrop, clearVaultFile: this.clearVaultFile,
+      vDragActive: s.vDragActive,
+      vUploadBorder: s.vDragActive ? "#2AD9B7" : "var(--c-border-strong,#35356A)",
+      vUploadBg: s.vDragActive ? "rgba(11,132,255,0.06)" : "var(--c-surface,#0E0E1F)",
+      submitVault: this.submitVault,
+      vSeg1Color: "var(--c-accent-ink,#2AD9B7)",
+      vSeg2Color: vStepNum >= 2 ? "var(--c-accent-ink,#2AD9B7)" : "var(--c-border,#25254A)",
+      vSeg3Color: vStepNum >= 3 ? "var(--c-accent-ink,#2AD9B7)" : "var(--c-border,#25254A)",
+      vSeg4Color: vStepNum >= 4 ? "var(--c-accent-ink,#2AD9B7)" : "var(--c-border,#25254A)",
+      vRejectionReason: s.vRejectionReason || "",
+      vRejectionReasonShow: !!(s.vRejectionReason),
+      vReviewSubmitting: s.vReview === "submitting",
+      vReviewPending: s.vReview === "pending", vReviewVerifying: s.vReview === "verifying",
+      vReviewApproved: s.vReview === "approved", vReviewRejected: s.vReview === "rejected",
+      vReviewInProgress: s.vReview === "submitting" || s.vReview === "pending" || s.vReview === "verifying",
+      vStepPendingColor: (s.vReview === "pending" || s.vReview === "verifying" || s.vReview === "approved") ? "#2AD9B7" : "var(--c-border-strong,#35356A)",
+      vStepVerifyColor: (s.vReview === "verifying" || s.vReview === "approved") ? "#2AD9B7" : "var(--c-border-strong,#35356A)",
+      vStepApprovedColor: s.vReview === "approved" ? "#3FB984" : "var(--c-border-strong,#35356A)",
+      vReviewAmount: vAmtNum.toLocaleString("en-US") + " USDT",
+      vCredit: s.vCredit,
+      vCreditPrev: s.vCredit ? fmtAP(s.vCredit.prev) + " AP" : "",
+      vCreditPoints: s.vCredit ? "+" + fmtAP(s.vCredit.points) + " AP" : "",
+      vCreditNext: s.vCredit ? fmtAP(s.vCredit.next) + " AP" : "",
+      vCreditAmount: s.vCredit ? s.vCredit.amount.toLocaleString("en-US") + " USDT" : "",
+      iconUploadCloud: this.ic("upload", 22), iconImg: this.ic("image", 15), iconTrash: this.ic("trash", 15),
+      iconInfo: this.ic("info", 16), iconArrow: this.ic("arrow", 16), iconXBig: this.ic("xcircle", 30), iconSparkBig: this.ic("sparkles", 30), iconCheckSm: this.ic("check", 14),
+      statusCardOpen: s.statusCardOpen, statusCard: s.statusCard, closeStatusCard: this.closeStatusCard,
+      scLabel: scMeta ? scMeta.label : "", scColor: scMeta ? scMeta.color : "", scBg: scMeta ? scMeta.bg : "", scDot: scMeta ? scMeta.dot : "",
+      scIsApproved: s.statusCard ? s.statusCard.status === "approved" : false,
+      scIsRejected: s.statusCard ? s.statusCard.status === "rejected" : false,
+      scIsActive: s.statusCard ? (s.statusCard.status === "pending" || s.statusCard.status === "verifying") : false,
+      scPointsText: s.statusCard ? "+" + fmtAP(s.statusCard.points) + " AP" : "",
+      scAmountText: s.statusCard ? s.statusCard.amount.toLocaleString("en-US") + " USDT" : "",
+      pageTitle,
+      projects: decProjects, featured,
+      pesoBalance: s.pesoBalance, tokenBalance: s.tokenBalance,
+      redeem: this.redeem,
+      toast: s.toast, toastShow: !!s.toast,
+      projectOpen: s.projectOpen, ap,
+      apMilestones: ap ? ap.milestones : [], apTrust: ap ? ap.trust : [],
+      closeProject: this.closeProject,
+      invested: s.invested, notInvested: !s.invested,
+      pIsDetails: s.pStep === "details", pIsType: s.pStep === "type", pIsAmount: s.pStep === "amount", pIsReview: s.pStep === "review",
+      pNotDetails: s.pStep !== "details",
+      pGoDetails: this.pGo("details"), pGoType: this.pGo("type"), pGoAmount: this.pGo("amount"), pGoReview: this.pGo("review"),
+      apBalanceText: fmtAP(apBal) + " AP",
+      xpEquivText: fmtXP2(xpOut) + " XP",
+      apRateText,
+      reviewApText: fmtAP(apIn) + " AP",
+      reviewXpText: fmtXP2(xpOut) + " XP",
+      reviewUsdtText: this.fmtUsd(xpOut * this.XP_USDT),
+      reviewPhpText: phpText,
+      investedXpText: fmtXP2(s.investedXp) + " XP",
+      iconBack: this.ic("arrow-left", 16),
+      p1Bg: pc1.bg, p1Fg: pc1.fg, p1Ring: pc1.ring, p1Lbl: pc1.lbl,
+      p2Bg: pc2.bg, p2Fg: pc2.fg, p2Ring: pc2.ring, p2Lbl: pc2.lbl,
+      p3Bg: pc3.bg, p3Fg: pc3.fg, p3Ring: pc3.ring, p3Lbl: pc3.lbl,
+      pBar1: pStepNum >= 2 ? pAccent : "var(--c-border,#25254A)",
+      pBar2: pStepNum >= 3 ? pAccent : "var(--c-border,#25254A)",
+      investAmount: s.investAmount, onInvest: this.onInvest, investChips,
+      investValid: invValid, investInvalid: !invValid,
+      investError: invError, investErrorShow: !!invError,
+      confirmInvest: this.confirmInvest,
+      pesoBalanceFmt: "₱" + this.fmtNum(s.pesoBalance),
+      iconDashboard: this.ic("grid", 18), iconWallet: this.ic("wallet", 18), iconTopup: this.ic("in", 18), iconTxns: this.ic("list", 18), iconSettings: this.ic("settings", 17),
+      theme: s.theme, toggleTheme,
+      iconTheme: this.ic(s.theme === "dark" ? "sun" : "moon", 18),
+      iconSearch: this.ic("search", 16), iconBell: this.ic("bell", 18), iconDown: this.ic("in", 16), iconUp: this.ic("out", 16), iconShield: this.ic("shield", 16), iconClose: this.ic("close", 18),
+      iconCheckBig: this.ic("check", 30),
+      usdt: this.ic("usdt", 34),
+      balanceUsd: this.fmtUsd(s.balance), balanceUsdt: this.fmtNum(s.balance) + " USDT",
+      spark: this.spark(),
+      assetBalance: this.fmtNum(s.balance) + " USDT", assetUsd: this.fmtUsd(s.balance),
+      recent, filtered, filters,
+      qrWallet: this.qr(this.NETWORKS.bsc.addr), walletAddr: this.NETWORKS.bsc.addr,
+      copyWallet: this.copyWallet, copiedWallet: s.copiedWallet,
+      copyWalletLabel: s.copiedWallet ? "Copied" : "Copy address",
+      copyWalletIcon: s.copiedWallet ? this.ic("check", 15) : this.ic("copy", 15),
+      topupOpen: s.topupOpen, modalTitle,
+      isStep1: s.step === 1, isStep2: s.step === 2, isStep3: s.step === 3, isStep4: s.step === 4,
+      segColor1: s.step >= 1 ? "#2AD9B7" : "var(--c-border,#25254A)",
+      segColor2: s.step >= 2 ? "#2AD9B7" : "var(--c-border,#25254A)",
+      segColor3: s.step >= 3 ? "#2AD9B7" : "var(--c-border,#25254A)",
+      amount: s.amount, amountError, amountErrorShow: !!amountError,
+      amountValid, amountInvalid: !amountValid, amountUsd: this.fmtUsd(amtNum),
+      onAmount: this.onAmount, amountChips, networks,
+      netLabel: net.label + " (" + net.tag + ")", netAddr: net.addr, netEta: net.eta,
+      receiveAmt: this.fmtNum(amtNum) + " USDT",
+      qr: this.qr(net.addr),
+      copyAddr: this.copyAddr, copiedAddr: s.copiedAddr,
+      copyAddrLabel: s.copiedAddr ? "Copied" : "Copy address",
+      copyAddrIcon: s.copiedAddr ? this.ic("check", 15) : this.ic("copy", 15),
+      txHash: s.txHash, onTxHash: this.onTxHash,
+      screenshotName: s.screenshotName, onScreenshot: this.onScreenshot,
+      hasScreenshot: !!s.screenshotName, noScreenshot: !s.screenshotName,
+      iconUpload: this.ic("upload", 16), iconHash: this.ic("hash", 15), iconFile: this.ic("file", 15),
+      iconClockBig: this.ic("clock", 30),
+      txHashShort: s.txHash.length > 18 ? s.txHash.slice(0, 10) + "…" + s.txHash.slice(-6) : s.txHash,
+      submitValid: invAmtTopupValid, submitInvalid: !invAmtTopupValid,
+      statusSubmitting: s.status === "submitting", statusSubmitted: s.status === "submitted",
+      submitRequest: this.submitRequest,
+      openTopup: this.openTopup, closeTopup: this.closeTopup, next: this.next, back: this.back, finishDone: this.finishDone,
+    };
+  }
+}
+</script>
+</body>
+</html>

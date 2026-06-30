@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aurora Wallet — Wallet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sulphur+Point:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="app-root" data-page="wallet">
+  <main class="app-main">
+    <div class="app-content">
+
+      <section class="card">
+        <div class="card-head"><span class="card-title"><i data-icon="wallet" style="display:inline-flex;width:18px;vertical-align:-3px"></i> Wallet</span></div>
+        <div class="eyebrow">Cash balance</div>
+        <div class="balance" style="font-size:40px;margin-top:8px;color:var(--c-text)">₱84,250.00</div>
+        <div class="tile" style="margin-top:16px;justify-content:space-between">
+          <span class="muted">Token holdings</span>
+          <span><span class="tabular" style="font:600 16px var(--font-body)">1,240.50</span> <span class="muted">AUR</span></span>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:18px">
+          <button class="btn btn-accent" data-modal="topup" style="flex:1"><i data-icon="in"></i> Deposit</button>
+          <button class="btn btn-secondary" data-modal="redeem" style="flex:1"><i data-icon="out"></i> Redeem</button>
+        </div>
+      </section>
+
+      <!-- Deposit address card -->
+      <section class="card" style="display:flex;flex-direction:column;gap:14px">
+        <div class="card-title">Deposit USDT</div>
+        <div class="muted" style="font:400 12px/1.3 var(--font-body)">Network · Binance Smart Chain (BEP-20)</div>
+        <div class="qr" data-qr="0x9C4d8f2a3B1e7D5c0A6f4E2b8C1d9F0e7A3b2D7a"></div>
+        <div class="tile" style="word-break:break-all;font:400 12px/1.5 var(--font-body)">0x9C4d8f2a3B1e7D5c0A6f4E2b8C1d9F0e7A3b2D7a</div>
+        <button class="btn btn-secondary full" data-copy-addr="0x9C4d8f2a3B1e7D5c0A6f4E2b8C1d9F0e7A3b2D7a"><i data-icon="copy"></i> Copy address</button>
+        <div class="callout warn">
+          <span class="ico"><i data-icon="shield" style="display:flex;width:16px"></i></span>
+          <div class="txt">Send only USDT on the selected network. Wrong-network transfers may not be recoverable.</div>
+        </div>
+      </section>
+
+      <!-- Asset detail -->
+      <section class="card">
+        <div class="tile" style="border:none;padding:0;background:transparent">
+          <span class="row-icon" style="background:rgba(38,161,123,0.16);color:#26A17B;font:700 14px var(--font-body)">T</span>
+          <div class="row-main"><div class="row-title">Tether USD</div><div class="row-sub">USDT · Stablecoin</div></div>
+        </div>
+        <div class="eyebrow" style="margin-top:18px">Balance</div>
+        <div class="balance" style="font-size:34px;margin-top:6px;color:var(--c-text)">12,480.50 <span class="muted" style="font:500 18px var(--font-body)">USDT</span></div>
+      </section>
+
+    </div>
+  </main>
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>

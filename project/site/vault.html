@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aurora Wallet — Aura Vault</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sulphur+Point:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="app-root" data-page="vault">
+  <main class="app-main">
+    <div class="app-content">
+
+      <!-- Vault hero -->
+      <section class="hero violet">
+        <div class="hero-bloom right"></div>
+        <div class="hero-inner" style="display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:flex-end">
+          <div style="min-width:240px">
+            <span class="badge-violet"><i data-icon="sparkles" style="display:flex;width:14px"></i> Aura Vault</span>
+            <div class="eyebrow" style="margin-top:18px">Vault balance</div>
+            <div style="display:flex;align-items:baseline;gap:10px;margin-top:12px">
+              <span class="balance sm" style="color:#F8F8F8">248,500</span>
+              <span style="font:500 18px var(--font-body);color:#D8B4FE">AP</span>
+            </div>
+            <div style="font:400 14px/1.4 var(--font-body);color:#C0C2CB;margin-top:10px">≈ $2,485.00 · 1 USDT = 100 AP</div>
+            <button class="btn btn-accent" data-modal="vault" style="margin-top:24px"><i data-icon="sparkles"></i> Top up vault</button>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <div style="min-width:120px;background:rgba(20,8,36,0.6);border:1px solid #25254A;border-radius:12px;padding:16px">
+              <div style="font:400 11px var(--font-body);color:#C0C2CB">Total topped up</div>
+              <div class="tabular" style="font:600 18px var(--font-body);color:#F8F8F8;margin-top:9px">500.00 USDT</div>
+            </div>
+            <div style="min-width:120px;background:rgba(20,8,36,0.6);border:1px solid #25254A;border-radius:12px;padding:16px">
+              <div style="font:400 11px var(--font-body);color:#C0C2CB">Pending requests</div>
+              <div class="tabular" style="font:600 18px var(--font-body);color:#FDE68A;margin-top:9px">2</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="callout info">
+        <span class="ico"><i data-icon="sparkles" style="display:flex;width:16px"></i></span>
+        <div class="txt">Top-ups are credited after our finance team verifies your transfer. Approval usually completes within a few hours.</div>
+      </div>
+
+      <!-- Top-up requests -->
+      <section class="card" style="padding:6px 20px">
+        <div class="row-between" style="padding:16px 2px 12px;border-bottom:1px solid var(--c-divider)">
+          <span class="card-title">Top-up requests</span>
+          <span class="muted" style="font:400 12px var(--font-body)">Tap a request for details</span>
+        </div>
+
+        <div class="list-row s-approved">
+          <span class="row-icon" style="background:rgba(14,138,111,0.12);color:var(--d)"><i data-icon="sparkles" style="width:18px;display:flex"></i></span>
+          <div class="row-main"><div class="row-title">500 USDT <span class="muted" style="font-weight:400">· AV-2041</span></div><div class="row-sub">TX 0x7d2a…f81c · Jun 20, 2026</div></div>
+          <div class="row-right"><div class="amt tabular">+50,000 AP</div><div class="status-label"><span class="status-dot"></span>Approved</div></div>
+        </div>
+        <div class="list-row s-verifying">
+          <span class="row-icon" style="background:rgba(47,107,216,0.12);color:var(--d)"><i data-icon="sparkles" style="width:18px;display:flex"></i></span>
+          <div class="row-main"><div class="row-title">1,200 USDT <span class="muted" style="font-weight:400">· AV-2038</span></div><div class="row-sub">TX 0x3b91…aa20 · Jun 19, 2026</div></div>
+          <div class="row-right"><div class="amt tabular">+120,000 AP</div><div class="status-label"><span class="status-dot"></span>Under verification</div></div>
+        </div>
+        <div class="list-row s-pending">
+          <span class="row-icon" style="background:rgba(180,83,9,0.12);color:var(--d)"><i data-icon="sparkles" style="width:18px;display:flex"></i></span>
+          <div class="row-main"><div class="row-title">250 USDT <span class="muted" style="font-weight:400">· AV-2035</span></div><div class="row-sub">TX 0x55c0…d31e · Jun 18, 2026</div></div>
+          <div class="row-right"><div class="amt tabular">+25,000 AP</div><div class="status-label"><span class="status-dot"></span>Pending review</div></div>
+        </div>
+        <div class="list-row s-rejected">
+          <span class="row-icon" style="background:rgba(220,38,38,0.12);color:var(--d)"><i data-icon="sparkles" style="width:18px;display:flex"></i></span>
+          <div class="row-main"><div class="row-title">800 USDT <span class="muted" style="font-weight:400">· AV-2030</span></div><div class="row-sub">TX 0x1f8e…b6c4 · Jun 15, 2026</div></div>
+          <div class="row-right"><div class="muted" style="font:500 14px var(--font-body)">—</div><div class="status-label"><span class="status-dot"></span>Rejected</div></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>

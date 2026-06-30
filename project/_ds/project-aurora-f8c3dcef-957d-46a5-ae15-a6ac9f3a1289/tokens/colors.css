@@ -1,0 +1,45 @@
+/* Aurora Vault — color tokens
+   Dark borealis palette: aurora teal + electric violet on void black. */
+:root {
+  /* ---- Base palette ---- */
+  --color-primary: #090916;        /* void black — main canvas */
+  --color-primary-80: #0E0E1F;     /* slightly lifted void */
+  --color-primary-60: #15152B;     /* primary hover fill */
+  --color-secondary: #C0C2CB;      /* silver mist — body copy */
+  --color-tertiary: #25254A;       /* hover states, dividers */
+  --color-neutral: #13132A;        /* dominant card tone */
+  --color-surface: #0E0E1F;        /* lifted near-black panels */
+  --color-surface-elevated: #1A1A38; /* inputs, elevated surfaces */
+  --color-on-surface: #F8F8F8;     /* chrome white — headlines */
+  --color-border: #25254A;         /* structural 1px lines */
+  --color-muted-border: #35356A;   /* lighter structural lines */
+  --color-accent: #2AD9B7;         /* aurora teal — primary CTA */
+  --color-accent-secondary: #7828E8; /* electric violet — secondary brand */
+  --color-starlight: #E8F8F8;      /* glow / shimmer only */
+
+  /* ---- Semantic status ---- */
+  --color-success: #BBF7D0;
+  --color-warning: #FDE68A;
+  --color-error: #F87171;
+
+  /* ---- Semantic aliases ---- */
+  --bg-canvas: var(--color-primary);
+  --bg-surface: var(--color-surface);
+  --bg-card: var(--color-neutral);
+  --bg-elevated: var(--color-surface-elevated);
+  --bg-hover: var(--color-tertiary);
+
+  --text-strong: var(--color-on-surface);
+  --text-body: var(--color-secondary);
+  --text-muted: var(--color-secondary);
+  --text-on-accent: #090916;
+  --text-on-status: var(--color-primary);
+
+  --border-default: var(--color-border);
+  --border-strong: var(--color-muted-border);
+  --focus-ring: var(--color-accent);
+
+  /* ---- Aurora gradient ---- */
+  --aurora-gradient: linear-gradient(90deg, #2A0F4A 0%, #7828E8 28%, #4C9ED9 52%, #2AD9B7 78%, #5FF0CC 100%);
+  --shadow-glow: 0 0 80px rgba(120,40,232,0.4);
+}
