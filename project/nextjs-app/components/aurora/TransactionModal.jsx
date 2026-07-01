@@ -64,7 +64,7 @@ function ModalShell({ open, onClose, title, step, totalSteps, width, children })
         {totalSteps > 1 && (
           <div style={{ display: 'flex', gap: 6, padding: '0 22px 18px' }}>
             {Array.from({ length: totalSteps }, (_, i) => (
-              <span key={i} style={{ flex: 1, height: 3, borderRadius: 9999, background: i < step ? 'var(--c-accent)' : 'var(--c-elevated)' }} />
+              <span key={i} style={{ flex: 1, height: 3, borderRadius: 9999, background: i <= step ? 'var(--c-accent)' : 'var(--c-elevated)' }} />
             ))}
           </div>
         )}
