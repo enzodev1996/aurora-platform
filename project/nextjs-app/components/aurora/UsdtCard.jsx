@@ -2,11 +2,6 @@
 import { useState } from 'react'
 import TransactionModal from './TransactionModal'
 
-const NETWORKS = ['Ethereum', 'Binance Network', 'Solana', 'Polygon', 'Base']
-
-/**
- * @param {{ balance: string }} props
- */
 export default function UsdtCard({ balance }) {
   const [flow, setFlow] = useState(null)
 
@@ -36,14 +31,6 @@ export default function UsdtCard({ balance }) {
           </button>
         </div>
 
-        <div style={{ marginTop: 22, paddingTop: 20, borderTop: '1px solid var(--c-border)' }}>
-          <div style={{ font: '400 11px/1 var(--font-body)', color: 'var(--c-muted)' }}>Supported networks</div>
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 10 }}>
-            {NETWORKS.map((n) => (
-              <span key={n} style={{ font: '400 11px/1 var(--font-body)', color: 'var(--c-muted)', background: 'var(--c-elevated)', border: '1px solid var(--c-border)', borderRadius: 9999, padding: '6px 12px' }}>{n}</span>
-            ))}
-          </div>
-        </div>
       </div>
 
       <TransactionModal flow={flow ?? 'topup'} open={flow != null} onClose={() => setFlow(null)} />

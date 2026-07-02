@@ -3,17 +3,7 @@ import { useState, useEffect } from 'react'
 import { Icon } from '@/lib/icons'
 import { fmt2 } from '@/lib/format'
 
-const ADDR_BEP20  = '0x9C4d8f2a3B1e7D5c0A6f4E2b8C1d9F0e7A3b2D7a'
-const ADDR_ERC20  = '0xA2b3c4D5e6f7A8b9c0D1e2f3A4b5C6d7E8f9A0b1'
-const ADDR_SOL    = '7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgA23'
-const ADDR_MATIC  = '0xC2d4E5f6A7b8C9d0E1f2A3b4C5d6E7f8A9b0C1d2'
-
-const NETWORKS = [
-  { id: 'BEP-20',  label: 'Binance Smart Chain', tag: 'BEP-20',  fee: '~$0.10', eta: '~1 min',  rec: true,  addr: ADDR_BEP20 },
-  { id: 'ERC-20',  label: 'Ethereum',             tag: 'ERC-20',  fee: '~$3–8',  eta: '~5 min',  rec: false, addr: ADDR_ERC20 },
-  { id: 'SOL',     label: 'Solana',               tag: 'SPL',     fee: '~$0.01', eta: '~30 sec', rec: false, addr: ADDR_SOL   },
-  { id: 'MATIC',   label: 'Polygon',              tag: 'Polygon', fee: '~$0.01', eta: '~1 min',  rec: false, addr: ADDR_MATIC },
-]
+const USDT_ADDR = '0x9C4d8f2a3B1e7D5c0A6f4E2b8C1d9F0e7A3b2D7a'
 
 function qrSvg(seed) {
   const size = 25, cell = 8
@@ -76,39 +66,36 @@ function ModalShell({ open, onClose, title, step, totalSteps, width, children })
   )
 }
 
-/* ── Top-up flow (4 steps) ── */
+/* ── Top-up flow (3 steps) ── */
 function TopupModal({ open, onClose }) {
-  const [step, setStep]       = useState(0)
-  const [rawAmt, setRawAmt]   = useState('')
-  const [network, setNetwork] = useState('BEP-20')
-  const [txHash, setTxHash]   = useState('')
+  const [step, setStep]             = useState(0)
+  const [rawAmt, setRawAmt]         = useState('')
+  const [txHash, setTxHash]         = useState('')
   const [copiedAddr, setCopiedAddr] = useState(false)
   const [submitted, setSubmitted]   = useState(false)
 
-  function reset() { setStep(0); setRawAmt(''); setNetwork('BEP-20'); setTxHash(''); setCopiedAddr(false); setSubmitted(false) }
+  function reset() { setStep(0); setRawAmt(''); setTxHash(''); setCopiedAddr(false); setSubmitted(false) }
   function handleClose() { onClose(); setTimeout(reset, 200) }
 
-  const amount  = parseFloat(rawAmt) || 0
-  const amtErr  = rawAmt && amount < 10 ? 'Minimum deposit is 10 USDT' : ''
-  const amtOk   = amount >= 10
-
-  const net = NETWORKS.find((n) => n.id === network) || NETWORKS[0]
+  const amount = parseFloat(rawAmt) || 0
+  const amtErr = rawAmt && amount < 10 ? 'Minimum deposit is 10 USDT' : ''
+  const amtOk  = amount >= 10
 
   function copyAddr() {
-    navigator.clipboard.writeText(net.addr).then(() => {
+    navigator.clipboard.writeText(USDT_ADDR).then(() => {
       setCopiedAddr(true); setTimeout(() => setCopiedAddr(false), 2000)
     })
   }
 
   function submitRequest() {
-    setStep(3)
+    setStep(2)
     setTimeout(() => setSubmitted(true), 1500)
   }
 
   const CHIPS = [100, 500, 1000, 5000]
 
   return (
-    <ModalShell open={open} onClose={handleClose} title="Add funds" step={step} totalSteps={4} width={440}>
+    <ModalShell open={open} onClose={handleClose} title="Add funds" step={step} totalSteps={3} width={440}>
       {/* Step 0 — amount */}
       {step === 0 && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -139,45 +126,8 @@ function TopupModal({ open, onClose }) {
         </div>
       )}
 
-      {/* Step 1 — network selection */}
+      {/* Step 1 — deposit address + TX hash */}
       {step === 1 && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-          <div style={{ font: '400 13px/1.5 Inter', color: 'var(--c-muted)' }}>Choose the network you'll send USDT on. It must match the network of the sending wallet.</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            {NETWORKS.map((n) => {
-              const on = network === n.id
-              return (
-                <button
-                  key={n.id}
-                  type="button"
-                  onClick={() => setNetwork(n.id)}
-                  style={{ all: 'unset', display: 'flex', alignItems: 'center', gap: 12, padding: 14, borderRadius: 10, cursor: 'pointer', border: `1px solid ${on ? 'var(--c-accent)' : 'var(--c-border)'}`, background: on ? 'rgba(42,217,183,0.07)' : 'transparent', transition: 'border-color .15s ease, background-color .15s ease' }}
-                >
-                  <span style={{ width: 18, height: 18, borderRadius: '50%', border: `2px solid ${on ? 'var(--c-accent)' : 'var(--c-border)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 'none' }}>
-                    <span style={{ width: 8, height: 8, borderRadius: '50%', background: on ? 'var(--c-accent)' : 'transparent' }} />
-                  </span>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ font: '500 14px/1.2 Inter', color: 'var(--c-text)' }}>
-                      {n.label} <span style={{ color: 'var(--c-muted)', fontWeight: 400 }}>({n.tag})</span>
-                    </div>
-                    <div style={{ font: '400 12px/1.3 Inter', color: 'var(--c-muted)', marginTop: 4 }}>Fee {n.fee} · arrives {n.eta}</div>
-                  </div>
-                  {n.rec && (
-                    <span style={{ flex: 'none', font: '500 10px/1 Inter', color: 'var(--c-pos-ink)', background: 'var(--c-pos-bg)', borderRadius: 9999, padding: '5px 9px', letterSpacing: '0.02em' }}>Recommended</span>
-                  )}
-                </button>
-              )
-            })}
-          </div>
-          <div style={{ display: 'flex', gap: 10, marginTop: 4 }}>
-            <button type="button" className="btn btn-secondary" style={{ flex: 1 }} onClick={() => setStep(0)}>Back</button>
-            <button type="button" className="btn btn-accent" style={{ flex: 2 }} onClick={() => setStep(2)}>Continue</button>
-          </div>
-        </div>
-      )}
-
-      {/* Step 2 — deposit address + TX hash */}
-      {step === 2 && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 14px', borderRadius: 10, background: 'var(--c-elevated)', border: '1px solid var(--c-border)' }}>
             <div>
@@ -185,17 +135,17 @@ function TopupModal({ open, onClose }) {
               <div style={{ font: '600 17px/1.2 Inter', color: 'var(--c-text)', marginTop: 5 }}>{fmt2(amount)} USDT</div>
             </div>
             <div style={{ textAlign: 'right' }}>
-              <div style={{ font: '400 11px/1 Inter', color: 'var(--c-muted)' }}>Network</div>
-              <div style={{ font: '500 13px/1.2 Inter', color: 'var(--c-text)', marginTop: 5 }}>{net.label}</div>
+              <div style={{ font: '400 11px/1 Inter', color: 'var(--c-muted)' }}>Channel</div>
+              <div style={{ font: '500 13px/1.2 Inter', color: 'var(--c-text)', marginTop: 5 }}>USDT</div>
             </div>
           </div>
 
-          <div style={{ alignSelf: 'center', width: 172, height: 172, background: '#fff', borderRadius: 14, padding: 11 }} dangerouslySetInnerHTML={{ __html: qrSvg(net.addr) }} />
+          <div style={{ alignSelf: 'center', width: 172, height: 172, background: '#fff', borderRadius: 14, padding: 11 }} dangerouslySetInnerHTML={{ __html: qrSvg(USDT_ADDR) }} />
           <div style={{ font: '400 12px/1.3 Inter', color: 'var(--c-muted)', textAlign: 'center' }}>Scan the QR or copy the receiving address below</div>
 
           <div>
             <div style={{ font: '500 12px/1 Inter', color: 'var(--c-muted)', marginBottom: 8 }}>Receiving wallet address</div>
-            <div style={{ background: 'var(--c-elevated)', border: '1px solid var(--c-border)', borderRadius: 8, padding: '12px 14px', font: '400 12px/1.5 Inter', color: 'var(--c-text)', wordBreak: 'break-all' }}>{net.addr}</div>
+            <div style={{ background: 'var(--c-elevated)', border: '1px solid var(--c-border)', borderRadius: 8, padding: '12px 14px', font: '400 12px/1.5 Inter', color: 'var(--c-text)', wordBreak: 'break-all' }}>{USDT_ADDR}</div>
           </div>
 
           <button type="button" className="btn btn-secondary full" onClick={copyAddr}>
@@ -204,7 +154,7 @@ function TopupModal({ open, onClose }) {
 
           <div style={{ display: 'flex', gap: 10, padding: '12px 14px', borderRadius: 10, background: 'var(--c-warn-bg)', border: '1px solid var(--c-warn-border)' }}>
             <span style={{ flex: 'none', color: 'var(--c-amber-ink)', display: 'flex' }}><Icon name="shield" /></span>
-            <div style={{ font: '500 12px/1.5 Inter', color: 'var(--c-warn-body)' }}>Send only USDT on the selected network. Wrong-network transfers may not be recoverable.</div>
+            <div style={{ font: '500 12px/1.5 Inter', color: 'var(--c-warn-body)' }}>Send only USDT to this address. Wrong-asset transfers may not be recoverable.</div>
           </div>
 
           <div style={{ height: 1, background: 'var(--c-border)' }} />
@@ -224,20 +174,20 @@ function TopupModal({ open, onClose }) {
           </div>
 
           <div style={{ display: 'flex', gap: 10, marginTop: 2 }}>
-            <button type="button" className="btn btn-secondary" style={{ flex: 1 }} onClick={() => setStep(1)}>Back</button>
+            <button type="button" className="btn btn-secondary" style={{ flex: 1 }} onClick={() => setStep(0)}>Back</button>
             <button type="button" className="btn btn-accent" style={{ flex: 2 }} disabled={!txHash.trim()} onClick={submitRequest}>Submit request</button>
           </div>
         </div>
       )}
 
-      {/* Step 3 — status */}
-      {step === 3 && (
+      {/* Step 2 — status */}
+      {step === 2 && (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 16, padding: '14px 6px 8px' }}>
           {!submitted ? (
             <>
               <div style={{ width: 64, height: 64, borderRadius: '50%', border: '3px solid var(--c-border)', borderTopColor: 'var(--c-accent)', animation: 'auroraSpin .9s linear infinite' }} />
               <div style={{ font: "700 20px/1.2 'Sulphur Point'", color: 'var(--c-text)' }}>Submitting your request</div>
-              <div style={{ font: '400 13px/1.5 Inter', color: 'var(--c-muted)', maxWidth: 300 }}>Sending your transfer details for {fmt2(amount)} USDT on {net.label}.</div>
+              <div style={{ font: '400 13px/1.5 Inter', color: 'var(--c-muted)', maxWidth: 300 }}>Sending your transfer details for {fmt2(amount)} USDT.</div>
             </>
           ) : (
             <>
@@ -252,8 +202,8 @@ function TopupModal({ open, onClose }) {
                   <span style={{ color: 'var(--c-text)' }}>{fmt2(amount)} USDT</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', font: '400 13px/1 Inter' }}>
-                  <span style={{ color: 'var(--c-muted)' }}>Network</span>
-                  <span style={{ color: 'var(--c-text)' }}>{net.label}</span>
+                  <span style={{ color: 'var(--c-muted)' }}>Channel</span>
+                  <span style={{ color: 'var(--c-text)' }}>USDT</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', gap: 16, font: '400 13px/1 Inter' }}>
                   <span style={{ color: 'var(--c-muted)', flex: 'none' }}>Tx hash</span>
