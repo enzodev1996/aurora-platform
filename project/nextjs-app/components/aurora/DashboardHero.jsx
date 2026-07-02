@@ -16,6 +16,7 @@ export default function DashboardHero({ balance, subtitle, delta }) {
         balance={balance}
         subtitle={subtitle}
         delta={delta}
+        sparkline
         actions={[
           { label: 'Top up',   icon: 'in',  variant: 'accent',    onClick: () => setFlow('topup')    },
           { label: 'Withdraw', icon: 'out', variant: 'secondary', onClick: () => setFlow('withdraw') },
