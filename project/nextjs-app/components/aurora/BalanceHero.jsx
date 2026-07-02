@@ -1,35 +1,46 @@
+'use client'
 import Button from '@/components/ui/Button'
+import { ChartContainer } from '@/components/ui/chart'
+import { AreaChart, Area, Tooltip, ResponsiveContainer } from 'recharts'
 
-const SPARK_DATA = [22, 20, 24, 21, 27, 24, 29, 26, 32, 30, 35, 32, 38, 41, 39, 45, 42, 49, 54, 60, 64, 70, 78]
+const SPARK_DATA = [
+  { v: 22 }, { v: 20 }, { v: 24 }, { v: 21 }, { v: 27 }, { v: 24 },
+  { v: 29 }, { v: 26 }, { v: 32 }, { v: 30 }, { v: 35 }, { v: 32 },
+  { v: 38 }, { v: 41 }, { v: 39 }, { v: 45 }, { v: 42 }, { v: 49 },
+  { v: 54 }, { v: 60 }, { v: 64 }, { v: 70 }, { v: 78 },
+]
+
+const CHART_CONFIG = {
+  v: { color: '#9B59E8' },
+}
 
 function Sparkline() {
-  const W = 440, H = 110, pad = 6
-  const min = Math.min(...SPARK_DATA), max = Math.max(...SPARK_DATA)
-  const range = max - min || 1
-  const pts = SPARK_DATA.map((v, i) => {
-    const x = (i / (SPARK_DATA.length - 1)) * W
-    const y = H - pad - ((v - min) / range) * (H - pad * 2)
-    return [x, y]
-  })
-  const linePath = 'M ' + pts.map(([x, y]) => `${x},${y}`).join(' L ')
-  const areaPath = linePath + ` L ${W},${H} L 0,${H} Z`
-
   return (
-    <svg
-      viewBox={`0 0 ${W} ${H}`}
-      preserveAspectRatio="none"
+    <div
       aria-hidden="true"
       style={{ position: 'absolute', right: 0, top: 0, width: '55%', height: '100%', pointerEvents: 'none' }}
     >
-      <defs>
-        <linearGradient id="spark-fill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#7828E8" stopOpacity="0.35" />
-          <stop offset="100%" stopColor="#7828E8" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <path d={areaPath} fill="url(#spark-fill)" />
-      <path d={linePath} fill="none" stroke="#9B59E8" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
-    </svg>
+      <ChartContainer config={CHART_CONFIG} style={{ width: '100%', height: '100%' }}>
+        <AreaChart data={SPARK_DATA} margin={{ top: 10, right: 0, bottom: 0, left: 0 }}>
+          <defs>
+            <linearGradient id="sparkGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#7828E8" stopOpacity={0.4} />
+              <stop offset="100%" stopColor="#7828E8" stopOpacity={0} />
+            </linearGradient>
+          </defs>
+          <Area
+            type="monotone"
+            dataKey="v"
+            stroke="#9B59E8"
+            strokeWidth={2}
+            fill="url(#sparkGradient)"
+            dot={false}
+            isAnimationActive={false}
+          />
+          <Tooltip content={() => null} />
+        </AreaChart>
+      </ChartContainer>
+    </div>
   )
 }
 
